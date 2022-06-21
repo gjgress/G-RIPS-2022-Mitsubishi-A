@@ -1,1 +1,1 @@
-# G-RIPS-2022-Mitsubishi-A-
+# G-RIPS-2022-Mitsubishi-A
