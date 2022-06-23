@@ -1,0 +1,27 @@
+Most smartphones contain IMU sensors which provide data such as angles, angular rates, accelerations. It can be used to sense tilt, motion, shock and vibration.
+
+Resolution (A): 0.98 mg
+(G): 0.004 °/s
+
+Measurement ranges
+(programmable)
+(A): ±2 g, ±4 g, ±8 g, ±16 g
+(G): ±125 °/s, ±250 °/s,
+±500 °/s, ±1000 °/s, 2000 °/s
+
+Sensitivity
+(calibrated)
+(A): ±2 g 1024 LSB/g
+±4 g 512 LSB/g
+±8 g 256 LSB/g
+±16 g 128 LSB/g
+(G): ±125 °/s 262.4 LSB/°/s
+±250 °/s: 131.2 LSB/°/s
+±500 °/s: 65.6 LSB/°/s
+±1000 °/s: 32.8 LSB/°/s
+±2000 °/s: 16.4 LSB/°/s
+
+Zero-point offset (A): ± 70 mg, (G): ± 1 °/s
+
+Noise density (typ.) (A): 150 μg/√Hz
+(G): 0.014 °/s/√Hz
