@@ -48,6 +48,11 @@ def save_graph_shapefile_directional(G, filepath=None, encoding="utf-8"):
     gdf_nodes.to_file(filepath_nodes, encoding=encoding)
     gdf_edges.to_file(filepath_edges, encoding=encoding)
 
+def extract_cpath(cpath):
+        if (cpath==''):
+            return []
+        return [int(s) for s in cpath.split(',')]
+    
 ### Required    
 class FMM(object):
     '''
@@ -67,12 +72,15 @@ class FMM(object):
         this_dir = os.path.dirname(__file__)
 
     ### Required
-    def run(self, input_nodes, input_edges, network_nodes, network_edges):
+    def run(self, network_edges, network_nodes, input_edges, input_nodes=None ):
         '''
         main procedure of the algorithm
         Args:
-            set_of_input is a GeoDataFrame (and so must have a 'geometry' column)
-            network is a GeoDataFrame object created from a MultiDiGraph (the default format for OSM)
+            network_edges is a GeoDataFrame object preferably created from a MultiDiGraph (the default format for OSM), consisting of LineStrings            
+            network_nodes is a GeoDataFrame object preferably created from a MultiDiGraph (the default format for OSM), consisting of Points
+            input_edges: a GeoDataFrame (and so must have a 'geometry' column) consisting of LineStrings
+            input_nodes*: a GeoDataFrame (and so must have a 'geometry' column) consisting of Points
+            * FMM doesn't actually use input_nodes, so the inclusion here is superfluous
         '''
         #input_edges = set_of_inputs[set_of_inputs.geom_type == 'LineString'].geometry
         
@@ -120,11 +128,6 @@ class FMM(object):
         
         resultdf = pd.read_csv("temp/mr.csv", sep=";")
         
-        def extract_cpath(cpath):
-            if (cpath==''):
-                return []
-            return [int(s) for s in cpath.split(',')]
-        
         # Extract cpath as list of int
         resultdf["cpath_list"] = resultdf.apply(lambda row: extract_cpath(row.cpath), axis=1)
 
@@ -138,14 +141,17 @@ class FMM(object):
         edges_df = network_gdf[network_gdf.fid.isin(all_edge_ids)].reset_index()
         edges_df["points"] = edges_df.apply(lambda row: len(row.geometry.coords), axis=1)
         
-        # fmm does not identify matched nodes, but only matched edges. So we will "export" both, but the nodes df will be empty
+        # fmm does not identify matched nodes, but only matched edges. So we will only export matched edges
         
         # results
         self.results = edges_df[edges_df.geom_type == 'Point'], edges_df[edges_df.geom_type == 'LineString']
-        self.network = networkDigraph
-        self.input_data = input_nodes.append(input_edges)
+        self.network = networkDigraph # This is often used in other utilities
+        if not (input_nodes == None):
+            self.input_data = input_nodes.append(input_edges) # This is often used in other utilities
+        else:
+            self.input_data = input_edges # This is often used in other utilities
         
-        shutil.rmtree('temp/')
+        shutil.rmtree('temp/') # Clean up files made
         
     def plot(self):
     
@@ -153,16 +159,22 @@ class FMM(object):
         self.input_data.plot(ax=ax)
         self.results[1].plot(ax=ax, color="red")
     
-    def evaluate(self, gt):
-        return
+    def evaluate(self, gt, match = 'geometry'):
+        
+        evalint = gt.loc[np.intersect1d(gt[match], pred_edges[match], return_indices=True)[2]]
+        evalxor = gt.overlay(evalint, how="difference").append(self.results.overlay(evalint, how = "difference")) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
+            # Why do this? Suppose that somehow your geometries were truncated, i.e (1.00001, 1.00001) => (1,1). Technically, these geometries are distinct, so overlay would put these in the xor GDF. But if we have a column like id which we are certain aligns with both datasets, then we can match that way, and ensure they are correctly put into the evalint set, and our evalxor length is corrected.
+        d0 = np.sum(gt['length'])
+        ddiff = np.sum(evalxor['length'])
+        
+        # This error formula was created in https://doi.org/10.1145/1653771.1653818
+        return ddiff/d0 # Lower is better (zero is perfect)
 
     ###Required
     def results(self):
         '''
         Returns:
             algorithm results as specified in self.output
-                algorithm time step, sec
-                Euler angles [yaw pitch roll], rad
         '''
         return self.results
     

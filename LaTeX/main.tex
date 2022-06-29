@@ -255,6 +255,14 @@ We will adopt the problem statement from definitions 2.1-2.4 in \cite{C}.
 A \textbf{trajectory} $Tr$ is a sequence points $p_1\rightarrow p_2 \rightarrow \dots \rightarrow p_n$. Each point $p_i$ consists of a coordinate $( x_i,y_i)\in \mathbb{R}^2$ , a timestamp $t_i$, a speed $spd_i$ (optional) and a heading $\theta_i$ (optional). i.e.:  $p_i=( x_i,y_i,t_i,spd_i,\theta_i )$.
 \end{definition}
 
+\begin{definition}[Trajectory]
+	A \textbf{trajectory} \(\textrm{Tr} := (p,t)\) is a sequence of coordinates \(\textrm{p} = \left\{ p_i \right\}_{i=1}^{N} \subset \R^2\) paired with a sequence of times \(t = \left\{t_i \right\}_{i=1}^{N}\) with \(0 \leq t_1 < t_2 < \ldots < t_n\). Optionally, a trajectory can also contain data such as:
+	\begin{itemize}
+		\item Speed \(\textrm{spd} = \left\{\textrm{spd}_i \right\}_{i=1}^{N}\) 
+		\item Heading \(\theta = \left\{\theta_i \right\}_{i=1}^{N}\) 
+	\end{itemize}
+\end{definition}
+
 \begin{definition}[Road Network]
 A  \textbf{road network} (also known as map) is a directed graph $G=(V,E)$ embedded in $\mathbb{R}^2$, with vertices $v=(x,y)\in V$ and edges $e = (s, f, l)$  between vertices $s$ to $f$  where $s,f\in V$ connected by a polyline $l$ represented by a sequence of points in $\mathbb{R}^2$. %{\color{red} Perhaps we should say something about the graph being embedded in $\mathbb{R}^2$}
 
