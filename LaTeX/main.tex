@@ -250,7 +250,14 @@ RACMaS
 \tableofcontents \newpage
 
 \section{Introduction}
-A fundamental question when dealing with geospatial information is, given GPS trajectory data and a road map, how can one determine which route on a map this trajectory corresponds to. This problem is called the map-matching problem. The aim of our project is to develop new solutions to the map-matching problem, favoring mathematical formulations, rather than a data-driven models, that are stable under small perturbations in road map and trajectory data. We propose three novel methods: Wasserstein distance, inner product, and energy functional methods. Each of these methods has an associated loss (objective) function whose minimum is the the ``matched" map. The loss function of each of the three methods employ the mathematical object for which they are named. The goal of our project is to develop these approaches into algorithms and evaluate their performance using both theoretical and numerical techniques. 
+A fundamental question when dealing with geospatial information is, given GPS trajectory data and a road map, how can one determine which route on a map this trajectory corresponds to. This problem is called the map-matching problem. 
+Data-driven methods, such as hidden Markov models, are currently the most prominent approach to the map-matching problem; however, they are inflexible changes in the data. In contrast, a mathematical model will have the benefit of being more adaptable to changes in the data, such as the extension from two to three-dimensional data. 
+The aim of our project is to develop new solutions to the map-matching problem, favoring mathematical formulations, rather than a data-driven models, that are stable under small perturbations in road map and trajectory data. 
+% 
+We propose three novel methods: Wasserstein distance, inner product, and energy functional methods. Each of these methods has an associated loss (objective) function whose minimum is the the ``matched" map.
+The loss function of each of the three methods employ the mathematical object for which they are named. 
+%The benefit of these proposed mathematical formulations is their ability to be extended to include  to higher dimensional data 
+We plan to develop these approaches into algorithms and evaluate their performance using both theoretical and numerical techniques. 
 
 % \begin{itemize}
 %     \item Applications
@@ -262,13 +269,15 @@ A fundamental question when dealing with geospatial information is, given GPS tr
 
 \section{Problem Summary and Statement} \label{PS}
 
- Here we will describe the mathematical formulation of our problem. We will adopt the problem statement from definitions 2.1-2.4 in \cite{CXHZ} with slight modifications. The geospatial data points will be modeled by a trajectory, see \autoref{Tr}, and map data will be encapsulated by a road network \autoref{RN}.
+Here we will describe the mathematical formulation of our problem. We will adopt the problem statement from definitions 2.1-2.4 in \cite{CXHZ} with slight modifications. The geospatial data points will be modeled by a trajectory, see \autoref{Tr}, and map data will be encapsulated by a road network \autoref{RN}.
+
+Let us fix $d \geq 2$ (but almost everywhere we consider the case $d = 2$).
 \begin{definition}[Trajectory] \label{Tr}
-A \textbf{trajectory} $Tr$ is a sequence points $\mathbf{p} = (p_1,p_2,\dots, p_n)$ where $p_i\in \mathbb{R}^2$ for $1\leq i\leq n$ equipped with 
+A \textbf{trajectory} $Tr$ is a sequence of points $\mathbf{p} = (p_1,p_2,\dots, p_n)$ where $p_i\in \mathbb{R}^d$ for $1\leq i\leq n$ equipped with 
 \begin{itemize}
     \item a sequence $t(\mathbf{p}) = (t_1,\dots,t_{n})$ such that $t_i\in \mathbb{R}^{+}$ for $1\leq i\leq n$ and  $t_1<t_2<\dots <t_n$, called the \textbf{time stamp} of $\mathbf{p}$,
     \item a sequence $\text{spd}(\mathbf{p}) = (\text{spd}_1,\dots,\text{spd}_{n})$ such that  $\text{spd}_i\in \mathbb{R}^{+}$  for $1\leq i\leq n$, called the \textbf{speed} of $\mathbf{p}$ (optional),
-    \item a sequence $\theta(\mathbf{p}) = (\theta_1, \dots, \theta_n)$ such that $\theta_i\in [0,2\pi)$  for $1\leq i\leq n$, called the \textbf{angle} of $\mathbf{p}$ (optional).
+    \item a sequence $u(\mathbf{p}) = (u_1, \dots, u_n)$ such that $u_i\in \mathbb{R}^d$ and $\|u\|=1$ for $1\leq i\leq n$, called the \textbf{direction} of $\mathbf{p}$ (optional).
 \end{itemize}
 \end{definition}
 
@@ -277,11 +286,10 @@ A \textbf{trajectory} $Tr$ is a sequence points $\mathbf{p} = (p_1,p_2,\dots, p_
 % \end{definition}
 
 
-
 \begin{definition}[Road Network] \label{RN}
-A  \textbf{road network} (also known as map) is a directed graph $G=(V,E)$ consists of the set $V$ (resp. $E$) of vertices (resp. edges) with an embedding $\phi:|G|\rightarrow\mathbb{R}^{2}$ of the geometric realization $|G|$ of $G$.
+A  \textbf{road network} (also known as map) is a directed graph $G=(V,E)$ consists of the set $V$ (resp. $E$) of vertices (resp. edges) with an embedding $\phi:|G|\rightarrow\mathbb{R}^{d}$ of the geometric realization $|G|$ of $G$.
 % , and a map $f:E\rightarrow \{(x,y)\mid  (x,y)\in V^2 \}$ where $f = (f_1,f_2) $.
-We will identify $G$ and the image $\phi(|G|)$ by $\phi$ as long as no confusion.
+We will identify $G$ and the image $\phi(|G|)$ by $\phi$ as long as there is no confusion.
 \end{definition}
 
 
@@ -289,7 +297,7 @@ We will identify $G$ and the image $\phi(|G|)$ by $\phi$ as long as no confusion
 \begin{definition}[Route]
 A \textbf{route} $r$ on a road network $G=(V,E)$ is a sequence of connected edges $(e_1,e_2,\dots,e_n)\subset E$, i.e. 
 % $e_i\in E$ and $f_2(e_i) = f_1(e_{i+1})$.
-the tail of $e_i$ coincides with $e_{i+1}$ for each $i = 1, 2, \dots, n-1$.
+the head of $e_i$ coincides with the tail of $e_{i+1}$ for each $i = 1, 2, \dots, n-1$.
 Let $R$ denote the set of all routes.
 \end{definition}
 
@@ -307,7 +315,7 @@ $Tr$, the map-matching, $\mathcal{MR}_G(Tr)$, is the route that is the argument 
 % $Tr$, the map-matching find a route $\mathcal{MR}_G(Tr)$ that represents the  by the trajectory.
 % \end{definition}
 
-The main goal of this project is to find a suitable loss function such that  $\mathcal{MR}_G(Tr)$ is the route which is minimal distance from the actual route traveled by a vehicle or pedestrian taken with respect to a chosen metric (see \autoref{Eval} for detail on chosen metrics).
+The main goal of this project is to find a suitable loss function such that  $\mathcal{MR}_G(Tr)$ is the route which is minimal distance from the actual route traveled by a vehicle or pedestrian taken with respect to a chosen metric (see \autoref{Eval} for details on chosen metrics).
 
 
 
@@ -446,7 +454,19 @@ A Markov chain is a probabilistic model for sequential events subject to the con
 \end{align*}
 The probability $p(x_i|y_i)$ is called the emission probability, $p(y_{i}|y_{i-1})$ is the transition probability, and $p(y_1)$ is the initial distribution. If there are a finite number of states each $x_i$ and $y_i$ can take on, then we can form emission, transition, and initial distribution matrices. Each probability is a parameter in our model. Once these parameters are established, one of several existing algorithms can be used to compute the  probabilities of some sequences of $y_i$ values occurring given the a sequence of observed $x_i$'s. 
 
-
+\begin{example} \label{Transition and Emission probabilities}
+A simple application of an HMM can be used to determine how busy a teacher is, given the observed lecture quality. Take the observed states $x_1,\dots,x_n\in \{\text{good, bad}\}$ to be the quality of the lecture on days $1,\dots, n$, and the unobserved states to be $y_1,\dots,y_n\in \{\text{busy, not busy}\}$. In this example, the emission matrix, $A$, and transition matrix, $B$, are given below based on the quantities decided in \autoref{TrEm}:
+\begin{align*}
+    A = \begin{bmatrix}
+    .7 & .3 \\
+    .6 & .4 
+    \end{bmatrix} , \qquad 
+     B = \begin{bmatrix}
+    .2 & .8 \\
+    .9 & .1
+    \end{bmatrix}. 
+\end{align*}
+\end{example}
 
 \begin{figure}[h!]
     \centering
@@ -465,24 +485,10 @@ The probability $p(x_i|y_i)$ is called the emission probability, $p(y_{i}|y_{i-1
         \path [->] (NBu) edge node[right] {.9}  (G) ; 
         \path [->] (NBu) edge node[right] {.1}  (B); 
     \end{tikzpicture}
-    \caption{Transition and Emission probabilities for Example 3.1 }
+    \caption{Transition and Emission probabilities for \autoref{Transition and Emission probabilities}. }
     \label{TrEm}
-
 \end{figure}
-\begin{example} 
-A simple application of an HMM can be used to determine how busy a teacher is, given the observed lecture quality. Take the observed states $x_1,\dots,x_n\in \{\text{good, bad}\}$ to be the quality of the lecture on days $1,\dots, n$, and the unobserved states to be $y_1,\dots,y_n\in \{\text{busy, not busy}\}$. In this example, the emission matrix, $A$, and transition matrix, $B$, are given below based on the quantities decided in \autoref{TrEm}. 
-\begin{align*}
-    A = \begin{bmatrix}
-    .7 & .3 \\
-    .6 & .4 
-    \end{bmatrix} \qquad 
-     B = \begin{bmatrix}
-    .2 & .8 \\
-    .9 & .1
-    \end{bmatrix} 
-\end{align*}
 
-\end{example}
 
 
 
@@ -493,6 +499,9 @@ A simple application of an HMM can be used to determine how busy a teacher is, g
 \subsubsection*{Application to Map-Matching}
 
 From the survey from Chao \cite{CXHZ}, HMM models for map-matching have the following setup. The observed quantities in the HMM for the map-matching problem are the sequence of geospatial data points and the hidden variables are the possible edges on the road network. The transition probabilities describe likelihood of the route containing some edge, given the previous edge, but the emission probabilities describe the probability that of observing a trajectory point given some edge in the road network. The choice of these parameter differentiates existing HMM models for map-matching. After the parameters are chosen, one can compute the route in the road network with the highest probability.  
+    Unfortunately, this approach to map-matching is limited, because a two dimensional hidden Markov model for map-matching cannot be extended to include three dimensional model or be changed to include speed information without training on the new data altogether. 
+
+%\subsubsection*{Limitations of Data Driven Methods}
 
 %The design of Hidden Markov Models has a simple correspondence to the map-matching process. Each trajectory point is considered a noisy observation, while the ground truth (the edge the vehicle is positioned on) is considered an unobserved state. In particular, because each trajectory point has measurement error, every edge proximate to the trajectory point has an associated emission probability, indicating the likelihood that the actual vehicle location is currently in that state. As additional trajectory points are considered, the transitions can be assigned to one of the candidate states depending on the transition probability between candidates. By applying the Viterbi algorithm to the HMM, we can obtain a sequence of hidden states with the maximum likelihood. /cite{Chao}
 
@@ -548,7 +557,7 @@ For probability measures $\mu,\nu$ with $\supp\mu=\{x_1,\ldots,x_n\}$ and $\supp
 \end{definition}
 Under the appropriate conditions, $W_1$ is a distance function on the probability measure space.
 A probability measure space often contains geometrical information about its underling space.
-Therefore, it is useful to analyze the probability measure space using the Wasserstein distance to understand the geometrical structure of its underlying space.
+Therefore, it is useful to analyze the probability measure space using Wasserstein distance to understand the geometrical structure of its underlying space.
 
 Although $\Pi(\mu,\nu)$ is an infinite set since the mass of sand transported can be continuously varied, this is known to be a bounded closed convex set.
 Hence, the right hand side of \eqref{Wasserstein} attains the minimum value.
@@ -562,7 +571,7 @@ We introduce the three methods each employing one of the following mathematical 
 \begin{itemize}
     \item Wasserstein Distance,
     \item Euclidean inner product,
-    \item Graph energy.
+    \item Graph energy functional.
 \end{itemize}
 The first two methods are based on the approach of considering the road network graph as a set of lines in $\R^2$, and the last method is based on the approach of focusing on the graph structure.
 
@@ -584,6 +593,7 @@ We assume that we know from the information of timestamps that the trajectory be
 %Here, let us assume that we know from the information of timestamps that the mover was from $v_1$ to $v_4$.
 It is difficult to judge from this trajectory alone whether $(v_1,v_2)\to(v_2,v_4)$ (we call this \textbf{route $A$}) or $(v_1,v_3)\to(v_3 ,v_4)$ (we call this \textbf{route $B$}) is the true route traveled.
 Therefore, we propose the method of route determination based on the optimal transport theory described in \autoref{IntroOfOT}.
+We can apply this method in theory even in general $\mathbb{R}^d$ and in the situation where each edge of the graph is a curve.
 
 \begin{figure}[H]
 \begin{tabular}{ccc}
@@ -789,29 +799,28 @@ The point-to-curve method projects from the trajectory point to the edges that c
 In contrast, our method transports weights from trajectory points $\mathbf{p}$ to a candidate route, in other words, it is a ``(trajectory  points)-to-route" process.
 The effect of outliners should be small because we deal with all trajectory points at the same.
 In this sense, we want the method to be robust to observation errors.
-In addition, we can apply this method in theory even in the situation where each edge of the graph is a curve.
 \end{remark}
 
 
-\subsubsection*{Incorporating velocity and angle data}
+\subsubsection*{Incorporating speed and direction data}
 % \subsubsection*{The case in which input data is  the trajectory, timestamps, velocity and angles} %\label{input:tra&time&velocity&angle}
 
 %We proposed the method of quantifying the distance between the trajectory set and candidate routes by using the information of coordinates of trajectory points only in \autoref{input:tra&time}.
-We consider to develop the above discussion in the case where we also have information on velocity and angle.
+We consider to develop the above discussion in the case where we also have information on speed and direction.
 In calculate $\varphi(A,m)$, we consider 
 \begin{align}
     \sum_{i=1}^n \sum_{j=1}^m d(p_i,a_j)\pi(p_i,a_j) \label{Wasserstein loss}
 \end{align}
 as loss function and solve a linear programming problem (see \eqref{object func.} in \autoref{IntroOfOT}).
-Therefore, we can apply the method using Wasserstein distance in this setting if we can modify this loss function \eqref{Wasserstein loss} so that associate with the trajectory velocity and angle information.
+Therefore, we can apply the method using Wasserstein distance in this setting if we can modify this loss function \eqref{Wasserstein loss} so that associate with the trajectory speed and direction information.
 
 \begin{prob}
-How to include the trajectory velocity and angle information in the loss function \eqref{Wasserstein loss}?
+How to include the trajectory speed and direction information in the loss function \eqref{Wasserstein loss}?
 \end{prob}
 
-In the case of reflecting the trajectory velocity and angle information, there are different future developments depending on whether the probability measure or the distance (or both) is modified.
+In the case of reflecting the trajectory speed and direction information, there are different future developments depending on whether the probability measure or the distance (or both) is modified.
 The term to be modified is different this is because $d(p_i,a_j)$ and $\pi(p_i,a_j)$ represent the distance between two points and the transport mass, respectively in \eqref{Wasserstein loss}.
-At the present stage, it seems that the distance between the two points should be modified, i.e. we introduce a flow locally within $\R^2$ that takes into account the trajectory velocity and angle information.
+At the present stage, it seems that the distance between the two points should be modified, i.e. we introduce a flow locally within $\R^2$ that takes into account the trajectory speed and direction information.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -819,15 +828,16 @@ At the present stage, it seems that the distance between the two points should b
 \subsection{Euclidean inner product method}
 
 %\subsubsection{Concept}
-We consider making the geometric method more accurate by taking into account not only the position of each trajectory point but also the vector connecting each point, calculating the inner product of that vector and the edge of the route, and measuring how close the oriented directions are. This method shares similarities with topological methods described in \cite{QOZN}.
+We consider making the geometric method more accurate by taking into account not only the position of each trajectory point but also the vector connecting each point, calculating the inner product of that vector and the edge of the route, and measuring how close the oriented directions are. This method shares similarities with ``topological methods'' described in \cite{QOZN} but we believe that our method has advantages over this one.
+%We also our method is valid in three-dimensional space as well because the vector connecting the trajectory points, the vector connecting the vertices of the road network, and the inner product of the two are all defined similarly in three-dimensional space. 
 
 \subsubsection*{Specific procedure}
 %we process trajectory points that seems to have little error and no influence on determining the edges. Take balls centered at each vertex of the road network with a radius small enough that they do not intersect each other. Then, we replace the position data of trajectory points which are contained in any of those balls to the center of the ball which is a vertex of road network graph. This process is a variant of point-to-point method in geometric methods.
 %Next we determine the edge by calculating inner product. This step is the main part of our method. 
-We assume that the image of a given road network $\phi(|G|)$ for $G=(V,E), \phi:G\to\mathbb{R}^{2}$ is a piecewise linear curve and have $\phi(V)=:\{V_{\alpha}\}_{\alpha}$ as vertices of that. Also we assume that input data on trajectory is only its coordinate.
+We assume that the image of a given road network $\phi(|G|)$ for $G=(V,E), \phi:G\to\mathbb{R}^{d}$ is a piecewise linear curve and have $\phi(V)=:\{V_{\alpha}\}_{\alpha}$ as vertices of that. Also we assume that input data on trajectory is only its coordinate.
 We first list all candidate routes by point-to-point method and point-to-curve method.
 That is, we determine the closest vertex and edge of road network for each trajectory points and list routes that are composed of those vertices and edges.
-Then we define score for each edge contained in the candidates and adopt the one which has the lowest score as the route.  
+Then we define score for each edge contained in the candidates and adopt the one which has the highest score as the route.  
 The factors that determine the score are the inner product of the line segment connecting the trajectory points and the edge, and the closeness of their positions.
 
 The specific procedure for defining score is as follows.
@@ -864,13 +874,20 @@ We define vectors $v_{i} = p_{i+1}-p_{i}$ and $v_{\alpha\beta} = V_{\beta}-V_{\a
 \end{figure} 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Then we define $P(v_{i}, v_{\alpha\beta}) := \left(\frac{v_{i}}{|v_{i}|}, \frac{v_{\alpha\beta}}{|v_{\alpha\beta}|}\right)$ where $(-,-)$ denotes the inner product on the Euclidean space $\mathbb{R}^2$.
+Then we define $P(v_{i}, v_{\alpha\beta}) := \left\langle\frac{v_{i}}{|v_{i}|}, \frac{v_{\alpha\beta}}{|v_{\alpha\beta}|}\right\rangle$ where $\langle-,-\rangle$ denotes the inner product on the Euclidean space $\mathbb{R}^{d}$.
 Let $L_{i,e}$ be the distance between the trajectory point $p_{i}$ and the point on the edge $e$ which is closest to $p_{i}$.
 We define the score
 \begin{align*}
-    S(e) := \left[\sum_{i}\biggl\{P(v_{i}, v_{\alpha\beta}) + \frac{1}{1+L_{i,e}}\biggr\}\right]^{-1}    
+    S(e) := \sum_{i}\frac{P(v_{i}, v_{\alpha\beta})}{1+L_{i,e}}  
 \end{align*}
 for each edge.
+
+We are also considering a methods that we use vectors representing the speed $\text{spd}_{i}$ and direction $u_{i}$ at the trajectory point $p_{i}$ instead of $v$. In this case, we can calculate the score of edge $e_{\alpha\beta}$ as follows:
+\begin{align*}
+    S(e) := \sum_{i}\frac{\text{spd}_{i}\langle u_{i}, v_{\alpha\beta}\rangle}{1+L_{i,e}}  
+\end{align*}
+
+In addition, we also consider taking average $v_{i}$ and $\text{spd}_{i}\cdot u_{i}$ to average out the errors in the position, velocity, and direction data.
 
 \begin{remark}
 This method has some points in common with the method called the ``topological method''\cite{QOZN}, but it is considered to be a simpler method because, unlike the topological method, it does not require the calculation of angles and a classification according to their magnitudes.
@@ -884,6 +901,7 @@ This method has some points in common with the method called the ``topological m
         How to improve this methods for the case when we also have information on velocity and angle?
     \end{enumerate}
 \end{prob}
+
 \subsection{Energy functional method}
 
 %\subsubsection{Concept}
@@ -904,6 +922,10 @@ Therefore, we take one transition matrix by determining the probability of movem
 In general, the random walk normalized Laplacian can be defined from the transition matrix.
 As a natural energy associated with the graph structure, we can consider the Laplacian energy which is defined as the sum of absolute values of eigenvalues of the graph Laplacian.The graph energy described here is a potential candidate for a suitable energy functional. 
 See also \cite{LSG}.
+
+\begin{remark}
+In the case of using graph energy or its variants, we only use information about structures of graph so we can apply this method to settings in arbitrary dimensions.
+\end{remark}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -982,6 +1004,12 @@ The benefit these data types provide is being simple (human-readable and easy to
 
 The code written for the project can be found at:  \url{https://github.com/gjgress/G-RIPS-2022-Mitsubishi-A}.
 
+\subsection{Extension to Higher Dimensions}
+
+Including the $z$-axis into our implementation faces one major hurdle: OpenStreetMaps does not include elevation. Because this information is not included within our network, we cannot test our algorithms in $3$-space. One can circumvent this by merging elevation data from an external source. However, highways and roads are often not incorporated into these data sets, and so it is approximate at best. Instead, it is probably best to source network information from more detailed data sets, such as proprietary sources, but results can vary greatly depending on region.\\
+
+Fortunately, the Python framework developed is quite modular, and so if one does have elevation data in their network and test data, it is easy to implement within our notebooks. Hopefully with time, data sets such as OpenStreetMaps will gain detail, and this line of inquiry becomes more accessible to the public.
+
 \section{Deliverables}
 \begin{itemize}
     \item Three novel approaches to map-matching 
@@ -1009,7 +1037,7 @@ The following is our proposed timeline for the project.
 \begin{itemize}[noitemsep]
     \item Expand preliminary ideas into robust map-matching algorithms
     \item Implement the algorithms
-     \item Prepare and deliver midterm presentation
+     \item Prepare and deliver midterm presentation (15/07)
 \end{itemize}
 
 % \subsection*{Week 4}
@@ -1042,8 +1070,8 @@ The following is our proposed timeline for the project.
 \begin{itemize}[noitemsep]
     \item Summarize and present results by
     \begin{itemize}
-        \item writing final report
-        \item preparing and giving final presentation
+        \item preparing and giving final presentation ( 08/08)
+        \item writing final report (due 09/08)
     \end{itemize}
 \end{itemize}
 
