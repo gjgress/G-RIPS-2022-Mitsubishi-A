@@ -19,6 +19,7 @@ import geopandas as gpd
 from shapely.geometry import LineString # To create line geometries that can be used in a GeoDataFrame
 from ctypes import *
 from ctypes import wintypes
+from scipy import spatial # for proximity fuse
 
 # globals
 VERSION = '1.0'
@@ -130,11 +131,47 @@ def point_to_traj(input_nodes, columns=None):
     
     return input_edges
 
-def fuse_data(main_data, *args):
+def fuse(main_data, data, fuse_method):
     '''
     A barebones method to fuse data measured asynchronously.
     main_data: the data you'd like to align to, as a (geo)pandas (geo)dataframe. This dataframe won't be changed; the other data will be aligned to it instead.
-    *args: all other data which you would like to align to main_data
+    datalist: a dataframe or a list of dataframes which you would like to align to main_data
+    fuse_method: a str or list of str. must be one of: 'proximity', 'average', 'blah'.
+If a list of str is provided, it must have the same length as datalist.
     
     Note: it is essential that the first column for all datasets be the timestamps, and that they all share the same relative formatting (i.e. 1000 needs to mean the same thing to both data sets). If you aren't sure if your time format will work, the simplest way to do this is to convert everything to UNIX time.
     '''
+        
+    # Now we check to make sure everything is formatted correctly
+    if (type(data)==list and type(fuse_method)==list):
+        if len(data) != len(fuse_method):
+            raise Exception('Data list and method list do not have equal length!')
+    
+    df = main_data
+    
+    if type(data)==list:
+        for i in range(len(data)):
+            if type(fuse_method) == list:
+                fuse = fuse_method[i]
+            else:
+                fuse = fuse_method
+            df = fuse_simple(df,data[i],fuse_m=fuse)
+    else:
+        df = fuse_simple(df,data,fuse_method)
+    
+    return df
+
+# Note-- you can but probably shouldn't use this function directly. fuse() will pass to this helper function as needed
+def fuse_simple(df1,df2,fuse_m):
+    if fuse_method = 'proximity':
+        # Make a kd-tree
+        tree = spatial.KDTree(df2.iloc[:,0].values.tolist())
+        aligndf2 = 
+        ## Finish this
+    elif fuse_method = 'average':
+        
+    elif fuse_method = 'blah':
+        
+    else:
+        raise Exception("Not a valid fusion method (must be 'proximity', 'average', or 'blah')!")
+        
