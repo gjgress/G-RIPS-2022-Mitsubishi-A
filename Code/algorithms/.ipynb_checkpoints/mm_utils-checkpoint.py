@@ -15,6 +15,7 @@ import platform
 import math
 import numpy as np
 import osmnx as ox
+import pandas as pd
 import geopandas as gpd
 from shapely.geometry import LineString # To create line geometries that can be used in a GeoDataFrame
 from ctypes import *
@@ -44,7 +45,7 @@ def evaluate(self, prediction, gt, match = 'geometry'):
         match: the column with which to match prediction and gt. Standard method is by matching geometries, but indexing columns can be superior if you know they are consistent between prediction and gt
     '''
     evalint = gt.loc[np.intersect1d(gt[matchid], pred_edges[matchid], return_indices=True)[2]]
-    evalxor = gt.overlay(evalint, how="difference").append(self.results.overlay(evalint, how = "difference")) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
+    evalxor = pd.concat([gt.overlay(evalint, how="difference"), self.results.overlay(evalint, how = "difference")]) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
         # Why do this? Suppose that somehow your geometries were truncated, i.e (1.00001, 1.00001) => (1,1). Technically, these geometries are distinct, so overlay would put these in the xor GDF. But if we have a column like id which we are certain aligns with both datasets, then we can match that way, and ensure they are correctly put into the evalint set, and our evalxor length is corrected.
 
     d0 = np.sum(gt['length'])
@@ -127,51 +128,94 @@ def point_to_traj(input_nodes, columns=None):
             print(column + ' is not a valid column in input nodes. Ignoring this column.')
 
     coldict['geometry'] = line_segments
-    input_edges = input_edges.append(gpd.GeoDataFrame(coldict)) # Put the separated LineStrings into a GeoDataFrame, along with any other columns supplied
+    input_edges = pd.concat([input_edges,gpd.GeoDataFrame(coldict)]) # Put the separated LineStrings into a GeoDataFrame, along with any other columns supplied
     
     return input_edges
 
-def fuse(main_data, data, fuse_method):
+def fuse(main_data, unfused_data, timestampcol, fuse_method):
     '''
     A barebones method to fuse data measured asynchronously.
     main_data: the data you'd like to align to, as a (geo)pandas (geo)dataframe. This dataframe won't be changed; the other data will be aligned to it instead.
-    datalist: a dataframe or a list of dataframes which you would like to align to main_data
-    fuse_method: a str or list of str. must be one of: 'proximity', 'average', 'blah'.
-If a list of str is provided, it must have the same length as datalist.
+    unfused_data: a dataframe or a list of dataframes which you would like to align to main_data
+    timestampcol: a str containing the name of the timestamp column in main_data and unfused_data
+    fuse_method: a str or list of str. must be one of: 'nearest neighbor', 'average', 'blah'.
+If a list of str is provided, it must have the same length as unfused_data.
     
     Note: it is essential that the first column for all datasets be the timestamps, and that they all share the same relative formatting (i.e. 1000 needs to mean the same thing to both data sets). If you aren't sure if your time format will work, the simplest way to do this is to convert everything to UNIX time.
     '''
-        
+    result = main_data
     # Now we check to make sure everything is formatted correctly
-    if (type(data)==list and type(fuse_method)==list):
-        if len(data) != len(fuse_method):
+    if (type(unfused_data)==list and type(fuse_method)==list):
+        if len(unfused_data) != len(fuse_method):
             raise Exception('Data list and method list do not have equal length!')
     
-    df = main_data
-    
-    if type(data)==list:
-        for i in range(len(data)):
+    if type(unfused_data)==list:
+        for i in range(len(unfused_data)):
             if type(fuse_method) == list:
                 fuse = fuse_method[i]
             else:
                 fuse = fuse_method
-            df = fuse_simple(df,data[i],fuse_m=fuse)
+            result = fuse_simple(result,unfused_data[i],timestampcol,fuse_m=fuse)
     else:
-        df = fuse_simple(df,data,fuse_method)
-    
-    return df
+        result = fuse_simple(result,unfused_data, timestampcol, fuse_method)
+    return result
 
 # Note-- you can but probably shouldn't use this function directly. fuse() will pass to this helper function as needed
-def fuse_simple(df1,df2,fuse_m):
-    if fuse_method = 'proximity':
-        # Make a kd-tree
-        tree = spatial.KDTree(df2.iloc[:,0].values.tolist())
-        aligndf2 = 
-        ## Finish this
-    elif fuse_method = 'average':
-        
-    elif fuse_method = 'blah':
-        
+def fuse_simple(df1,df2,timestampcol,fuse_m):
+        # I think this works fine but may be good to create a test case
+    if fuse_m == 'nearest neighbor':
+        base_df2 = df2[timestampcol].to_numpy()   
+        vals = []
+        for i in range(len(df1)):
+            k = np.argmin(np.abs(base_df2 - df1[timestampcol][i]))
+            vals.append(df2.iloc[k,1])
+        result = df1.copy()
+        result[df2.columns[1]] = vals
+        return result
+    
+    elif fuse_m == 'average':
+        # I think this works fine but may be good to create a test case
+        df2_time = df2[timestampcol].to_numpy() 
+        df2_vals = df2.iloc[:,1].to_numpy() 
+        vals = []
+        for i in range(len(df1)):
+            if i == 0:
+                prox_vals = df2_vals[df2_time <= df1[timestampcol][i]+(df1[timestampcol][i+1]-df1[timestampcol][i])/2]
+                if len(prox_vals) == 0: # If there are no points in the interval, just pick the closest one
+                    k = np.argmin(np.abs(df2_time - df1[timestampcol][i]))
+                    newval = df2_vals[k]
+                else:
+                    newval = np.average(prox_vals)
+                vals.append(newval)
+            elif i == len(df1)-1:
+                prox_vals = df2_vals[df2_time >= df1[timestampcol][i-1]+(df1[timestampcol][i]-df1[timestampcol][i-1])/2]
+                if len(prox_vals) == 0: # If there are no points in the interval, just pick the closest one
+                    k = np.argmin(np.abs(df2_time - df1[timestampcol][i]))
+                    newval = df2_vals[k]
+                else:
+                    newval = np.average(prox_vals)
+                vals.append(newval)
+            else:
+                prox_vals = df2_vals[(df2_time <= df1[timestampcol][i]+(df1[timestampcol][i+1]-df1[timestampcol][i])/2) & (df2_time >= df1[timestampcol][i-1]+(df1[timestampcol][i]-df1[timestampcol][i-1])/2)]
+                if len(prox_vals) == 0: # If there are no points in its interval, just pick the closest one
+                    k = np.argmin(np.abs(df2_time - df1[timestampcol][i]))
+                    newval = df2_vals[k]
+                vals.append(newval)
+        result = df1.copy()
+        result[df2.columns[1]] = vals
+        return result
+    
+    ## Other methods to consider implementing:
+    # - K-Means
+    # - PDA (Probabilistic Data Association)
+    # - JPDA (Joint PDA)
+    # - MHT (Multiple Hypothesis Test)
+    # - JPDA-D (Distributed JPDA)
+    # - MHT-D (Distributed MHT)
+    # - Graphical models?
+    # - See more from here: https://www.hindawi.com/journals/tswj/2013/704504/
+    elif fuse_m == 'blah':
+        return df1
     else:
-        raise Exception("Not a valid fusion method (must be 'proximity', 'average', or 'blah')!")
+        raise Exception("Not a valid fusion method (must be 'nearest neighbor', 'average', or 'blah')!")
         

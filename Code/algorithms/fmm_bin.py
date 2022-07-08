@@ -146,8 +146,8 @@ class FMM(object):
         # results
         self.results = edges_df[edges_df.geom_type == 'Point'], edges_df[edges_df.geom_type == 'LineString']
         self.network = networkDigraph # This is often used in other utilities
-        if not (input_nodes == None):
-            self.input_data = input_nodes.append(input_edges) # This is often used in other utilities
+        if not input_nodes.empty:
+            self.input_data = pd.concat([input_nodes,input_edges]) # This is often used in other utilities
         else:
             self.input_data = input_edges # This is often used in other utilities
         
@@ -162,7 +162,7 @@ class FMM(object):
     def evaluate(self, gt, match = 'geometry'):
         
         evalint = gt.loc[np.intersect1d(gt[match], pred_edges[match], return_indices=True)[2]]
-        evalxor = gt.overlay(evalint, how="difference").append(self.results.overlay(evalint, how = "difference")) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
+        evalxor = pd.concat([gt.overlay(evalint, how="difference"),self.results.overlay(evalint, how = "difference")]) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
             # Why do this? Suppose that somehow your geometries were truncated, i.e (1.00001, 1.00001) => (1,1). Technically, these geometries are distinct, so overlay would put these in the xor GDF. But if we have a column like id which we are certain aligns with both datasets, then we can match that way, and ensure they are correctly put into the evalint set, and our evalxor length is corrected.
         d0 = np.sum(gt['length'])
         ddiff = np.sum(evalxor['length'])
