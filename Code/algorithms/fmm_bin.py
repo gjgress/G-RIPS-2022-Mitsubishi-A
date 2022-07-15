@@ -21,7 +21,9 @@ import geopandas as gpd
 import pandas as pd
 from ctypes import *
 from ctypes import wintypes
+import tempfile
 from fmm import Network,NetworkGraph,FastMapMatch,UBODTGenAlgorithm,UBODT,FastMapMatchConfig,GPSConfig,ResultConfig
+import sys
 
 # globals
 VERSION = '1.0'
@@ -72,86 +74,151 @@ class FMM(object):
         this_dir = os.path.dirname(__file__)
 
     ### Required
-    def run(self, network_edges, network_nodes, input_edges, input_nodes=None ):
+    def run(self, input_edges, input_nodes=None, network_edges=None, network_nodes=None,   return_results=False):
         '''
         main procedure of the algorithm
         Args:
-            network_edges is a GeoDataFrame object preferably created from a MultiDiGraph (the default format for OSM), consisting of LineStrings            
-            network_nodes is a GeoDataFrame object preferably created from a MultiDiGraph (the default format for OSM), consisting of Points
             input_edges: a GeoDataFrame (and so must have a 'geometry' column) consisting of LineStrings
             input_nodes*: a GeoDataFrame (and so must have a 'geometry' column) consisting of Points
+            network edges/nodes: FMM is picky about the network structure, so its simpler to ignore the given network and download from OSM... however, if given, it will try its best to match its results with the network edges/nodes supplied
+            return_results: By default the run() function simply passes the results to a local variable, but sometimes it is preferable to also return the results directly
             * FMM doesn't actually use input_nodes, so the inclusion here is superfluous
         '''
         #input_edges = set_of_inputs[set_of_inputs.geom_type == 'LineString'].geometry
         
-        if not os.path.exists("temp/"):
-            os.makedirs("temp/")
-        else: 
-            print()
         
-        # Write to Shapefile (just make a copy)
-        outfp = "temp/input_edges.shp"
-        input_edges.geometry.to_file(outfp)
-        
-        networkDigraph = ox.graph_from_gdfs(network_nodes, network_edges)
-        save_graph_shapefile_directional(networkDigraph, filepath='temp')
-        network = Network("temp/network_edges.shp", "fid", "u", "v")
-        print("Nodes {} edges {}".format(network.get_node_count(),network.get_edge_count()))
-        graph = NetworkGraph(network)
-        
-        ### Precompute an UBODT table
+#        if not os.path.exists("temp/"):
+#            os.makedirs("temp/")
+#        else: 
+#            print()
 
-        # Can be skipped if you already generated an ubodt file
-        ubodt_gen = UBODTGenAlgorithm(network,graph)
-        status = ubodt_gen.generate_ubodt("temp/ubodt.txt", 0.02, binary=False, use_omp=True)
-        print(status)
+        # So, Dask Delayed can be silly, and when computed, gives us a list (of 1 element)
+        # Obviously we want the element and not the list, so we need to unpack it if so
+        # Typically the way to handle this is to set nout when initializing the Dask Delayed
+        # But because we are converting a Dask Bag to Dask Delayed, we can't actually do that....
+        # I don't know of any other way to fix this yet.
+        if type(input_edges) == list:
+            try:
+                input_edges = input_edges[0]
+            except:
+                raise Exception('Cannot unpack list')
+        if type(input_nodes) == list:
+            try:
+                input_nodes = input_nodes[0]
+            except:
+                raise Exception('Cannot unpack list')
+        if type(network_edges) == list:
+            try:
+                network_edges = network_edges[0]
+            except:
+                raise Exception('Cannot unpack list')        
+        if type(input_edges) == list:
+            try:
+                network_nodes = network_nodes[0]
+            except:
+                raise Exception('Cannot unpack list')
+    
+        # Write to Shapefile (just make a copy)
+        with tempfile.NamedTemporaryFile() as tmp1:
+            
+            #outfp = "temp/input_edges.shp"
+            input_edges.geometry.to_file(tmp1.name + '.shp')
         
+        if network_edges is None:
+            networkDigraph = df_to_network(input_edges, as_gdf = False)    
+            save_graph_shapefile_directional(networkDigraph, filepath='temp')
+            network = Network('temp/network_edges.shp', 'fid', 'u', 'v')
+            
+            network_nodes, network_edges = ox.graph_to_gdfs(networkDigraph)
+            
+            # Import our network edges for later
+            network_gdf = gpd.read_file('temp/network_edges.shp')
+            network_gdf.fid = network_gdf.fid.astype(int)
+        else:
+            network_edges.index.names = ['fid']
+            with tempfile.NamedTemporaryFile() as tmp2:
+                network_edges.to_file(tmp2.name + '.shp',index = True)
+                network = Network(tmp2.name + '.shp', "fid", "u", "v")
+                
+                # Import our network edges for later
+                network_gdf = gpd.read_file(tmp2.name + '.shp')
+                network_gdf.fid = network_gdf.fid.astype(int)
+#        print("Nodes {} edges {}".format(network.get_node_count(),network.get_edge_count()))
+        
+        graph = NetworkGraph(network)
+
+    ### Precompute an UBODT table
+
+    # Can be skipped if you already generated an ubodt file
+        ubodt_gen = UBODTGenAlgorithm(network,graph)
+        with tempfile.NamedTemporaryFile() as tmp3:
+            status = ubodt_gen.generate_ubodt(tmp3.name, 0.02, binary=False, use_omp=True)
+#        print(status)
+
         ### Read UBODT
 
-        ubodt = UBODT.read_ubodt_csv("temp/ubodt.txt")
-        
+            ubodt = UBODT.read_ubodt_csv(tmp3.name)
+
         ### Create FMM model
         model = FastMapMatch(network,graph,ubodt)
-        
+
         input_config = GPSConfig()
-        input_config.file = "temp/input_edges.shp"
+        input_config.file = tmp1.name + '.shp'
         input_config.id = "FID"
 
         result_config = ResultConfig()
-        result_config.file = "temp/mr.csv"
-        result_config.output_config.write_opath = True
-        print(result_config.to_string())
+        with tempfile.NamedTemporaryFile() as tmp4:
+            result_config.file = tmp4.name + '.csv'
+            result_config.output_config.write_opath = True
+#        print(result_config.to_string())
 
-        result = model.match_gps_file(input_config, result_config, self.config)
-        
-        # Now we post-process
-        
-        resultdf = pd.read_csv("temp/mr.csv", sep=";")
-        
-        # Extract cpath as list of int
-        resultdf["cpath_list"] = resultdf.apply(lambda row: extract_cpath(row.cpath), axis=1)
+            result = model.match_gps_file(input_config, result_config, self.config)
 
-        # Extract all the edges matched
-        all_edge_ids = np.unique(np.hstack(resultdf.cpath_list)).tolist()
+    # Now we post-process
 
-        # Import our network edges
-        network_gdf = gpd.read_file("temp/network_edges.shp")
-        network_gdf.fid = network_gdf.fid.astype(int)
+            resultdf = pd.read_csv(tmp4.name + '.csv', sep=";")
+
+            # Extract cpath as list of int
+            resultdf["cpath_list"] = resultdf.apply(lambda row: extract_cpath(row.cpath), axis=1)
+
+            # Extract all the edges matched
+            all_edge_ids = np.unique(np.hstack(resultdf.cpath_list)).tolist()
 
         edges_df = network_gdf[network_gdf.fid.isin(all_edge_ids)].reset_index()
         edges_df["points"] = edges_df.apply(lambda row: len(row.geometry.coords), axis=1)
         
         # fmm does not identify matched nodes, but only matched edges. So we will only export matched edges
+        output = edges_df[edges_df.geom_type == 'LineString']
         
-        # results
-        self.results = edges_df[edges_df.geom_type == 'Point'], edges_df[edges_df.geom_type == 'LineString']
-        self.network = networkDigraph # This is often used in other utilities
-        if not input_nodes.empty:
-            self.input_data = pd.concat([input_nodes,input_edges]) # This is often used in other utilities
+        ## results
+        # If a network was provided, then we need to find the nearest match from our downloaded network
+        ##### OK, this is much harder than I thought, so for now this is WIP.
+        # While ideally we'd simply do a nearest neighbors search, match the edges 1-1, and return the matched edges,this doesn't actually work
+        # This is because a given road may appear multiple times in a network...
+        # For example, take a divided highway-- technically the lanes are part of the same road
+        # But they connect very differently, so OSM treats them as separate roads occupying the same space
+        # If you naively try a nearest neighbor search, you'll get both of these routes
+        # Of course, only one of the routes was actually traversed, but it is rather difficult to algorithmically ascertain which one
+        # And if you return the wrong one, it would appear as a 'invalid guess' to your evaluation method
+        # Which would erroneously increase your error
+        # I haven't figured out a robust solution yet (maybe require ids to align with osm ids?)
+        # So for now I'm just returning the OSM matched route
+        if network_edges is None:
+            self.results = output
         else:
+            #matched_nodes = output.sjoin_nearest(network_nodes, how = 'right')
+            self.results = output
+        self.network = network_edges # This is often used in other utilities
+        if input_nodes is None:
             self.input_data = input_edges # This is often used in other utilities
+        else:
+            self.input_data = pd.concat([input_nodes,input_edges]) # This is often used in other utilities
+
+            
+        if return_results:
+            return self.results
         
-        shutil.rmtree('temp/') # Clean up files made
+        
         
     def plot(self):
     
@@ -160,7 +227,9 @@ class FMM(object):
         self.results[1].plot(ax=ax, color="red")
     
     def evaluate(self, gt, match = 'geometry'):
-        
+        '''
+        Author: Gabriel Gress
+        '''
         evalint = gt.loc[np.intersect1d(gt[match], pred_edges[match], return_indices=True)[2]]
         evalxor = pd.concat([gt.overlay(evalint, how="difference"),self.results.overlay(evalint, how = "difference")]) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
             # Why do this? Suppose that somehow your geometries were truncated, i.e (1.00001, 1.00001) => (1,1). Technically, these geometries are distinct, so overlay would put these in the xor GDF. But if we have a column like id which we are certain aligns with both datasets, then we can match that way, and ensure they are correctly put into the evalint set, and our evalxor length is corrected.
@@ -178,3 +247,22 @@ class FMM(object):
         '''
         return self.results
     
+def df_to_network(df, buffer = 0.002, ntype = 'drive', as_gdf = True, *args):
+    '''
+    A helper function which takes a GeoDataFrame (coordinates, lines, anything) and downloads a road network from OSM for the surrounding area
+    Args:
+    df: a GeoDataFrame from which to generate the network
+    buffer: a buffer distance (in lat/lon) from which to expand the bbox (optional, default 0.002)
+    ntype: network type to download (optional, default 'drive')
+    as_gdf: Boolean, returns as gdf if True, and as OSM network if false
+    *args: optional arguments to pass to osmnx.graph_from_bbox()
+    
+    Author: Gabriel Gress
+    '''
+    miny, minx, maxy, maxx = df.geometry.total_bounds
+    network = ox.graph_from_bbox(maxx+buffer, minx-buffer, maxy+buffer, miny-buffer, network_type=ntype, *args)
+    if as_gdf:
+        networknodes, networkedges = ox.graph_to_gdfs(network)
+        return [networknodes, networkedges]
+    else:
+        return network

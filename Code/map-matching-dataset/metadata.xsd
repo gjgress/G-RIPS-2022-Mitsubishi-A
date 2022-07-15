@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:attributeGroup name="spat-mism">
+    <xs:attribute name="max" type="xs:double" use="required"/>
+    <xs:attribute name="mad" type="xs:double" use="required"/>  
+  </xs:attributeGroup>
+  <xs:attributeGroup name="file">
+    <xs:attribute name="path" type="xs:string" use="required"/>
+    <xs:attribute name="md5" type="xs:string" use="required"/>  
+  </xs:attributeGroup>
+  <xs:element name="records">
+    <xs:complexType>
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+	<xs:element name="record">
+	  <xs:complexType>  
+            <xs:sequence>    
+	      <xs:element name="track" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:attributeGroup ref="file"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="nodes" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:attributeGroup ref="file"/>
+                </xs:complexType> 
+              </xs:element>
+              <xs:element name="arcs" minOccurs="1"  maxOccurs="1">
+                <xs:complexType>
+                  <xs:attributeGroup ref="file"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="route" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:attributeGroup ref="file"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="spatial-mismatch" minOccurs="1" maxOccurs="1">
+                <xs:complexType>
+                  <xs:attributeGroup ref="spat-mism"/>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="tag" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:attribute name="key" type="xs:string" use="required"/>
+                  <xs:attribute name="value" type="xs:string" use="required"/>  
+                </xs:complexType> 
+              </xs:element>     
+	    </xs:sequence>
+	    <xs:attribute name="id" type="xs:nonNegativeInteger" use="required"/>
+	    <xs:attribute name="state"> 
+	      <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:enumeration value="revised"/>
+                  <xs:enumeration value="corrected"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:attribute> 
+	  </xs:complexType>    
+	</xs:element>
+      </xs:choice>  
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -25,34 +25,76 @@ from scipy import spatial # for proximity fuse
 # globals
 VERSION = '1.0'
     
-### Required     
-def plot(self, network, input_data, results):
+def run(sim, tracks_edges_list = None, tracks_nodes_list = None, network_edges_list = None, network_nodes_list = None, parallel=False, workers = os.cpu_count()):
+    '''
+    This is a higher level function which takes a list (or tuple) of map-matching datasets and runs them sequentially through the given sim. This way you can write your algorithm for the simplest situation, and use this when you want to test on a bigger scale
+    Args:
+        sim: a map-matching algorithm object. Needs to have a run() function which can handle the other variables
+        network_nodes_list: a list containing network node datasets (optional; if your algorithm requires it)
+        network_edges_list: a list containing network edge datasets (optional; if your algorithm requires it)
+        tracks_nodes_list: a list containing track nodes datasets (optional; if your algorithm requires it)
+        tracks_edges_list: a list containing track edge datasets (optional; if your algorithm requires it)
+    All of the lists must be of the same length
+    '''
+    tn = tracks_nodes_list
+    te = tracks_edges_list
+    nn = network_nodes_list
+    ne = network_edges_list
+
+    arglist = [te, tn, nn, ne]
+    arglist = list(filter(None, arglist))
+    
+
+    results = []
+    for i in range(len(arglist[0])):
+        arglisti = []
+#            for j in range(len(arglist)): # Also broken for now
+#                arglisti.append(arglist[j][i])
+        results.append(sim.run(te[i],tn[i],ne[i],nn[i], return_results=True))
+    
+    return results
+    
+def plot(network, input_data, results, fs = (8,8)):
     '''
     Args:
         network: a MultiDigraph, preferably directly from OSM
         input_data: a dataset that matplotlib can plot. Needs to share the same CRS as network
         results: a dataset that matplotlib can plot. Needs to share the same CRS as network
     '''
-    fig, ax = ox.plot_graph(network,show=False, close=False)
+    fig, ax = ox.plot_graph(network,show=False, close=False, figsize= fs)
     input_data.plot(ax=ax)
-    results[1].plot(ax=ax, color="red")
-
-def evaluate(self, prediction, gt, match = 'geometry'):
+    results.plot(ax=ax, color="red")
+    
+def evaluate(prediction, gt, matchid = 'index'):
     '''
     Args:
         prediction: a GeoDataFrame consisting of the matches found by the algorithm
         gt: a GeoDataFrame consisting of the actual network nodes/edges traversed (ground truth). Should be indexed similar to prediction. (Note: ground truth has a specific meaning in literature, which we misuse here. gt does not need to be the literal ground truth, but simply the route taken as truth for comparison)
         match: the column with which to match prediction and gt. Standard method is by matching geometries, but indexing columns can be superior if you know they are consistent between prediction and gt
     '''
-    evalint = gt.loc[np.intersect1d(gt[matchid], pred_edges[matchid], return_indices=True)[2]]
-    evalxor = pd.concat([gt.overlay(evalint, how="difference"), self.results.overlay(evalint, how = "difference")]) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
-        # Why do this? Suppose that somehow your geometries were truncated, i.e (1.00001, 1.00001) => (1,1). Technically, these geometries are distinct, so overlay would put these in the xor GDF. But if we have a column like id which we are certain aligns with both datasets, then we can match that way, and ensure they are correctly put into the evalint set, and our evalxor length is corrected.
+    if (type(prediction) == list or type(prediction) == tuple):
+        error = []
+        for i in range(len(prediction)):
+            error.append(evaluate(prediction[i], gt[i], matchid))
+    else:
+        if type(gt) == list:
+            gt = gt[0] # Dask Delayed returns a list of one element...
+            # Temporary workaround
+        try:
+            np.intersect1d(gt[matchid], prediction[matchid], return_indices=True)
+        except:
+            raise Exception('Currently only array-like objects can be matched; please choose a different match column.')
+        else:
+            evalint = gt.loc[np.intersect1d(gt[matchid], prediction[matchid], return_indices=True)[1]]
+            evalxor = pd.concat([gt.overlay(evalint, how="difference"), prediction.overlay(evalint, how = "difference")]) # This may seem similar to directly using overlay (symmetric difference), but not so. The difference here is that the intersection is found by matchid; then we take the geometries in the prediction/gt and subtract it out.
+                # Why do this? Suppose that somehow your geometries were truncated, i.e (1.00001, 1.00001) => (1,1). Technically, these geometries are distinct, so overlay would put these in the xor GDF. But if we have a column like id which we are certain aligns with both datasets, then we can match that way, and ensure they are correctly put into the evalint set, and our evalxor length is corrected.
+            d0 = sum(gt.length)
+            ddiff = sum(evalxor.length)
 
-    d0 = np.sum(gt['length'])
-    ddiff = np.sum(evalxor['length'])
-
+            error = ddiff/d0
     # This error formula was created in https://doi.org/10.1145/1653771.1653818
-    return ddiff/d0 # Lower is better (zero is perfect)
+    return error # Lower is better (zero is perfect)
+
 
 def save_graph_shapefile_directional(G, filepath=None, encoding="utf-8"):
     '''
@@ -107,25 +149,26 @@ def point_to_traj(input_nodes, columns=None):
 
     # Now we will format the other columns in the input_data to be included in our final GeoDataFrame
     coldict = {}
-    for column in columns:
-        
-        # Make sure the column exists
-        if np.any(input_nodes.columns.values == column):
-            dat = input_nodes[column].to_numpy()
+    if columns:
+        for column in columns:
 
-            # Depending on the method, create the adjusted data
-            if columns[column] == 'first':
-                datval = dat[:-1]
-            elif columns[column] == 'average':
-                datval = (dat[:-1] + dat[1:])/2
-            elif columns[column] == 'last':
-                datval = dat[1:]
-            else: # I only have the above methods! Don't try to use something else
-                print(columns[column] + ' is not a valid assignment method. Ignoring this column.')
+            # Make sure the column exists
+            if np.any(input_nodes.columns.values == column):
+                dat = input_nodes[column].to_numpy()
 
-            coldict[column] = datval
-        else:
-            print(column + ' is not a valid column in input nodes. Ignoring this column.')
+                # Depending on the method, create the adjusted data
+                if columns[column] == 'first':
+                    datval = dat[:-1]
+                elif columns[column] == 'average':
+                    datval = (dat[:-1] + dat[1:])/2
+                elif columns[column] == 'last':
+                    datval = dat[1:]
+                else: # I only have the above methods! Don't try to use something else
+                    print(columns[column] + ' is not a valid assignment method. Ignoring this column.')
+
+                coldict[column] = datval
+            else:
+                print(column + ' is not a valid column in input nodes. Ignoring this column.')
 
     coldict['geometry'] = line_segments
     input_edges = pd.concat([input_edges,gpd.GeoDataFrame(coldict)]) # Put the separated LineStrings into a GeoDataFrame, along with any other columns supplied
@@ -219,3 +262,20 @@ def fuse_simple(df1,df2,timestampcol,fuse_m):
     else:
         raise Exception("Not a valid fusion method (must be 'nearest neighbor', 'average', or 'blah')!")
         
+def df_to_network(df, buffer = 0.002, ntype = 'drive', as_gdf = True, *args):
+    '''
+    A helper function which takes a GeoDataFrame (coordinates, lines, anything) and downloads a road network from OSM for the surrounding area
+    Args:
+    df: a GeoDataFrame from which to generate the network
+    buffer: a buffer distance (in lat/lon) from which to expand the bbox (optional, default 0.002)
+    ntype: network type to download (optional, default 'drive')
+    as_gdf: Boolean, returns as gdf if True, and as OSM network if false
+    *args: optional arguments to pass to osmnx.graph_from_bbox()
+    '''
+    miny, minx, maxy, maxx = df.geometry.total_bounds
+    network = ox.graph_from_bbox(maxx+buffer, minx-buffer, maxy+buffer, miny-buffer, network_type=ntype, *args)
+    if as_gdf:
+        networknodes, networkedges = ox.graph_to_gdfs(network)
+        return [networknodes, networkedges]
+    else:
+        return network
