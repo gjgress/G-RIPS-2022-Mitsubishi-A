@@ -4,6 +4,7 @@
 """
 FMM Algorithm Wrapper
 Created on 2022-06-27
+Last Modified: 2022-07-21
 @author: gjgress
 This python module is a wrapper which allows one to use fmm more simply.
 It still requires fmm to be installed separately.
@@ -22,7 +23,14 @@ import pandas as pd
 from ctypes import *
 from ctypes import wintypes
 import tempfile
-from fmm import Network,NetworkGraph,FastMapMatch,UBODTGenAlgorithm,UBODT,FastMapMatchConfig,GPSConfig,ResultConfig
+from fmm import Network
+from fmm import NetworkGraph
+from fmm import FastMapMatch
+from fmm import UBODTGenAlgorithm
+from fmm import UBODT
+from fmm import FastMapMatchConfig
+from fmm import GPSConfig
+from fmm import ResultConfig
 import sys
 
 # globals
@@ -53,7 +61,13 @@ def save_graph_shapefile_directional(G, filepath=None, encoding="utf-8"):
 def extract_cpath(cpath):
         if (cpath==''):
             return []
-        return [int(s) for s in cpath.split(',')]
+        elif type(cpath) == float:
+            if math.isnan(float(cpath)):
+                return []
+            else:
+                return [int(cpath)]
+        else:
+            return [int(s) for s in cpath.split(',')]
     
 ### Required    
 class FMM(object):
@@ -265,4 +279,5 @@ def df_to_network(df, buffer = 0.002, ntype = 'drive', as_gdf = True, *args):
         networknodes, networkedges = ox.graph_to_gdfs(network)
         return [networknodes, networkedges]
     else:
-        return network
+        return network# -*- coding: utf-8 -*-
+# Fielname = fmm_bin.py
