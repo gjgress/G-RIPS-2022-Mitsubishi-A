@@ -28,12 +28,13 @@ import sys
 from functools import reduce
 from algorithms import mm_utils
 from shapely.geometry import Point
+import dask
 
 ### Required    
 class Sim(object):
     '''
     '''
-    def __init__(self, route_inner_f = None, route_outer_f = None, gps_inner_f = None, gps_outer_f = None, wrapper_f = None, loss_function = None):
+    def __init__(self, route_inner_f = None, route_outer_f = None, gps_inner_f = None, gps_outer_f = None, wrapper_f = None, loss_function = None, trajectory = None, candidate_route_nodes = None, candidate_routes = None):
         '''
         Args:
             None
@@ -50,6 +51,9 @@ class Sim(object):
         self.gps_inner_f = gps_inner_f
         self.gps_outer_f = gps_outer_f
         self.wrapper_f = wrapper_f
+        self.trajectory = trajectory
+        self.candidate_route_nodes = candidate_route_nodes
+        self.candidate_routes = candidate_routes
         
         if loss_function is None:
             try:
@@ -135,7 +139,7 @@ class Sim(object):
         # This is all we need to run our algorithm.
         
         
-    def run(self, k1 = 1, k2 = 1, return_full = False, return_results=False):
+    def run(self, k1 = 1, k2 = 1, return_full = False, return_results=False, parallel = True, preprocessed = True, **kwargs):
         '''
         main procedure of the algorithm
         Args:
@@ -146,14 +150,27 @@ class Sim(object):
         By default it assumes minimum less is optimal. If you want to instead maximize loss, include a -1* term in your wrapper function (turning a max into a min)
         '''
         
+        if not preprocessed:
+            self.preprocessing(**kwargs)    
+            
         loss = []
         
-        for i in range(len(self.candidate_route_nodes)):
-            in_pts = [(x,y) for x,y in zip(self.candidate_route_nodes[i].to_crs("EPSG:3395").geometry.x , self.candidate_route_nodes[i].to_crs("EPSG:3395").geometry.y)]
-            qry_pts =  [(x,y) for x,y in zip(self.trajectory.to_crs("EPSG:3395").geometry.x , self.trajectory.to_crs("EPSG:3395").geometry.y)]
-            _, routeloss = mm_utils.get_nearest(in_pts, qry_pts, k_neighbors = k1)
-            _, gpsloss = mm_utils.get_nearest(qry_pts, in_pts, k_neighbors = k2)
-            loss.append(self.loss_function(routeloss, gpsloss))
+        if parallel:
+            for i in range(len(self.candidate_route_nodes)):
+                in_pts = [(x,y) for x,y in zip(self.candidate_route_nodes[i].to_crs("EPSG:3395").geometry.x , self.candidate_route_nodes[i].to_crs("EPSG:3395").geometry.y)]
+                qry_pts =  [(x,y) for x,y in zip(self.trajectory.to_crs("EPSG:3395").geometry.x , self.trajectory.to_crs("EPSG:3395").geometry.y)]
+                _, routeloss = mm_utils.get_nearest(in_pts, qry_pts, k_neighbors = k1)
+                _, gpsloss = mm_utils.get_nearest(qry_pts, in_pts, k_neighbors = k2)
+                loss.append(dask.delayed(self.loss_function)(routeloss, gpsloss))  
+            loss = dask.compute(*loss)
+            
+        else:
+            for i in range(len(self.candidate_route_nodes)):
+                in_pts = [(x,y) for x,y in zip(self.candidate_route_nodes[i].to_crs("EPSG:3395").geometry.x , self.candidate_route_nodes[i].to_crs("EPSG:3395").geometry.y)]
+                qry_pts =  [(x,y) for x,y in zip(self.trajectory.to_crs("EPSG:3395").geometry.x , self.trajectory.to_crs("EPSG:3395").geometry.y)]
+                _, routeloss = mm_utils.get_nearest(in_pts, qry_pts, k_neighbors = k1)
+                _, gpsloss = mm_utils.get_nearest(qry_pts, in_pts, k_neighbors = k2)
+                loss.append(self.loss_function(routeloss, gpsloss))
         
         
         loss_ind = np.argsort(loss)
