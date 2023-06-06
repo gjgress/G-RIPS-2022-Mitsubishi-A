@@ -1,0 +1,1105 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{xcolor}%used to color text
+% \usepackage{mathabx}
+\usepackage{graphicx,tikz,setspace}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+% \usepackage{float}
+% \usepackage{array}
+% \usepackage{listings}
+% \usepackage{hhline}
+% \usepackage[numbered,framed]{matlab-prettifier}
+% \usepackage{fancyvrb}
+\usepackage{mathtools}
+% \usepackage{multirow}
+% \usepackage{algorithm2e}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usetikzlibrary{positioning}
+\usetikzlibrary{topaths,calc}
+\usepackage{here}
+\usepackage{aliascnt}
+
+\usepackage[english]{babel}  %なんかsubsectionとかをautorefで引用したときに先頭の``S"を大文字にしてくれる呪文らしい
+\addto\extrasenglish{\def\subsubsectionautorefname{\S}}
+\addto\extrasenglish{\def\subsectionautorefname{\S}}
+\addto\extrasenglish{\def\sectionautorefname{Section}}
+
+\usepackage[rm]{titlesec}
+\titleformat*{\section}{\center\large\bfseries}
+\titleformat*{\subsection}{\center\bfseries}
+\titleformat*{\subsubsection}{\center\bfseries}
+
+\hypersetup{
+colorlinks=true,
+citecolor=blue,
+linkcolor=red,
+urlcolor=cyan}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes, fit, arrows.meta, bending}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+
+
+
+% \usepackage{pgfplots}
+% \pgfplotsset{compat=1.15}
+% \newenvironment{solution}
+%   {\renewcommand\qedsymbol{$\vartriangleleft$}\begin{proof}[Solution]}
+%   {\end{proof}}
+
+\numberwithin{equation}{section}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newcommand{\definitionautorefname}{Definition}
+\newaliascnt{example}{definition} %Example
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\newcommand{\exampleautorefname}{Example}
+\newaliascnt{remark}{definition} %Remark
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\newcommand{\remarkautorefname}{Remark}
+\newaliascnt{prob}{definition} %Problem
+\newtheorem{prob}[prob]{Problem}
+\aliascntresetthe{prob}
+\newcommand{\probautorefname}{Problem}
+
+%%%%%
+\newcommand{\ninni}{{}^\forall} %∀
+\newcommand{\aru}{{}^\exists} %∃
+\newcommand{\dis}{\displaystyle} 
+\newcommand{\A}{\alpha}
+\newcommand{\B}{\beta}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\de}{\delta}
+\newcommand{\dex}{\delta_x}
+\newcommand{\dey}{\delta_y}
+\newcommand{\K}{\kappa}
+\newcommand{\la}{\lambda}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\PP}{\mathscr{P}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\RR}{\mathbb{R}_{\geq 0}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ttilde}{\widetilde} %大きいチルダ
+\newcommand{\eps}{\varepsilon} %ε
+\newcommand{\uto}{\uparrow}
+\newcommand{\dto}{\downarrow}
+\newcommand{\rv}{\mathbb{R}^V} 
+\newcommand{\expo}{\mathsf{exp}}
+\newcommand{\vol}{\mathsf{vol}}
+\newcommand{\mt}{\mathsf{MT}}
+\newcommand{\ttt}{\mathsf{TT}}
+\DeclareMathOperator\supp{supp} %supp
+\newcommand{\argmax}{\mathop{\rm arg\,max}\limits} %argmax
+\newcommand{\argmin}{\mathop{\rm arg\,min}\limits} %argmin
+\newcommand{\rwx}{\mu_x^\alpha} %xでのr.w.
+\newcommand{\rwy}{\mu_y^\alpha} %yでのr.w.
+\newcommand{\wxy}{W_1\big(m_x^\alpha,m_y^\alpha\big)}
+\newcommand{\whxy}{W_h\big(m_x^\alpha,m_y^\alpha\big)}
+\newcommand{\kaxy}{\kappa(\alpha;x,y)}
+\newcommand{\tkaxy}{\tilde{\kappa}(\alpha,h;x,y)}
+\newcommand{\kxy}{\kappa(x,y)}
+\newcommand{\tkxy}{\tilde{\kappa}(h;x,y)}
+\newcommand{\kLLYxy}{\kappa_{\textrm{LLY}}(x,y)}
+\newcommand{\lip}{\textsf{Lip}(V)}
+\def\:={\coloneqq} %:=
+\def\bu{$\bullet$ }
+\def\comar{$\rightsquigarrow$}%ぐにゃぐにゃのヤツ
+\def\dcomar{$\downrsquigarrow$}%下向きぐにゃぐにゃ
+\def\kakko<#1>{\left\langle #1 \right\rangle}
+\def\diam(#1){\mathsf{diam}(#1)}
+%\def\vol(#1){\mathsf{vol}(#1)}
+\def\W(#1){W_1\big(#1\big)}
+\def\wh(#1){W_h\big(#1\big)}
+\def\conv(#1){\textrm{conv}\left( #1 \right)}
+\def\01{\{0,1\}}
+\def\L(#1){#1\textrm{-Lip}}
+\def\w-#1-Lip{\textrm{w-}$#1$\textrm{-Lip}}
+\def\3|{|\hspace{-0.4mm}|\hspace{-0.4mm}|}
+\def\Lip(#1){\textsf{Lip}_w^{#1}(V)}
+\def\blue(#1){\textcolor{blue}{#1}}
+\def\red(#1){\textcolor{red}{#1}}
+\def\green(#1){\textcolor{green}{#1}}
+%%%%%
+
+
+% \newcommand{\bmb}{\begin{bmatrix}}
+% \newcommand{\bme}{\end{bmatrix}}
+% \newcommand\norm[1]{\left\lVert#1\right\rVert}
+% \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+% \newcommand{\st}{\text{s.t.}}
+% \newcommand{\E}[2]{\ensuremath{{\mathbb{E}_{#1}}{\left[{#2}\right]}}}
+% \newcommand{\R}{\ensuremath{\mathbb{R}}}
+% \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+% https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles
+\bibliographystyle{unsrt}
+
+\title{Mitsubishi-A Work Statement}
+\author{}
+\date{}
+
+\pagestyle{fancy}
+\fancyhf{}
+ 
+\lhead{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\rhead{g-RIPS Sendai 2022, Mitsubishi-A}
+\cfoot{\thepage}
+
+\begin{document}
+\nocite{*}% for bibilography
+
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%	HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE g-RIPS Sendai 2022}\\[1.5cm] % Name of your university/college
+\textsc{\Large Mitsubishi-A Group}\\[0.5cm] % Major heading such as course name
+%\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Work Statement}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%	AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Authors:}\\
+ \textsc{Tomoya Akamatsu}\textsuperscript{1} \\ % Your name \\ 
+ \textsc{Gabriel Gress}\textsuperscript{2}\\
+ \textsc{Katelynn Huneycutt}\textsuperscript{3}\\
+  \textsc{Seiya Omura }\textsuperscript{4}\\
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Mentors:} \\
+ \textsc{Dr. Shunsuke Kano}\textsuperscript{+}\\% \\% Supervisor's Name
+ \textsc{Dr. Masashi Yamazaki}\textsuperscript{*} 
+\end{flushright}
+\end{minipage}\\[0.5cm]
+\center\begin{minipage}{0.35\textwidth}
+\begin{flushleft}\small
+
+\textsuperscript{1} Osaka University\\
+\textsuperscript{2} University of New Mexico\\
+\textsuperscript{3} Ohio State University \\
+\textsuperscript{4} Nagoya University \\
+\textsuperscript{+} Academic Mentor, Tohoku University,
+% Aobayama campus
+RACMaS
+\\
+\textsuperscript{*} Industrial Mentor, MITSUBISHI Electric Corp \\
+
+\end{flushleft}
+\end{minipage}\\[2cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%	DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%	LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{logo.png}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents \newpage
+
+\section{Introduction}
+A fundamental question when dealing with geospatial information is, given GPS trajectory data and a road map, how can one determine which route on a map this trajectory corresponds to. This problem is called the map-matching problem. 
+Data-driven methods, such as hidden Markov models, are currently the most prominent approach to the map-matching problem; however, they are inflexible changes in the data. In contrast, a mathematical model will have the benefit of being more adaptable to changes in the data, such as the extension from two to three-dimensional data. 
+The aim of our project is to develop new solutions to the map-matching problem, favoring mathematical formulations, rather than a data-driven models, that are stable under small perturbations in road map and trajectory data. 
+% 
+We propose three novel methods: Wasserstein distance, inner product, and energy functional methods. Each of these methods has an associated loss (objective) function whose minimum is the the ``matched" map.
+The loss function of each of the three methods employ the mathematical object for which they are named. 
+%The benefit of these proposed mathematical formulations is their ability to be extended to include  to higher dimensional data 
+We plan to develop these approaches into algorithms and evaluate their performance using both theoretical and numerical techniques. 
+
+% \begin{itemize}
+%     \item Applications
+%     \item What is  matching?
+%     \item summarize our project plan
+% \item associated challenges 
+% \end{itemize}
+
+
+\section{Problem Summary and Statement} \label{PS}
+
+Here we will describe the mathematical formulation of our problem. We will adopt the problem statement from definitions 2.1-2.4 in \cite{CXHZ} with slight modifications. The geospatial data points will be modeled by a trajectory, see \autoref{Tr}, and map data will be encapsulated by a road network \autoref{RN}.
+
+Let us fix $d \geq 2$ (but almost everywhere we consider the case $d = 2$).
+\begin{definition}[Trajectory] \label{Tr}
+A \textbf{trajectory} $Tr$ is a sequence of points $\mathbf{p} = (p_1,p_2,\dots, p_n)$ where $p_i\in \mathbb{R}^d$ for $1\leq i\leq n$ equipped with 
+\begin{itemize}
+    \item a sequence $t(\mathbf{p}) = (t_1,\dots,t_{n})$ such that $t_i\in \mathbb{R}^{+}$ for $1\leq i\leq n$ and  $t_1<t_2<\dots <t_n$, called the \textbf{time stamp} of $\mathbf{p}$,
+    \item a sequence $\text{spd}(\mathbf{p}) = (\text{spd}_1,\dots,\text{spd}_{n})$ such that  $\text{spd}_i\in \mathbb{R}^{+}$  for $1\leq i\leq n$, called the \textbf{speed} of $\mathbf{p}$ (optional),
+    \item a sequence $u(\mathbf{p}) = (u_1, \dots, u_n)$ such that $u_i\in \mathbb{R}^d$ and $\|u\|=1$ for $1\leq i\leq n$, called the \textbf{direction} of $\mathbf{p}$ (optional).
+\end{itemize}
+\end{definition}
+
+% \begin{definition}[Trajectory]
+% A \textbf{trajectory} $Tr$ is a sequence points $p_1\rightarrow p_2 \rightarrow \dots \rightarrow p_n$. Each point $p_i$ consists of a coordinate $( x_i,y_i)\in \mathbb{R}^2$ , a timestamp $t_i$, a speed $spd_i$ (optional) and a heading $\theta_i$ (optional). i.e.:  $p_i=( x_i,y_i,t_i,spd_i,\theta_i )$.
+% \end{definition}
+
+
+\begin{definition}[Road Network] \label{RN}
+A  \textbf{road network} (also known as map) is a directed graph $G=(V,E)$ consists of the set $V$ (resp. $E$) of vertices (resp. edges) with an embedding $\phi:|G|\rightarrow\mathbb{R}^{d}$ of the geometric realization $|G|$ of $G$.
+% , and a map $f:E\rightarrow \{(x,y)\mid  (x,y)\in V^2 \}$ where $f = (f_1,f_2) $.
+We will identify $G$ and the image $\phi(|G|)$ by $\phi$ as long as there is no confusion.
+\end{definition}
+
+
+
+\begin{definition}[Route]
+A \textbf{route} $r$ on a road network $G=(V,E)$ is a sequence of connected edges $(e_1,e_2,\dots,e_n)\subset E$, i.e. 
+% $e_i\in E$ and $f_2(e_i) = f_1(e_{i+1})$.
+the head of $e_i$ coincides with the tail of $e_{i+1}$ for each $i = 1, 2, \dots, n-1$.
+Let $R$ denote the set of all routes.
+\end{definition}
+
+% \begin{definition}[Route]
+% A  \textbf{route} $R$ represents a sequence of connected edges, i.e. $R = e_1\rightarrow e_2 \rightarrow \dots \rightarrow e_n$, {\color{blue} where for all $1\leq i\leq n$, $e_i=(s_i,f_i,l_i)$ and $f_i =s_{i+1}$.}
+% \end{definition}
+
+\begin{definition}[Map-Matching]
+Given a road network $G=(V, E)$ and a trajectory
+$Tr$, the map-matching, $\mathcal{MR}_G(Tr)$, is the route that is the argument of the minimum of some function $L:R\rightarrow \mathbb{R}^+$, called the \textbf{loss function}. 
+\end{definition}
+
+% \begin{definition}[Map-Matching]
+% Given a road network $G(V, E)$ and a trajectory
+% $Tr$, the map-matching find a route $\mathcal{MR}_G(Tr)$ that represents the  by the trajectory.
+% \end{definition}
+
+The main goal of this project is to find a suitable loss function such that  $\mathcal{MR}_G(Tr)$ is the route which is minimal distance from the actual route traveled by a vehicle or pedestrian taken with respect to a chosen metric (see \autoref{Eval} for details on chosen metrics).
+
+
+
+
+ %Given a road network $G(V, E)$ and a trajectory
+% $Tr$, the map-matching find a route $\mathcal{MR}_G(Tr)$ that represents the sequence of roads travelled by the trajectory.
+
+
+
+    
+%We have adhere to a standard setting of map-matching which is to consider a map as a graph in $\mathbb{R}^2$
+
+
+
+\section{Background}
+
+In this section, we will review two existing map-matching methods, the point-to-point method and the Hidden Markov Model method, and evaluate their strengths and weaknesses. Surveys of these and many other existing map-matching algorithms are available in \cite{CXHZ,QON}.
+In addition, we will present an introduction to discrete optimal transport theory which will be necessary for the explanation of one of our proposed map-matching algorithms.
+% \begin{itemize}
+%     \item geometric methods 
+%     \item machine learning methods
+% %{\color{red}   \item methods available in patents... Haven't found any worth talking about yet  }
+% \end{itemize}
+\subsection{Geometric Model}
+% Many elementary techniques fall into the category of geometric methods. 
+Descriptions of several geometric methods including point-to-point, point-to-curve, and curve-to-curve methods can be found in \cite{BK}. The simplest geometric map-matching algorithms is the point-to-point method (for this method only, consider a route to instead be a sequence of vertices in the road network). The procedure for the point-to-point method is given in \cite{BK} to be
+\begin{enumerate}
+\item Compute the distance between each trajectory point $p_i$ to $v$ for each $v\in V$,
+\item Match trajectory point $p_i$ to the vertex $v\in V$ for which the euclidean distance between $p_i$ and $v$ is minimal. 
+\end{enumerate}
+Geometric methods like the point-to-point method are easily implemented and have low computational time \cite{BK}. Techniques such as creating Voronoi diagrams can be used to further decrease computational time. For example, one can partition a subset of $\mathbb{R}^{2}$ based on which points are closer to a given vertex on the graph than all others. This partition could be computed once and used to map-match different trajectories on the same road network. See \autoref{voronoi} for an example of a Voronoi diagram of a road network. The black lines and circles in the figure correspond to the road network while the blue lines partition the space into regions whose points are closest to the given vertex.
+
+
+However, this method, and other geometric methods, can be sensitive to measurement errors and are highly dependent on the network structure \cite{BK}. Bernstein and Kornhauser presented the example in \autoref{GME} to demonstrate this. Suppose the sequence of red points labeled $x_1,x_2,x_3$ is our trajectory and the lines and circles represent the vertices and edges of the underlying road network. Clearly, the trajectory appears to be closest to the path from vertex $v_4$ to $v_5$, but the closest node to trajectory point $x_2$ is $v_2$.
+
+
+
+
+\begin{figure}[H]
+\begin{tabular}{ccc}
+\begin{minipage}{0.45\hsize}
+\begin{center}
+%\begin{figure} %[h!]
+    \includegraphics[scale=.2]{Voronoi.png} %  \includegraphics[scale=.2]{Voronoi.png}
+    \caption{Voronoi Example}
+    \label{voronoi}
+%\end{figure}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.35\hsize}
+%\begin{figure} %[h!]
+\begin{center}
+\begin{tikzpicture}[]
+    \node[shape=circle,draw=black] (A) at (0,0) {$v_1$};
+    \node[shape=circle,draw=black] (B) at (3,0) {$v_2$};
+    \node[shape=circle,draw=black] (C) at (6,0) {$v_3$};
+    \node (x1) at (-.5,-1.2) {\red($x_1$)};
+    \node (x2) at (2.5,-1.1) {\red($x_2$)};
+    \node (x3) at (5.5,-1.2) {\red($x_3$)};
+    \node (x) at (0,2.1) {};
+    \node (y) at (0,-3.6) {};
+    \path [-] (A) edge node[left] {} (B);
+    \path [-] (B) edge node[left] {} (C);
+    \node[shape=circle,draw=black] (A) at (0,-1.5) {$v_4$};
+    \node[shape=circle,draw=black] (C) at (6,-1.5) {$v_5$};
+    \path [-] (A) edge node[left] {} (C);
+\end{tikzpicture}
+    \caption{Geometric Method Error }
+    \label{GME}
+\end{center}
+%\end{figure}
+\end{minipage}
+\end{tabular}
+\end{figure} 
+
+
+\subsection{Hidden Markov Model}
+
+The use of Hidden Markov Models (HMM) is one of the most popular approaches to the map-matching problem \cite{CXHZ}. An open source example of a map-matching algorithm using HMM is GraphHopper \cite{GH}. 
+
+\begin{figure}[h!]
+    \centering
+\begin{tikzpicture}[]
+    \node[shape=circle,draw=black] (y1) at (0,0) {$y_1$};
+    \node[shape=circle,draw=black] (y2) at (1.5,0) {$y_2$};
+    \node[draw=none] (ellipsis1) at (3,0) {$\cdots$};
+    \node[shape=circle,draw=black] (yN) at (4.5,-0) {$y_{N}$};
+     \node[shape=circle,draw=black,fill=gray!40] (x1) at (0,-1.5) {$x_1$};
+    \node[shape=circle,draw=black,fill=gray!40] (x2) at (1.5,-1.5) {$x_2$};
+    \node[draw=none] (ellipsis2) at (3,-1.5) {$\cdots$};
+    \node[shape=circle,draw=black, fill=gray!40] (xN) at (4.5,-1.5) {$x_{N}$};
+
+    \path [->] (y1) edge node[left] {} (y2);
+    \path [->](y2) edge node[left] {} (ellipsis1);
+     \path [->](ellipsis1) edge node[left] {} (yN);
+     \path [->](y1) edge node[left] {} (x1);
+     \path [->](y2) edge node[left] {} (x2);
+     \path [->](yN) edge node[left] {} (xN);
+
+\end{tikzpicture}
+    \caption{Hidden Markov Model (HMM)}
+    \label{HMM}
+\end{figure}
+
+%\subsubsection{Hidden Markov Model} 
+A Markov chain is a probabilistic model for sequential events subject to the condition that the probability of a given event depends on the on the previous event alone, i.e.  it is a sequence of random variable $z_1,\dots,z_n$ satisfying
+\begin{align*}
+    p(z_n| z_1,\dots,z_{n-1}) =  p(z_n| z_{n-1}).
+\end{align*}
+% \begin{figure}[h!]
+%     \centering
+% \begin{tikzpicture}[]
+%     \node[shape=circle,draw=black] (y1) at (0,0) {$Y_1$};
+%     \node[shape=circle,draw=black] (y2) at (1.5,0) {$Y_2$};
+%     \node[draw=none] (ellipsis1) at (3,0) {$\cdots$};
+%     \node[shape=circle,draw=black] (yN) at (4.5,-0) {$Y_{N}$};
+
+%     \path [->] (y1) edge node[left] {} (y2);
+%     \path [->](y2) edge node[left] {} (ellipsis1);
+%      \path [->](ellipsis1) edge node[left] {} (yN);
+% \end{tikzpicture}
+%     \caption{Markov Chain}
+%     \label{fig:my_label}
+% \end{figure}
+
+
+\noindent A Hidden Markov Model assumes that observations, $x_1,x_2,\dots,x_n$ are generated by a Markov chain of unobserved states $y_1,\dots,y_n$, seen in \autoref{HMM}. The joint probability of the observed and unobserved states is
+\begin{align*}
+    p(x_1,x_2,\dots,x_n,y_1,\dots,y_n) = p(y_1)p(x_1|y_1) \prod_{i=2}^n p(y_i|y_{i-1})p(x_i|y_i).
+\end{align*}
+The probability $p(x_i|y_i)$ is called the emission probability, $p(y_{i}|y_{i-1})$ is the transition probability, and $p(y_1)$ is the initial distribution. If there are a finite number of states each $x_i$ and $y_i$ can take on, then we can form emission, transition, and initial distribution matrices. Each probability is a parameter in our model. Once these parameters are established, one of several existing algorithms can be used to compute the  probabilities of some sequences of $y_i$ values occurring given the a sequence of observed $x_i$'s. 
+
+\begin{example} \label{Transition and Emission probabilities}
+A simple application of an HMM can be used to determine how busy a teacher is, given the observed lecture quality. Take the observed states $x_1,\dots,x_n\in \{\text{good, bad}\}$ to be the quality of the lecture on days $1,\dots, n$, and the unobserved states to be $y_1,\dots,y_n\in \{\text{busy, not busy}\}$. In this example, the emission matrix, $A$, and transition matrix, $B$, are given below based on the quantities decided in \autoref{TrEm}:
+\begin{align*}
+    A = \begin{bmatrix}
+    .7 & .3 \\
+    .6 & .4 
+    \end{bmatrix} , \qquad 
+     B = \begin{bmatrix}
+    .2 & .8 \\
+    .9 & .1
+    \end{bmatrix}. 
+\end{align*}
+\end{example}
+
+\begin{figure}[h!]
+    \centering
+    \begin{tikzpicture}[]
+        \node[shape=circle,draw=black,minimum size=1.5cm] (Bu) at (0,0) {Busy};
+        \node[shape=circle,draw=black,,minimum size=1.5cm] (NBu) at (4,0) {Not Busy};
+        \node[shape=circle,draw=black,minimum size=1.5cm] (G) at (.5,-3) {Good};
+        \node[shape=circle,draw=black,minimum size=1.5cm] (B) at (3.5,-3) {Bad};
+            
+        \path[->] (Bu)edge [loop left] node {.7} (Bu);    
+        \path [->](NBu) edge[bend right] node [above] {.6} (Bu);
+        \path [<-](NBu) edge[bend left] node [above] {.3} (Bu);
+        \path[->] (NBu) edge [loop right] node {.4} (NB);   
+        \path [->] (Bu) edge node[left] {.2}  (G) ; 
+        \path [->] (Bu) edge node [left] {.8} (B) ; 
+        \path [->] (NBu) edge node[right] {.9}  (G) ; 
+        \path [->] (NBu) edge node[right] {.1}  (B); 
+    \end{tikzpicture}
+    \caption{Transition and Emission probabilities for \autoref{Transition and Emission probabilities}. }
+    \label{TrEm}
+\end{figure}
+
+
+
+
+
+
+
+
+\subsubsection*{Application to Map-Matching}
+
+From the survey from Chao \cite{CXHZ}, HMM models for map-matching have the following setup. The observed quantities in the HMM for the map-matching problem are the sequence of geospatial data points and the hidden variables are the possible edges on the road network. The transition probabilities describe likelihood of the route containing some edge, given the previous edge, but the emission probabilities describe the probability that of observing a trajectory point given some edge in the road network. The choice of these parameter differentiates existing HMM models for map-matching. After the parameters are chosen, one can compute the route in the road network with the highest probability.  
+    Unfortunately, this approach to map-matching is limited, because a two dimensional hidden Markov model for map-matching cannot be extended to include three dimensional model or be changed to include speed information without training on the new data altogether. 
+
+%\subsubsection*{Limitations of Data Driven Methods}
+
+%The design of Hidden Markov Models has a simple correspondence to the map-matching process. Each trajectory point is considered a noisy observation, while the ground truth (the edge the vehicle is positioned on) is considered an unobserved state. In particular, because each trajectory point has measurement error, every edge proximate to the trajectory point has an associated emission probability, indicating the likelihood that the actual vehicle location is currently in that state. As additional trajectory points are considered, the transitions can be assigned to one of the candidate states depending on the transition probability between candidates. By applying the Viterbi algorithm to the HMM, we can obtain a sequence of hidden states with the maximum likelihood. /cite{Chao}
+
+%The HMM method allows for a great variety of implementations, based on how emission probabilities and transition probabilities are defined (and weighed?). Thus, there is no 'optimal' HMM method for any possible trajectory.
+
+%Here we will outline of HMM approach.
+
+
+
+
+% Describe open problems in map-matching
+
+% \subsection{Literature Review}
+
+\subsection{Mathematical Background} \label{IntroOfOT}
+
+
+%Here we can include an introduction to optimal transport theory and the necessary Riemannian geometry.
+
+\subsubsection*{A brief introduction of (discrete) optimal transport theory} 
+
+We will briefly describe discrete optimal transport theory (see also \cite{FG,Sa,Vi}, etc.).
+Consider transporting sand from a sand pile at $x_1,\ldots,x_n$ to a hole at $y_1,\ldots,y_m$.
+Note that $n,m\in\N$ are independent.
+Suppose that each sand pile $x_1,\dots,x_n$ has $\mu(x_1),\ldots,\mu(x_n)$ mass of sand, respectively, and each hole $y_1,\dots,y_m$ can contain $\nu(y_1),\dots,\nu(y_m)$ mass of sand, respectively.
+Moreover, we assume that the cost of transporting from a sand pile of $x_i$ to a hole of $y_j$ is linearly dependent on their distance $d(x_i,y_j)$: 
+it costs $d(x_i,y_j)\pi(x_i,y_j)$ to transport sand of mass $\pi(x_i,y_j)$ from the sand pile at $x_i$ to the hole at $y_j$.
+Since the sum of the mass of sand transported from each $x_i$ equals the sum of the mass of sand placed in each hole $y_j$, the following holds:
+\begin{align}
+    \dis \sum_{i=1}^n \mu(x_i) = \sum_{j=1}^m \nu(y_j). \label{total mass}
+\end{align}
+For simplicity, we normalize both sides of \eqref{total mass} to be 1.
+Then, $\mu,\nu$ can be regarded as probability measures, respectively.
+Optimal transport problem is the problem such minimizing total cost for transporting.
+In other words, we consider the following the minimizing problem.
+\begin{align}
+\begin{aligned}
+    & \text{minimize} 
+        & \sum_{i=1}^n \sum_{j=1}^m d(x_i,y_j)\pi(x_i,y_j) & & \label{object func.} \\
+    & \text{subject to} 
+        & \pi(x_i,y_j)\ge 0 & \qquad \text{for } i=1,2,\ldots,n,\, j=1,2,\ldots,m, \\
+        & & \mu(x_i)=\sum_{j=1}^m \pi(x_i,y_j) & \qquad \text{for } i=1,2,\ldots,n, \\
+        & & \mu(y_j)=\sum_{i=1}^n \pi(x_i,y_j) & \qquad \text{for } j=1,2,\ldots,m. 
+\end{aligned}
+\end{align}
+We call the map $\pi$ that satisfies these conditions the \textbf{optimal transport plan} or the \textbf{coupling} of $\mu,\nu$.
+$\Pi(\mu,\nu)$ denotes a set of all couplings of $\mu,\nu$.
+\begin{definition}[$L^1$-Wasserstein distance]
+For probability measures $\mu,\nu$ with $\supp\mu=\{x_1,\ldots,x_n\}$ and $\supp\nu=\{y_1,\ldots,y_m\}$, we define 
+\begin{align}
+    W_1(\mu,\nu) \:= \inf_{\pi\in\Pi(\mu,\nu)} \sum_{i=1}^n \sum_{j=1}^m d(x_i,y_j)\pi(x_i,y_j). \label{Wasserstein}
+\end{align}
+\end{definition}
+Under the appropriate conditions, $W_1$ is a distance function on the probability measure space.
+A probability measure space often contains geometrical information about its underling space.
+Therefore, it is useful to analyze the probability measure space using Wasserstein distance to understand the geometrical structure of its underlying space.
+
+Although $\Pi(\mu,\nu)$ is an infinite set since the mass of sand transported can be continuously varied, this is known to be a bounded close  set.
+Hence, the right hand side of \eqref{Wasserstein} attains the minimum value.
+
+
+
+\section{Our Approach}
+
+In this section, we describe our approaches.
+We introduce the three methods each employing one of the following mathematical tools
+\begin{itemize}
+    \item Wasserstein Distance,
+    \item Euclidean inner product,
+    \item Graph energy functional.
+\end{itemize}
+The first two methods are based on the approach of considering the road network graph as a set of lines in $\R^2$, and the last method is based on the approach of focusing on the graph structure.
+
+\subsection{Wasserstein Distance Method}
+
+\subsubsection*{The case in which input data is only the trajectory coordinates and timestamps} %\label{input:tra&time}
+
+We assume that the input data on trajectory is only its coordinates and timestamps.
+We first consider the case where the edges of the road network graph form a square, and the trajectory points are located around in a neighborhood of the diagonal of the square.  We consider this to be the simplest case where is it is difficult to determine the true route. 
+%We assume that the input data on trajectory is only its coordinates and timestamps. We consider the case
+% that the road network graph is a square and the trajectories is located around its diagonal as the simplest
+% model of situations where we cannot judge the passing route. 
+Suppose that the trajectory points $p_1,\ldots,p_n$ is observed near the diagonal as shown in \autoref{square model}.
+Although the trajectory points are drawn in a zigzag pattern in \autoref{square model}, our approach can be used for anything near the diagonal line.
+%Suppose that the trajectory $p_1,\ldots,p_n$ is observed near the diagonal as shown in \autoref{square model}.
+% Although the trajectory are drawn in a zigzag pattern in \autoref{square model}, this arrangement can be used for anything near the diagonal line.
+%We assume that the trajectory  points are ordered corresponding to their time stamp, i.e. in chronological order. Therefore, we determine that trajectory the began near $v_1$ and ended near $v_4$.
+We assume that we know from the information of timestamps that the trajectory began near $v_1$ and ended near $v_4$.
+%Here, let us assume that we know from the information of timestamps that the mover was from $v_1$ to $v_4$.
+It is difficult to judge from this trajectory alone whether $(v_1,v_2)\to(v_2,v_4)$ (we call this \textbf{route $A$}) or $(v_1,v_3)\to(v_3 ,v_4)$ (we call this \textbf{route $B$}) is the true route traveled.
+Therefore, we propose the method of route determination based on the optimal transport theory described in \autoref{IntroOfOT}.
+We can apply this method in theory even in general $\mathbb{R}^d$ and in the situation where each edge of the graph is a curve.
+
+\begin{figure}[H]
+\begin{tabular}{ccc}
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (p1) at (1,3.6) {\red($p_1$)};
+\node (p2) at (0.5,2.9) {\red($p_2$)};
+\node (p3) at (1.5,3.1) {\red($p_3$)};
+\node (pn-1) at (3.5,1.2) {\red($p_{n-1}$)};
+\node (pn) at (3.1,0.3) {\red($p_n$)};
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw[dashed] (v1)--(v4);
+\draw[red, dashed] (p3)--(pn-1);
+\draw[red, dashed] (p2)--(pn);
+\draw[arrows=->, thick, draw=blue] ($(v1)+(0.15,0.6)$) to ($(v2)+(0.3,0.6)$);
+\draw[arrows=->, thick, draw=blue] ($(v2)+(0.6,0.6)$) to ($(v4)+(0.6,0)$);
+\draw[arrows=->, thick, draw=green] ($(v1)+(-0.6,-0.15)$) to ($(v3)+(-0.6,-0.3)$);
+\draw[arrows=->, thick, draw=green] ($(v3)+(-0.6,-0.6)$) to ($(v4)+(0,-0.6)$);
+\node at (5.5,2) {{Route $A$}};
+\node at (-1.5,2) {{Route $B$}};
+\end{tikzpicture}
+\caption{The case where the trajectory points $p_1,\dots,p_n$ is observed near the diagonal of a square road network.} \label{square model}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (p1) at (1,3.6) {\footnotesize{\red($1/n$)}};
+\node (p2) at (0.5,2.9) {\footnotesize{\red($1/n$)}};
+\node (p3) at (1.5,3.1) {\footnotesize{\red($1/n$)}};
+\node (pn-1) at (3.5,1.2) {\footnotesize{\red($1/n$)}};
+\node (pn) at (3.1,0.3) {\footnotesize{\red($1/n$)}};
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw[dashed] (v1)--(v4);
+\draw[red, dashed] (p3)--(pn-1);
+\draw[red, dashed] (p2)--(pn);
+\end{tikzpicture}
+\caption{A probability measure $\mu_\mathbf{p}$ on the trajectory points. The weight $1/n$ is placed on the trajectory points $p_1,\dots,p_n$ respectively.} \label{mu_P}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure} 
+
+We reduce the problem of route determination to the framework of an optimal transportation problem by introducing the following three types of probability measures: probability measures associated with the trajectory points and routes $A$ and $B$.
+In other words, our idea is to quantify the distance between the trajectory points $\mathbf{p}=\{p_1,\ldots,p_n\}$ and each route by measuring Wasserstein distance between probability measures associated with the trajectory points and route.
+
+First, we introduced the probability measure $\mu_\mathbf{p}$ associated with the trajectory points $\mathbf{p}$.
+
+\begin{definition}[A probability measure associated with the trajectory points]
+We define a probability measure $\mu_\mathbf{p}$ as by putting weights of $1/n$ on each points in $\mathbf{p}$ (see also \autoref{mu_P}):
+\begin{align*}
+    \mu_\mathbf{p} \:= \frac{1}{n}\de_{p_1}+\cdots+\frac{1}{n}\de_{p_n}. 
+\end{align*}
+\end{definition}
+
+Then, we introduced the probability measures associated with the route $A$, $B$ by dividing each routes into $m+1$ equal parts and putting weights by $1/m$ on the points that are its thresholds. 
+
+\begin{definition}[The probability measures associated with the route $A$ and $B$]
+We divide the route $A$ into $m+1$ equal parts along the edges, and denote the threshold points as $a_1,\ldots,a_m$, starting from the point closest to $v_1$.
+We define a probability measure $\nu_{A,m}$ as by putting weights of $1/m$ on each threshold points on the route $A$ (see also \autoref{nu_A}):
+\begin{align*}
+    \nu_{A,m} \:= \frac{1}{m}\de_{a_1}+\cdots+\frac{1}{m}\de_{a_m}. 
+\end{align*}
+We define $\nu_{B,m}$ in exactly the same way (see also \autoref{nu_B}):
+\begin{align*}
+    \nu_{B,m} \:= \frac{1}{m}\de_{b_1}+\cdots+\frac{1}{m}\de_{b_m}.
+\end{align*}
+\end{definition}
+
+\begin{remark}
+In the above definitions, $n$ and $m$ are independent, while $m$, the number of supports of $\nu_{A,m}$ and $\nu_{B,m}$, are both equal: 
+for any $m\in\N$, $\#\supp\nu_{A,m}=\#\supp\nu_{B,m}\;(=m)$.
+If $m$ is odd and can be expressed as $m=2\ell-1$, then the threshold points $a_\ell$ and $b_\ell$ coincide with the nodes $v_2$ and $v_3$, respectively.
+\end{remark}
+
+\begin{figure}[H]
+\begin{tabular}{ccc}
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (a1) at (0.7,3.7) {\footnotesize{\blue($a_1$)}};
+\node (a2) at (1.15,3.7) {\footnotesize{\blue($a_2$)}};
+\draw[dashed, blue] (1.4,3.7)--(3.6,3.7);
+\draw[dashed, blue] (3.7,3.6)--(3.7,1);
+\node (am-1) at (3.5,1.15) {\footnotesize{\blue($a_{m-1}$)}};
+\node (am) at (3.6,0.7) {\footnotesize{\blue($a_m$)}};
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\fill [blue] (0.7,4) circle (0.1);
+\fill [blue] (1.15,4) circle (0.1);
+\fill [blue] (3.3,4) circle (0.1);
+\fill [blue] (4,3.3) circle (0.1);
+\fill [blue] (4,1.15) circle (0.1);
+\fill [blue] (4,0.7) circle (0.1);
+%\draw[dashed] (v1)--(v4);
+\draw[arrows=->, thick, draw=blue] ($(v1)+(0.15,0.6)$) to ($(v2)+(0.3,0.6)$);
+\draw[arrows=->, thick, draw=blue] ($(v2)+(0.6,0.6)$) to ($(v4)+(0.6,0)$);
+\node at (5.5,2) {{Route $A$}};
+\end{tikzpicture}
+\caption{A probability measure $\nu_{A,m}$ associated with the route $A$.
+The edges $(v_1,v_2)$ and $(v_2,v_4)$ forming the route $A$ are divided into $m+1$ equal parts, each with $1/m$ weight on its threshold points $a_1,\ldots,a_m$.} \label{nu_A}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (b1) at (0.4,3.3) {\footnotesize{\green($b_1$)}};
+\node (a2) at (0.4,2.85) {\footnotesize{\green($b_2$)}};
+\draw[dashed, green] (0.4,2.5)--(0.4,0.5);
+\draw[dashed, green] (0.5,0.3)--(2.4,0.3);
+\node (am-1) at (2.8,0.3) {\footnotesize{\green($b_{m-1}$)}};
+\node (am) at (3.5,0.3) {\footnotesize{\green($b_m$)}};
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\fill [green] (0,3.3) circle (0.1);
+\fill [green] (0,2.85) circle (0.1);
+\fill [green] (0,0.7) circle (0.1);
+\fill [green] (0.7,0) circle (0.1);
+\fill [green] (2.85,0) circle (0.1);
+\fill [green] (3.3,0) circle (0.1);
+%\draw[dashed] (v1)--(v4);
+\draw[arrows=->, thick, draw=green] ($(v1)+(-0.6,-0.15)$) to ($(v3)+(-0.6,-0.3)$);
+\draw[arrows=->, thick, draw=green] ($(v3)+(-0.6,-0.6)$) to ($(v4)+(0,-0.6)$);
+\node at (-1.5,2) {{Route $B$}};
+\end{tikzpicture}
+\caption{A probability measure $\nu_{B,m}$ associated with the route $B$.
+The edges $(v_1,v_3)$ and $(v_3,v_4)$ forming the route $B$ are divided into $m+1$ equal parts, each with $1/m$ weight on its threshold points $b_1,\ldots,b_m$.} \label{nu_B}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure}
+
+\begin{definition}
+For $\mu_\mathbf{p}$, $\nu_{A,m}$, $\nu_{B,m}$, we define 
+\begin{align*}
+    \varphi(A,m) \:= W_1\big(\mu_\mathbf{p},\nu_{A,m}\big), \qquad \varphi(B,m) \:= W_1\big(\mu_\mathbf{p},\nu_{B,m}\big).
+\end{align*}
+\end{definition}
+
+As $m$ is increased, $\supp\nu_{A,m}$ and $\supp\nu_{B,m}$ approach route $A$: $(v_1,v_2)\to(v_2,v_4)$ and route $B$: $(v_1,v_3)\to(v_3,v_4)$ respectively.
+Our idea is that we can judge which route is closer to the trajectory points $\mathbf{p}$ by computing $\varphi(A,m)-\varphi(B,m)$ for a sufficiently large $m\in\N$.
+Then, we need to show the following.
+
+\begin{prob} \label{monotonicity}
+There exists a $\ttilde{m}\in\N$ such that $\varphi(A,m)-\varphi(B,m)$ is a monotone function for any $m\in\N$ such that $m\geq \ttilde{m}$.%more than $\ttilde{m}$.
+\end{prob}
+
+We can judge which route the trajectory points is closer to by checking the sign of $\varphi(A,m)-\varphi(B,m)$ for a sufficiently large $m$ if we can prove \autoref{monotonicity}.
+Hence, if $\varphi(A,m)<\varphi(B,m)$ holds, then we can conclude that the trajectory points is closer the route $A$, which is the true route.
+
+\begin{remark}
+Although $\varphi(A,m)$ and $\varphi(B,m)$ take finite values for any $m\in\N$, they might not converge as $m\to\infty$.
+In fact, although we would conjecture that they converge as $m$ approaches infinity in an even or odd state, respectively, their values may be different, i.e. their values may oscillate as $m\to\infty$.
+\end{remark}
+
+\begin{remark}
+Even if all trajectory points are on the route $A$, $\varphi(A,m)\neq0$ holds in general.
+Therefore, we should apply this method only when it is non-trivial which route was passed such as the trajectory points are clustered near the diagonal.
+\end{remark}
+
+\begin{remark}
+Note that the trajectory points $\mathbf{p}$ is a finite set, and the route is a curve, that is, a set of infinite points.
+The point-to-curve method projects from the trajectory point to the edges that compose the candidate route, so it is actually a ``point-to-(point on curve)" iteration.
+In contrast, our method transports weights from trajectory points $\mathbf{p}$ to a candidate route, in other words, it is a ``(trajectory  points)-to-route" process.
+The effect of outliners should be small because we deal with all trajectory points at the same.
+In this sense, we want the method to be robust to observation errors.
+\end{remark}
+
+
+\subsubsection*{Incorporating speed and direction data}
+% \subsubsection*{The case in which input data is  the trajectory, timestamps, velocity and angles} %\label{input:tra&time&velocity&angle}
+
+%We proposed the method of quantifying the distance between the trajectory set and candidate routes by using the information of coordinates of trajectory points only in \autoref{input:tra&time}.
+We consider to develop the above discussion in the case where we also have information on speed and direction.
+In calculate $\varphi(A,m)$, we consider 
+\begin{align}
+    \sum_{i=1}^n \sum_{j=1}^m d(p_i,a_j)\pi(p_i,a_j) \label{Wasserstein loss}
+\end{align}
+as loss function and solve a linear programming problem (see \eqref{object func.} in \autoref{IntroOfOT}).
+Therefore, we can apply the method using Wasserstein distance in this setting if we can modify this loss function \eqref{Wasserstein loss} so that associate with the trajectory speed and direction information.
+
+\begin{prob}
+How to include the trajectory speed and direction information in the loss function \eqref{Wasserstein loss}?
+\end{prob}
+
+In the case of reflecting the trajectory speed and direction information, there are different future developments depending on whether the probability measure or the distance (or both) is modified.
+The term to be modified is different this is because $d(p_i,a_j)$ and $\pi(p_i,a_j)$ represent the distance between two points and the transport mass, respectively in \eqref{Wasserstein loss}.
+At the present stage, it seems that the distance between the two points should be modified, i.e. we introduce a flow locally within $\R^2$ that takes into account the trajectory speed and direction information.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Euclidean inner product method}
+
+%\subsubsection{Concept}
+We consider making the geometric method more accurate by taking into account not only the position of each trajectory point but also the vector connecting each point, calculating the inner product of that vector and the edge of the route, and measuring how close the oriented directions are. This method shares similarities with ``topological methods'' described in \cite{QOZN} but we believe that our method has advantages over this one.
+%We also our method is valid in three-dimensional space as well because the vector connecting the trajectory points, the vector connecting the vertices of the road network, and the inner product of the two are all defined similarly in three-dimensional space. 
+
+\subsubsection*{Specific procedure}
+%we process trajectory points that seems to have little error and no influence on determining the edges. Take balls centered at each vertex of the road network with a radius small enough that they do not intersect each other. Then, we replace the position data of trajectory points which are contained in any of those balls to the center of the ball which is a vertex of road network graph. This process is a variant of point-to-point method in geometric methods.
+%Next we determine the edge by calculating inner product. This step is the main part of our method. 
+We assume that the image of a given road network $\phi(|G|)$ for $G=(V,E), \phi:G\to\mathbb{R}^{d}$ is a piecewise linear curve and have $\phi(V)=:\{V_{\alpha}\}_{\alpha}$ as vertices of that. Also we assume that input data on trajectory is only its coordinate.
+We first list all candidate routes by point-to-point method and point-to-curve method.
+That is, we determine the closest vertex and edge of road network for each trajectory points and list routes that are composed of those vertices and edges.
+Then we define score for each edge contained in the candidates and adopt the one which has the highest score as the route.  
+The factors that determine the score are the inner product of the line segment connecting the trajectory points and the edge, and the closeness of their positions.
+
+The specific procedure for defining score is as follows.
+We define vectors $v_{i} = p_{i+1}-p_{i}$ and $v_{\alpha\beta} = V_{\beta}-V_{\alpha}$ for a pair of trajectory points $p_{i}, p_{i+1}$ and each edge $e_{\alpha\beta}$ which connects vertices $V_{\alpha}$ and $V_{\beta}$, contained in candidates routes, as shown in \autoref{inner-product}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+%\begin{tabular}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (v12) at (2.9,0.8) {\red($v_1$)};
+\node (v23) at (4.9,0.85) {\red($v_2$)};
+\node (v34) at (6.9,0.7) {\red($v_3$)};
+\node (p1) at (2,0.6) {$p_1$};
+\node (p2) at (4,1.2) {$p_2$};
+\node (p3) at (6,0.7) {$p_3$};
+\node (p4) at (8,0.9) {$p_4$};
+\node (eAB) at (5, -0.3) {$e_{\alpha\beta}$};
+\draw[-{Stealth[length=4mm]}, thick, draw=red] (2,0.3) to (4,0.9);
+\draw[-{Stealth[length=4mm]}, thick, draw=red] (4,0.9) to (6,0.4);
+\draw[-{Stealth[length=4mm]}, thick, draw=red] (6,0.4) to (8,0.6);
+\draw (0,0) node (v1) [draw] {$V_\alpha$} (10,0) node (v2) [draw] {$V_\beta$} (v1)--(v2);
+\draw (0,3) node (v3) [draw] {$V_\gamma$} (10,3) node (v4) [draw] {$V_\delta$} (v3)--(v4);
+\draw (v1)--(v3);
+\draw (v2)--(v4);
+\fill (2,0.3) circle (0.1);
+\fill (4,0.9) circle (0.1);
+\fill (6,0.4) circle (0.1);
+\fill (8,0.6) circle (0.1);
+\end{tikzpicture}
+\caption{Vectors defined by connecting trajectory points} \label{inner-product}
+\end{center}
+%\end{tabular}
+\end{figure} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Then we define $P(v_{i}, v_{\alpha\beta}) := \left\langle\frac{v_{i}}{|v_{i}|}, \frac{v_{\alpha\beta}}{|v_{\alpha\beta}|}\right\rangle$ where $\langle-,-\rangle$ denotes the inner product on the Euclidean space $\mathbb{R}^{d}$.
+Let $L_{i,e}$ be the distance between the trajectory point $p_{i}$ and the point on the edge $e$ which is closest to $p_{i}$.
+We define the score
+\begin{align*}
+    S(e) := \sum_{i}\frac{P(v_{i}, v_{\alpha\beta})}{1+L_{i,e}}  
+\end{align*}
+for each edge.
+
+We are also considering a methods that we use vectors representing the speed $\text{spd}_{i}$ and direction $u_{i}$ at the trajectory point $p_{i}$ instead of $v$. In this case, we can calculate the score of edge $e_{\alpha\beta}$ as follows:
+\begin{align*}
+    S(e) := \sum_{i}\frac{\text{spd}_{i}\langle u_{i}, v_{\alpha\beta}\rangle}{1+L_{i,e}}  
+\end{align*}
+
+In addition, we also consider taking average $v_{i}$ and $\text{spd}_{i}\cdot u_{i}$ to average out the errors in the position, velocity, and direction data.
+
+\begin{remark}
+This method has some points in common with the method called the ``topological method''\cite{QOZN}, but it is considered to be a simpler method because, unlike the topological method, it does not require the calculation of angles and a classification according to their magnitudes.
+\end{remark}
+
+\begin{prob}
+    \begin{enumerate}
+        \item
+        How to modify this method to one for the case when the image of a given road network is not a piecewise linear curve but Strongly curved curve?
+        \item
+        How to improve this methods for the case when we also have information on velocity and angle?
+    \end{enumerate}
+\end{prob}
+
+\subsection{Energy functional method}
+
+%\subsubsection{Concept}
+%We give the routes weight by taking information about positions of trajectory points, velocity, angle and so on. 
+We would like to define an energy functional on the set of routes so that we can determine the most suitable route as the one that minimizes the value of the functional as we wrote in the end of \autoref{PS}.
+At this time, we want to define the energy functional as reflecting the weights given to each routes and find a quantity that is a necessary condition for minimizing the energy functional and is particularly easy to compute.
+
+\begin{example}
+Let us consider about energy of a curve in Riemannian geometry.
+Take a Riemannian manifold $(M,g)$ and a smooth curve $c:[0,1]\to M$, the energy of $c$ is defined by $E(c):=\int_{0}^{1}g(\frac{dc}{dt}, \frac{dc}{dt})dt$. This energy functional is defined on a set consists of all curves on $M$ and critical points of this functional are geodesic, i.e., for Levi-Civita connection $\nabla$ of $M$, curves which satisfy the equation $\nabla^{c^{*}TM}_{\frac{dc}{dt}}\frac{dc}{dt} = 0$. To satisfy the geodesic equation  means that $c$ is ``straight'' in $M$. As we see bend of a curve has a close relation with and characterize length.
+See also \cite{Jo}.
+\end{example}
+
+\subsubsection*{Making use of graph energy}
+We think that the notion of graph energy in graph theory may be useful for our plan described above.
+A transition matrix is a probabilistic way to describe the movement between vertices on a graph. 
+Therefore, we take one transition matrix by determining the probability of movement considering information such as the speed of a given trajectory points. 
+In general, the random walk normalized Laplacian can be defined from the transition matrix.
+As a natural energy associated with the graph structure, we can consider the Laplacian energy which is defined as the sum of absolute values of eigenvalues of the graph Laplacian.The graph energy described here is a potential candidate for a suitable energy functional. 
+See also \cite{LSG}.
+
+\begin{remark}
+In the case of using graph energy or its variants, we only use information about structures of graph so we can apply this method to settings in arbitrary dimensions.
+\end{remark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\section{Implementation}
+
+After formulating the proposed  mathematical methods into robust map-matching algorithms, we will implement them in python to evaluate their performance numerically. We will evaluate them their performance on one of the following open source data sets
+\begin{itemize}
+    \item \textit{Dataset for testing and training of map-matching algorithms} \cite{KCMMN} (GPS only, has ground truths),
+    \item The BDD100K open data set provided by Berkeley \cite{yuBDD100KDiverseDriving2020} (for GPS and IMU data, no ground truths).\footnote{Because there are no public annotated ground truths, we compare our predictions with the standard EKF approach. This evaluation method is flawed but unavoidable.} % Describe what we used for ground truths
+\end{itemize}
+We will also compare the performance of our methods to a geometric method, such as point-to-curve, and HMM method, such as an extended Kalman filter (EKF) or Fast Map-Matching \cite{YG}.
+    % \begin{itemize}
+    %     \item point-to-curve method
+    %     \item HMM, such as an extended Kalman filter (EKF) or Fast Map-Matching \cite{YG}
+    %   % \item Fast Map-Matching \url{https://github.com/cyang-kth/fmm}.
+    % \end{itemize}
+
+\subsection{Evaluation} \label{Eval}
+\label{sub:evaluation}
+
+How do we measure the accuracy of our prediction? There isn't a consensus in the literature, so we will evaluate our predictions using the following error calculations:
+\begin{itemize}
+    \item Newson and Krumm presented the formula: $$\textrm{Err} = \frac{d_- + d_+}{d_0}$$ where $d_0$ is the length of the correct route, $d_-$ is the length the prediction erroneously subtracted from the ground truth, and $d_+$ is the length the prediction erroneously added outside the ground truth. See \autoref{fig:error-formula} \cite{newsonHiddenMarkovMap2009} for a visual explanation.
+    \item Fréchet distance
+    \item Euclidean distance
+\end{itemize}
+
+\begin{figure}[ht]
+    \centering
+    \def\svgwidth{\linewidth}
+    \input{error-formula.pdf_tex}
+    \begin{align*}
+	    d_0 &= \text{length of ground truth}\\
+	    d_- &= \text{length of prediction route erroneously subtracted}\\
+	    d_{+} &= \text{length of prediction route erroneously added}
+    \end{align*}
+    \caption{Error Formula by Newson and Krumm}
+    \label{fig:error-formula}
+\end{figure}
+
+% {\color{blue}After formulating our ideas into robust map-matching algorithms, we will implement them in python. We will evaluate their performance numerically by testing our methods on at least one of the following available open source data sets
+% \begin{itemize}
+%     \item Dataset for testing and training of map-matching algorithms, \cite{K}
+%     \item Berkeley's driving data set, BDD100K, \cite{berkeley}
+% \end{itemize}
+
+% \noindent We will also compare the performance to at least two of following existing map-matching methods
+% \begin{itemize}
+%     \item point-to-curve method
+%     \item HMM, such as an extended Kalman filter
+%     \item Fast Map-Matching \url{https://github.com/cyang-kth/fmm}
+% \end{itemize}
+% by applying them to the same data sets. }
+% {\color{red} I incorporated the above into the section-- please review. Feel free to remove this and the above suggestions if you are happy with it.}
+
+% After formulating the mathematical methods into robust map-matching algorithms, we will need to test them against data.
+
+% We will test these methods using Jupyter notebooks. Within the notebooks we will implement them in Python and evaluate them on the following open source datasets (possibly others):
+% \begin{itemize}
+%     \item \textit{Dataset for testing and training of map-matching algorithms}\cite{K} (GPS only, has ground truths)
+%     \item The BDD100K open data set provided by Berkeley\cite{berkeley} (for GPS and IMU data, no ground truths).\footnote{Because there are no public annotated ground truths, we compare our predictions with the standard EKF approach. This evaluation method is flawed but unavoidable.} % Describe what we used for ground truths
+% \end{itemize}
+
+% We also will implement at least two standard map-matching methods to compare the performances, including but not limited to: 
+% \begin{itemize}
+%     \item Fast Map-Matching \url{https://github.com/cyang-kth/fmm}
+%     \item A simple Extended Kalman Filter % Might use another source, might make my own
+% \end{itemize}
+
+\subsection{Data Fusion}
+Furthermore, the Jupyter notebooks will develop a framework for implementing and testing other algorithms against data sets. One issue that pervades this field of research is the lack of standard formatting-- namely, there are several different GIS data types which differ slightly, and in particular none of these formats are well-suited for containing IMU data. Our notebooks will provide a rudimentary fusion method to align asynchronous data and incorporates IMU data into GPX/GeoDataFrame in a sensible manner. In particular, this method will subsample discrete-time data such as speed, accelerometer, and gyroscope, and merge it with the GPS data sequence.
+
+The benefit these data types provide is being simple (human-readable and easy to convert from/to) and lightweight (quick to access and manipulate, and simple to compress). Moreover, it is easy to convert from these data types to others, unlike proprietary formats such as ESRI ShapeFile. Testing algorithms against data sets then reduces to formatting your inputs/outputs properly. This is designed for accessibility, so other students or researchers can experiment with their own ideas and obtain results more easily. %We also hope this will encourage the greater community to publish their data sets in these formats, so to increase standardization.
+
+The code written for the project can be found at:  \url{https://github.com/gjgress/G-RIPS-2022-Mitsubishi-A}.
+
+\subsection{Extension to Higher Dimensions}
+
+Including the $z$-axis into our implementation faces one major hurdle: OpenStreetMaps does not include elevation. Because this information is not included within our network, we cannot test our algorithms in $3$-space. One can circumvent this by merging elevation data from an external source. However, highways and roads are often not incorporated into these data sets, and so it is approximate at best. Instead, it is probably best to source network information from more detailed data sets, such as proprietary sources, but results can vary greatly depending on region.\\
+
+Fortunately, the Python framework developed is quite modular, and so if one does have elevation data in their network and test data, it is easy to implement within our notebooks. Hopefully with time, data sets such as OpenStreetMaps will gain detail, and this line of inquiry becomes more accessible to the public.
+
+\section{Deliverables}
+\begin{itemize}
+    \item Three novel approaches to map-matching 
+    \item Comparison of these methods with current method
+    \item Python scripts and Jupyter notebooks for reproducibility
+\end{itemize}
+ 
+
+% \newpage
+\section{Timeline}
+The following is our proposed timeline for the project. 
+
+\subsection*{Week 1-2}
+\begin{itemize}[noitemsep]
+    \item Write project proposal
+    \item Develop Python framework to manipulate map structures and set up data sets
+\end{itemize}
+
+% \subsection*{Week 2}
+% \begin{itemize}[noitemsep]
+%     \item 
+% \end{itemize}
+
+\subsection*{Week 3-4}
+\begin{itemize}[noitemsep]
+    \item Expand preliminary ideas into robust map-matching algorithms
+    \item Implement the algorithms
+     \item Prepare and deliver midterm presentation (15/07)
+\end{itemize}
+
+% \subsection*{Week 4}
+% \begin{itemize}[noitemsep]
+%     \item Prepare and deliver midterm presntation
+% \end{itemize}
+
+\subsection*{Week 5-6}
+\begin{itemize}[noitemsep]
+    \item Evaluate performance of proposed map-matching methods by
+    \begin{itemize}
+        \item deriving theoretical estimates for accuracy
+        \item applying our algorithms and preexisting algorithms to the same map-matching data set and comparing accuracy 
+        %implementing them in python and comparing against existing algorithms.
+    \end{itemize}
+    
+\end{itemize}
+
+% \subsection*{Week 6}
+% \begin{itemize}[noitemsep]
+%     \item 
+% \end{itemize}
+
+% \subsection*{Week 7}
+% \begin{itemize}[noitemsep]
+%     \item 
+% \end{itemize}
+
+\subsection*{Week 7-8}
+\begin{itemize}[noitemsep]
+    \item Summarize and present results by
+    \begin{itemize}
+        \item preparing and giving final presentation ( 08/08)
+        \item writing final report (due 09/08)
+    \end{itemize}
+\end{itemize}
+
+% \newpage
+
+\bibliographystyle{unsrt}
+% \bibliography{bibliography} 
+\begin{thebibliography}{YCWXCLMD}
+\bibitem[BK]{BK}  D. Bernstein and A. Kornhauser, \textit{An introduction to map-matching for personal navigation assistants}, (1996). 
+%\url{http://www.njtude.org/reports/mapmatchintro.pdf}
+\bibitem[CXHZ]{CXHZ} P. Chao,  Y. Xu,  W. Hua and X. Zhou, \textit{A survey on map-matching algorithms}, Springer, Cham. (2020).
+\bibitem[FG]{FG} A. Figalli and F. Glaudo, \textit{An invitation to optimal transport, Wasserstein distances, and gradient flows}, EMS Textbooks in Mathematics. EMS Press (2021).
+\bibitem[GH]{GH} GraphHopper Github Repository, \url{https://github.com/graphhopper/graphhopper}.
+\bibitem[Jo]{Jo} J. Jost, \textit{Riemannian geometry and geometric analysis}, $7$th edn. Springer, Berlin (2017).
+%\bibitem[KCMMN]{KCMMN} M. KubiCka, A. Cela, P. Moulin, H. Mounier and S. I. Niculescu, \texit{Dataset for testing and training of map-matching algorithms,} 2015 IEEE Intelligent Vehicles Symposium (IV), 2015, pp. 1088-1093, doi: 10.1109/IVS.2015.7225829.
+\bibitem[KCMMN]{KCMMN} M. Kubi\u cka, A. Cela, P. Moulin, H. Mountier and S. I. Niculescu, \textit{Dataset for testing and training of map-matching algorithms}, In 2015 IEEE Intelligent Vehicles Symposium (IV), 1088--1093 (2015).
+\bibitem[LSG]{LSG} X. Li, Y. Shi and I. Gutman, \textit{Graph energy}, Springer, New York. (2012).
+\bibitem[NK]{newsonHiddenMarkovMap2009} P. Newson and J. Krumm, \textit{Hidden Markov map matching through noise and sparseness}, In Proceedings of the 17th ACM SIGSPATIAL international conference on advances in geographic information systems, 336--343 (2009). 
+%Proceedings of the 17th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems - GIS ’09, 336. %https://doi.org/10.1145/1653771.1653818
+\bibitem[QON]{QON} M. A. Quddus, W. Y. Ochieng and R. B. Noland. \textit{Current map-matching algorithms for transport applications: State-of-the art and future research directions}, Transportation research part $c$: Emerging technologies, \textbf{15}(5), 312--328 (2007).
+\bibitem[QOZN]{QOZN} M. A. Quddus, W. Y. Ochieng, L. Zhao and  R. B. Noland, \textit{A general map-matching algorithm for transport telematics applications}, GPS Solutions \textbf{7}, 157--167 (2003). 
+%10.1007/s10291-003-0069-z. 
+\bibitem[Sa]{Sa} F. Santambrogio, \textit{Optimal transport for applied mathematicians. Calculus of variations, PDEs, and modeling}, Progress in Nonlinear Differential Equations and their Applications, Birkh\"{a}user/Springer, Cham. (2015).
+\bibitem[Vi]{Vi} C. Villani, \textit{Optimal Transport. Old and New}, Springer-Verlag. (2008).
+\bibitem[YG]{YG} C. Yang and G. Gid\' ofalvi, \textit{Fast map matching, an algorithm for integrating a hidden Markov model with precomputation}, International Journal of Geographical Information Science. Taylor \& Francis, \textbf{32}(3), 547--570 (2018).
+\bibitem[YCWXCLMD]{yuBDD100KDiverseDriving2020} F. Yu, H. Chen, X. Wang, W. Xian, Y. Chen, F. Liu, V. Madhavan and T. Darrell, \textit{BDD100K: A Diverse Driving Dataset for Heterogeneous Multitask Learning}, In Proceedings of the IEEE/CVF conference on computer vision and pattern recognition, 2636--2645 (2020).
+%(arXiv:1805.04687). arXiv.
+\end{thebibliography}
+
+
+\end{document}

@@ -1,0 +1,45 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Problem Summary and Statement}{2}{section.2}%
+\contentsline {section}{\numberline {3}Background}{3}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Geometric Model}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Hidden Markov Model}{4}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Application to Map-Matching}{5}{subsubsection.3.2.1}%
+\contentsline {section}{\numberline {4}Mathematical formulation for our Approach}{5}{section.4}%
+\contentsline {section}{\numberline {5}Wasserstein Distance Method}{7}{section.5}%
+\contentsline {subsection}{\numberline {5.1}A brief introduction of (discrete) optimal transport theory}{7}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}The case in which input data is only the trajectory coordinates and timestamps}{8}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Incorporating speed and direction information}{10}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Our motivation}{10}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Our strategy}{10}{subsubsection.5.3.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}The definition of weights including speed and direction information}{11}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Briefly explanation of route determination in \autoref {test-case} using Wasserstein method}{12}{subsubsection.5.3.4}%
+\contentsline {subsection}{\numberline {5.4}Future problems}{14}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Methods by Physical Analogy}{15}{section.6}%
+\contentsline {subsection}{\numberline {6.1}``Electric'' Method}{15}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Details of method}{15}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Observations}{16}{subsubsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.2}``Harmonic oscillator'' method}{17}{subsection.6.2}%
+\contentsline {subsubsection}{\numberline {6.2.1}Details of method}{18}{subsubsection.6.2.1}%
+\contentsline {subsubsection}{\numberline {6.2.2}Observations}{19}{subsubsection.6.2.2}%
+\contentsline {section}{\numberline {7}Implementation}{20}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Preprocessing Routes}{21}{subsection.7.1}%
+\contentsline {subsubsection}{\numberline {7.1.1}Restricting to a Sub-graph}{21}{subsubsection.7.1.1}%
+\contentsline {subsubsection}{\numberline {7.1.2}Obtaining Candidate Routes}{22}{subsubsection.7.1.2}%
+\contentsline {subsubsection}{\numberline {7.1.3}Candidate Route Interpolation}{22}{subsubsection.7.1.3}%
+\contentsline {subsection}{\numberline {7.2}Wasserstein Distance Implementation}{22}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Electrical Method and Harmonic Oscillator Implementation}{23}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Evaluation (Error) Method}{24}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.5}Preliminary Results}{25}{subsection.7.5}%
+\contentsline {subsection}{\numberline {7.6}Computational Complexity}{25}{subsection.7.6}%
+\contentsline {subsection}{\numberline {7.7}Metric-based Algorithm Framework}{26}{subsection.7.7}%
+\contentsline {subsection}{\numberline {7.8}Data Fusion}{26}{subsection.7.8}%
+\contentsline {subsection}{\numberline {7.9}Other Utilities}{28}{subsection.7.9}%
+\contentsline {section}{\numberline {8}Future Work (Implementation)}{28}{section.8}%
+\contentsline {subsection}{\numberline {8.1}IMU Inclusion}{29}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Incomplete Map Matching}{29}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Extension to Higher Dimensions}{29}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Conclusion}{29}{section.9}%
+\contentsline {section}{Appendix \numberline {A}Geometric background of Wasserstein method}{29}{appendix.1.A}%
+\contentsline {subsection}{\numberline {A.1}Ricci curvature of graphs}{29}{subsection.1.A.1}%
+\contentsline {subsection}{\numberline {A.2}``Ricci curvature" between the trajectory and route}{31}{subsection.1.A.2}%

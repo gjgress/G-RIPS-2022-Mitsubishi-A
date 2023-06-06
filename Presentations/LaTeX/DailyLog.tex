@@ -1,0 +1,1710 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{xcolor}%used to color text
+% \usepackage{mathabx}
+\usepackage{graphicx,tikz,setspace}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage[colorlinks=true]{hyperref}
+% \usepackage{float}
+% \usepackage{array}
+% \usepackage{listings}
+% \usepackage{hhline}
+% \usepackage[numbered,framed]{matlab-prettifier}
+% \usepackage{fancyvrb}
+\usepackage{mathtools}
+% \usepackage{multirow}
+% \usepackage{algorithm2e}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{indentfirst}
+\usetikzlibrary{positioning}
+\usetikzlibrary{topaths,calc}
+\usepackage{here}
+\usepackage{aliascnt}
+
+\usepackage[english]{babel}  %なんかsubsectionとかをautorefで引用したときに先頭の``S"を大文字にしてくれる呪文らしい
+\addto\extrasenglish{\def\subsubsectionautorefname{\S}}
+\addto\extrasenglish{\def\subsectionautorefname{\S}}
+\addto\extrasenglish{\def\sectionautorefname{Section}}
+
+% \usepackage[rm]{titlesec}
+% \titleformat*{\section}{\center\large\bfseries}
+% \titleformat*{\subsection}{\center\bfseries}
+% \titleformat*{\subsubsection}{\center\bfseries}
+
+\hypersetup{
+colorlinks=true,
+citecolor=blue,
+linkcolor=red,
+urlcolor=cyan}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows, shapes, fit, arrows.meta, bending}
+\tikzstyle{decision} = [diamond, draw, fill=blue!20, 
+    text width=4.5em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{block} = [rectangle, draw, fill=blue!20, 
+    text width=5em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{cloud} = [draw, ellipse,fill=red!20, node distance=3cm,
+    minimum height=2em]
+
+
+
+% \usepackage{pgfplots}
+% \pgfplotsset{compat=1.15}
+% \newenvironment{solution}
+%   {\renewcommand\qedsymbol{$\vartriangleleft$}\begin{proof}[Solution]}
+%   {\end{proof}}
+
+\numberwithin{equation}{section}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newcommand{\definitionautorefname}{Definition}
+\newaliascnt{example}{definition} %Example
+\newtheorem{example}[example]{Example}
+\aliascntresetthe{example}
+\newcommand{\exampleautorefname}{Example}
+\newaliascnt{remark}{definition} %Remark
+\newtheorem{remark}[remark]{Remark}
+\aliascntresetthe{remark}
+\newcommand{\remarkautorefname}{Remark}
+\newaliascnt{setdef}{definition} %Setting＆Definition
+\newtheorem{setdef}[setdef]{Setting \& Definition}
+\aliascntresetthe{setdef}
+\newcommand{\setdefautorefname}{Setting \& Definition}
+\newaliascnt{observation}{definition} %Observation
+\newtheorem{observation}[observation]{Observation}
+\aliascntresetthe{observation}
+\newcommand{\observationautorefname}{Observation}
+\newaliascnt{prob}{definition} %Problem
+\newtheorem{prob}[prob]{Problem}
+\aliascntresetthe{prob}
+\newcommand{\probautorefname}{Problem}
+\newaliascnt{thm}{definition} %Theorem
+\newtheorem{thm}[thm]{Theorem}
+\aliascntresetthe{thm}
+\newcommand{\thmautorefname}{Theorem}
+\newaliascnt{lemma}{definition} %Lemma
+\newtheorem{lemma}[lemma]{Lemma}
+\aliascntresetthe{lemma}
+\newcommand{\lemmaautorefname}{Lemma}
+\newaliascnt{proposition}{definition} %Proposition
+\newtheorem{proposition}[proposition]{Proposition}
+\aliascntresetthe{proposition}
+\newcommand{\propositionautorefname}{Proposition}
+\newaliascnt{assumption}{definition} %Assumption
+\newtheorem{assumption}[assumption]{Assumption}
+\aliascntresetthe{assumption}
+\newcommand{\assumptionautorefname}{Assumption}
+
+%%%%%
+\newcommand{\ninni}{{}^\forall} %∀
+\newcommand{\aru}{{}^\exists} %∃
+\newcommand{\dis}{\displaystyle} 
+\newcommand{\A}{\alpha}
+\newcommand{\B}{\beta}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\de}{\delta}
+\newcommand{\dex}{\delta_x}
+\newcommand{\dey}{\delta_y}
+\newcommand{\ee}{\mathsf{e}}
+\newcommand{\cc}{\mathsf{C}}
+\newcommand{\err}{\mathsf{Err}}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\newcommand{\K}{\kappa}
+\newcommand{\la}{\lambda}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\PP}{\mathscr{P}}
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\RR}{\mathbb{R}_{\geq 0}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ttilde}{\widetilde} %大きいチルダ
+\newcommand{\eps}{\varepsilon} %ε
+\newcommand{\uto}{\uparrow}
+\newcommand{\dto}{\downarrow}
+\newcommand{\rv}{\mathbb{R}^V} 
+\newcommand{\expo}{\mathsf{exp}}
+\newcommand{\vol}{\mathsf{vol}}
+\newcommand{\mt}{\mathsf{MT}}
+\newcommand{\vect}{\mathsf{vec}}
+\newcommand{\spd}{\mathsf{spd}}
+\newcommand{\ttt}{\mathsf{TT}}
+\DeclareMathOperator\supp{supp} %supp
+\newcommand{\argmax}{\mathop{\rm arg\,max}\limits} %argmax
+\newcommand{\argmin}{\mathop{\rm arg\,min}\limits} %argmin
+\newcommand{\rwx}{\mu_x^\eps} %xでのr.w.
+\newcommand{\rwy}{\mu_y^\eps} %yでのr.w.
+\newcommand{\rwv}{m_v^\eps} %vでのr.w.
+\newcommand{\wxy}{W_1\big(\mu_x^\eps,\mu_y^\eps\big)}
+\newcommand{\kexy}{\kappa(\eps;x,y)}
+\newcommand{\kxy}{\kappa(x,y)}
+\newcommand{\kepa}{\kappa(\eps;\mathbf{p},A)}
+\newcommand{\kpa}{\kappa(\mathbf{p},A)}
+\newcommand{\tkxy}{\tilde{\kappa}(h;x,y)}
+\newcommand{\kLLYxy}{\kappa_{\textrm{LLY}}(x,y)}
+\newcommand{\lip}{\textsf{Lip}(V)}
+\def\:={\coloneqq} %:=
+\def\bu{$\bullet$ }
+\def\comar{$\rightsquigarrow$}%ぐにゃぐにゃのヤツ
+\def\dcomar{$\downrsquigarrow$}%下向きぐにゃぐにゃ
+\def\kakko<#1>{\left\langle #1 \right\rangle}
+\def\diam(#1){\mathsf{diam}(#1)}
+%\def\vol(#1){\mathsf{vol}(#1)}
+\def\W(#1){W_1\big(#1\big)}
+\def\wh(#1){W_h\big(#1\big)}
+\def\conv(#1){\textrm{conv}\left( #1 \right)}
+\def\01{\{0,1\}}
+\def\L(#1){#1\textrm{-Lip}}
+\def\w-#1-Lip{\textrm{w-}$#1$\textrm{-Lip}}
+\def\3|{|\hspace{-0.4mm}|\hspace{-0.4mm}|}
+\def\Lip(#1){\textsf{Lip}_w^{#1}(V)}
+\definecolor{hanpurple}{rgb}{0.32, 0.09, 0.98}
+\def\hanpurple(#1){\textcolor{hanpurple}{#1}}
+\def\red(#1){\textcolor{red}{#1}}
+\definecolor{officegreen}{rgb}{0.0, 0.5, 0.0}
+\def\green(#1){\textcolor{officegreen}{#1}}
+\def\blue(#1){\textcolor{blue}{#1}}
+\def\cyan(#1){\textcolor{cyan}{#1}}
+\def\orange(#1){\textcolor{orange}{#1}}
+%%%%%
+
+
+% \newcommand{\bmb}{\begin{bmatrix}}
+% \newcommand{\bme}{\end{bmatrix}}
+% \newcommand\norm[1]{\left\lVert#1\right\rVert}
+% \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+% \newcommand{\st}{\text{s.t.}}
+% \newcommand{\E}[2]{\ensuremath{{\mathbb{E}_{#1}}{\left[{#2}\right]}}}
+% \newcommand{\R}{\ensuremath{\mathbb{R}}}
+% \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
+% https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles
+\bibliographystyle{unsrt}
+
+\title{Daily Log}
+% \author{You}
+
+\begin{document}
+\maketitle
+
+% \begin{abstract}
+% Your abstract.
+% \end{abstract}
+
+\section{Week 3}
+
+\subsection{July 4th}
+\subsubsection*{Katelynn}
+I tried to implement Wasserstein distance method on the simple example outlined in the work statement as seen in \autoref{simple} by minimizing the associated linear program. 
+\begin{figure}[h!]   
+    \centering
+        \begin{tikzpicture}[every node/.style={circle,fill=white}]
+        \node (p1) at (1,3.6) {\red($p_1$)};
+        \node (p2) at (0.5,2.9) {\red($p_2$)};
+        \node (p3) at (1.5,3.1) {\red($p_3$)};
+        \node (pn-1) at (3.5,1.2) {\red($p_{n-1}$)};
+        \node (pn) at (3.1,0.3) {\red($p_n$)};
+        \draw (0,4) node (v1) [draw] {$v_1$};
+        \draw (4,4) node (v2) [draw] {$v_2$};
+        \draw (0,0) node (v3) [draw] {$v_3$};
+        \draw (4,0) node (v4) [draw] {$v_4$};
+        \draw (v1)--(v2);
+        \draw (v2)--(v4);
+        \draw (v4)--(v3);
+        \draw (v3)--(v1);
+        \draw[dashed] (v1)--(v4);
+        \draw[red, dashed] (p3)--(pn-1);
+        \draw[red, dashed] (p2)--(pn);
+        \draw[arrows=->, thick, draw=blue] ($(v1)+(0.15,0.6)$) to ($(v2)+(0.3,0.6)$);
+        \draw[arrows=->, thick, draw=blue] ($(v2)+(0.6,0.6)$) to ($(v4)+(0.6,0)$);
+        \draw[arrows=->, thick, draw=green] ($(v1)+(-0.6,-0.15)$) to ($(v3)+(-0.6,-0.3)$);
+        \draw[arrows=->, thick, draw=green] ($(v3)+(-0.6,-0.6)$) to ($(v4)+(0,-0.6)$);
+        \node at (5.5,2) {{Route $A$}};
+        \node at (-1.5,2) {{Route $B$}};
+        \end{tikzpicture}
+    \caption{Simple road map and trajectory} \label{simple}
+\end{figure}
+
+
+
+I ran into the obstacle with the following constraints: 
+\begin{align*}
+        \mu(p_i)=\sum_{j=1}^m \pi(p_i,q_j) & \qquad \text{for } i=1,2,\ldots,n, \\
+        \mu(q_j)=\sum_{i=1}^n \pi(p_i,q_j) & \qquad \text{for } j=1,2,\ldots,m. 
+\end{align*}
+We can write these constraints in the form $Ax = b$ as follows
+\begin{enumerate}
+    \item Concatenate the rows of the matrix $pi$ into a single vector $x$ of size $N*M\times 1$.
+    \item Let $b$ be a $N*M\times 1$ size vector, and for $1\leq i\leq N$, let $b(i)= \mu(p_i)$ and for $N\leq j\leq M$, let $b(i)= \mu(q_j)$.
+    \item Finally, $A$ is an $(N+M)\times N*M$ size matrix, where for $1\leq i \leq N $, the $i$th row, of $A$ is $1$ for entries $i$ to $i+M$ and $0$ otherwise. For $1\leq j \leq M $, the $j+N$th row, of $A$ is $1$ for entries $j*k$ for $1\leq k\leq N$ and $0$ otherwise.
+\end{enumerate}
+For example, when $N=2$ and $M=3$, the linear system takes the following form
+\begin{align*}
+    \begin{bmatrix}
+    1 & 1 & 1 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1 & 1 & 1\\
+    1 & 0 & 0 & 1 & 0 & 0\\
+    0 &  1 & 0 & 0 & 1 & 0 \\
+    0 & 0 & 1 & 0 & 0 & 1
+    \end{bmatrix} 
+     \begin{bmatrix}
+     \pi(p_1, q_1) \\ 
+     \pi(p_1, q_2) \\ 
+     \pi(p_1, q_3) \\ 
+     \pi(p_2, q_1) \\ 
+     \pi(p_2, q_2) \\ 
+     \pi(p_2, q_3) \\ 
+    \end{bmatrix} 
+    & =      \begin{bmatrix}
+     \mu(p_1) \\ 
+     \mu(p_2)\\ 
+     \nu(q_1)\\ 
+     \nu(q_2) \\ 
+     \nu(q_3) \\ 
+    \end{bmatrix} 
+\end{align*}
+The matrix $A$ created above does not always have full row rank for all choices of $N$ and $M$, making it intractable using scipy.optimize.linprog in Python. My goal for tomorrow is to look other literature on using linear programming for finding a solutions to optimal transport problems, i.e. the minimum cost flow problem.
+
+\subsection*{Seiya}
+I considered about three things.
+\begin{enumerate}
+    \item
+    About ``electric method'' \\
+    I thought about a method whose procedure is as below.
+    \begin{enumerate}
+        \item
+        We list candidate routes (for example by geometric methods). We assume that these routes are fixed and can not move.
+        \item
+        We connect trajectory points by segments. We consider this segments as string and that they can move.
+        \item
+        We give these route positive electric charge and trajectory string negative electric charge.
+        \item
+        We determine which path string adhere to.
+    \end{enumerate}
+    
+    Advantage of this method:
+    \begin{itemize}
+        \item
+        I think this method can measure ``distance'' between whole of trajectory segment and whole of candidate routes than point-to-curve method because electric forces act not only from the closest point.
+    \end{itemize}
+    Problem about this method:
+    \begin{itemize}
+        \item 
+        I have not considered about accuracy of this method.
+        \item
+        I have no concrete idea to reflect information about speed, angle and so on. 
+        (One way is to change density of electric charge but how?)
+    \end{itemize}
+    
+    \item
+    About energy functional for indicator function on graph. \\
+    I looked for appropriate functional but have not found. 
+    \item
+    About graph energy. \\
+    I studied about general properties of graph energy and variant of graph energy to use them in energy functional methods but I don't have any idea. 
+\end{enumerate}
+
+\subsection{July 5th}
+
+ \subsubsection*{Katelynn} 
+ 
+Tomoya shared with me the following helpful resource \url{https://python.quantecon.org/opt_transport.html}. It suggests merely excluding one of the rows of $A$ to solve the issue from before. The Wasserstein distance was lower for the route that seemed more likely using the ``eyeball'' metric.
+
+The current task is to pre-process the road network data to yield potential routes to compare against each other. How do we determine first based on time stamps and trajectory, which routes to exclude as infeasible? After this is determined, we can apply the same process as the in simple example.  
+
+The following is a prospective procedure for finding a route using our ability to compute Wasserstein distance. 
+\begin{enumerate}
+    \item Choose some $\varepsilon$ (how to choose $\varepsilon$ is still unknown, but likely to depend on the map data). Then from the first trajectory point, find all vertices on the road network within $\varepsilon$. These will be prospective starting nodes of our route. 
+    \item From each of these prospective starting points, consider all edges leaving these nodes. Find the minimum length among the edges, $\ell$. Consider the list of consecutive trajectory points from the initial trajectory points where the sum of the distances between consecutive trajectory points is less than $\ell$. 
+    \item Compute Wasserstein distance the initial collection of trajectories points and the possible paths. 
+    \item From the the terminating vertices of the paths with minimal Wasserstein distance, compute which edges depart from there and apply steps 2 and 3 to them.
+\end{enumerate}
+There are several steps in the above process that require adjustment. First, in step one, the determination of the starting vertex shouldn't depend so heavily on a single point. We would like to adapt this to include the first few consecutive trajectory points somehow. Second, I'd be interested in step three to be used to choose more than one edge at a time. Finally, the Wasserstein method can be applied to entire routes, so perhaps maybe such the pre-processing should be done in a more global sense. A question I want to consider can I effectively shrink the number of global routes effectively?
+
+\subsection{July 7th}
+
+\subsubsection*{Tomoya}
+ 
+I am considering the graph curvature method.
+This is a kind of variant of the Wasserstein distance method.
+The following is a draft of the description.
+
+\section*{Graph curvature method}
+We propose a route determination method based on Ricci curvature of graphs.
+The Ricci curvature of graph is a metric to measure the strength of cohesion between two vertices, which was introduced by \cite{Ol,LLY}.
+This notion has attracted attention as a new tool for graph analysis and has already been applied to real problems (\cite{JL,NLGGS,NLLG}, etc.).
+
+\subsection*{Ricci curvature of graphs} \label{intro of Ricci}
+In this section, we briefly describe the Ricci curvature of graphs.
+We consider a weighted graph.
+Denote the weight of edge $e$ as $w_e$.
+In this case, the node degree $d_x$ of vertex $x$ is $d_x=\sum_{y\sim x}w_{xy}$.
+We call a graph with a weight of $1$ on all edges a \emph{combinatorial graph}.
+First, we introduce a transition probability measure on a node.
+In this section, we use $x,y$ as symbols that denote nodes.
+
+\begin{definition}[Random walk with idleness parameter $\eps\in\text{[0,1]}$] \label{random walk}
+For each node $x\in V$ and $\eps\in[0,1]$, we define a random walk $\rwx$ as follows: \vspace{-3mm}
+\begin{center}
+\[ \dis \rwx(y) \:=
+\begin{cases}
+1-\eps & (y=x) , \vspace{1mm} \\
+\eps\cdot\frac{w_{xy}}{d_x} & (y\sim x) , \vspace{1mm} \\
+0 & (\text{otherwise}) .
+\end{cases}\]
+\end{center} 
+\end{definition}
+
+The Ricci curvature with idleness parameter $\eps$ is defined as follows.
+
+\begin{definition}[$\eps$-Ollivier--Ricci curvature; \cite{Ol,LLY}] \label{eps-curv}
+Let $\eps\in[0,1]$.
+The \emph{$\eps$-Ollivier--Ricci curvature $\kexy$} between two nodes $x,y\in V$ is defined as 
+\begin{align*}
+\kexy\:=1-\frac{\wxy}{d(x,y)}.
+\end{align*}
+\end{definition}
+
+When $\eps=0$, $\K(0;x,y)=0$ for any nodes $x,y$.
+Then, in \cite{LLY}, they defined a curvature as the (right) limit $\lim_{\eps\dto0}\kexy/\eps$ instead of simply assigning $\eps=0$ (\autoref{LLY-curv}).
+%To confirm the existence of this limit, the following two lemmas were shown.
+
+%\begin{lemma}[{\cite[Lemma 2.1]{LLY}}] \label{global concavity}
+%For any $x,y\in V$, the function $\varphi:\eps\mapsto\kexy$ is concave on $[0,1]$.
+%\end{lemma}
+
+\begin{lemma}[{\cite[Lemma 2.2]{LLY}}] \label{LLY-bdd}
+For any $\eps\in[0,1]$ and $x,y\in V$, we have
+\begin{align*}
+|\kexy|\leq\frac{2\eps}{d(x,y)}. %\label{ineq:LLY-bdd}
+\end{align*}
+\end{lemma}
+
+\begin{thm}[{\cite[Theorem 3.4]{BCLMP}, \cite[Theorem 3.2]{CK}}] \label{3-pieces}
+For any connected, locally finite and simple graph $G=(V,E)$ and any of its nodes $x,y$, the function $\varphi:\eps\mapsto\kexy$ is concave and piecewise linear on $[0,1]$.
+Moreover, the number of its partitions is at most $3$.
+In particular, $\varphi(\eps)\:=\kexy/\eps$ is constant for $\eps$ sufficiently close to $0$.
+\end{thm}
+
+\begin{remark}  \label{LLY-concavity}
+The concavity of $\varphi$ was already proved in \cite[Lemma 2.1]{LLY}.
+Although only this \cite[Lemma 2.1]{LLY} and \autoref{LLY-bdd} are sufficient to justify the following \autoref{LLY-curv}, we have stated here a stronger result which was later proved in \cite{BCLMP,CK}.
+\end{remark}
+
+From \autoref{LLY-bdd} and \autoref{3-pieces}, we can see the existence of the (right) limit $\lim_{\eps\dto0}\kexy/\eps$.
+
+\begin{definition}[LLY--Ricci curvature; \cite{LLY}] \label{LLY-curv}
+We define the \emph{LLY--Ricci curvature} $\kxy$ between two nodes $x,y\in V$ as
+\begin{align*}
+\kxy\:=\lim_{\eps\dto0}\frac{\kexy}{\eps}. 
+\end{align*}
+\end{definition}
+
+Although LLY--Ricci curvature $\kxy$ is a limit value, it can be obtained by linear programming (\cite{CKLLS}) thanks to \autoref{3-pieces}.
+Moreover, the Graph Curvature Calculator\footnote{\url{https://www.mas.ncl.ac.uk/graph-curvature/}
+On this page, you can select from the tabs in the lower left corner to calculate various types of curvatures.
+The tab ``Lin--Lu--Yau Curvature" allows you to calculate the curvatures used in this study.
+Remark that these are calculated on \textbf{unweighted graphs}, and the following discussion considers \textbf{weighted graphs}.} 
+has been developed to calculate LLY--Ricci curvature of each edge of a graph by inputting node and edge information.
+
+
+\subsection*{Calculation of LLY--Ricci-type curvature in weighted graphs} \label{section:weighted graph}
+
+\subsubsection*{Setting \& Definition}
+
+We will calculate ``LLY--Ricci-type curvature" on a weighted graph specifically before describing the graph curvature method.
+Consider a graph $G$ such that \autoref{traj-p} and calculate $\K(p,v_2)$.
+Denote $\A\:=1-\eps$ and $w_{pv_i}$ as $w_i$ for $i=1,2,3,4$.
+
+Note that the transition probability measures $\mu_p^\eps$ and $\nu_{v_2}^\eps$ are determined as follows:
+\begin{itemize}
+    \item we define the transition probability measure $\mu_{p}^\eps$ by considering $G$ as a \textbf{weighted graph} (\autoref{p-p.m.}),
+    \item we define the transition probability measure $\nu_{v_2}^\eps$ by considering $G$ as a \textbf{combinatorial graph} (\autoref{v2-p.m.}).
+\end{itemize}
+In this sense, the curvature we now calculate is strictly different from LLY--Ricci curvature, but we will use the same symbols.
+
+\begin{figure}[H]
+\begin{tabular}{ccccc}
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (2,2) node (p) [draw] {$p$};
+\draw (2,4.6) node (x) {};
+\draw (2,-0.6) node (y) {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw (v1)--(p);
+\draw (v2)--(p);
+\draw (v4)--(p);
+\draw (v3)--(p);
+\end{tikzpicture}
+\caption{A graph $G$.} \label{traj-p}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\draw (0,4) node (v1) [draw, fill=pink] {$\dis \frac{w_1}{d_p}\cdot\eps$};
+\draw (4,4) node (v2) [draw, fill=pink] {$\dis \frac{w_2}{d_p}\cdot\eps$};
+\draw (0,0) node (v3) [draw, fill=pink] {$\dis \frac{w_3}{d_p}\cdot\eps$};
+\draw (4,0) node (v4) [draw, fill=pink] {$\dis \frac{w_4}{d_p}\cdot\eps$};
+\draw (2,2) node (p) [draw, fill=pink] {$\A$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw (v1)--(p);
+\draw (v2)--(p);
+\draw (v4)--(p);
+\draw (v3)--(p);
+\end{tikzpicture}
+\caption{$\supp\mu_{p}^\eps$.} \label{p-p.m.}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\draw (0,4) node (v1) [draw, fill=cyan] {$\dis \frac{\eps}{3}$};
+\draw (4,4) node (v2) [draw, fill=cyan] {$\A$};
+\draw (0,0) node (v3) [draw] { };
+\draw (4,0) node (v4) [draw, fill=cyan] {$\dis \frac{\eps}{3}$};
+\draw (2,2) node (p) [draw, fill=cyan] {$\dis \frac{\eps}{3}$};
+\draw (2,4.6) node (x) {};
+\draw (2,-0.6) node (y) {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw (v1)--(p);
+\draw (v2)--(p);
+\draw (v4)--(p);
+\draw (v3)--(p);
+\end{tikzpicture}
+\caption{$\supp\nu_{v_2}^\eps$.} \label{v2-p.m.}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure}
+
+\subsection*{Calculation of $W_1\big(\mu_p^\eps,\nu_{v_2}^\eps\big)$ and $\K(p,v_2)$}
+
+Consider transporting weights from $\supp\mu_{p}^\eps$ to $\supp\nu_{v_2}^\eps$.
+Note that we have to consider a transport plan that minimizes the transport cost since we calculate $W_1$ distance.
+Now let $\eps$ be sufficiently close to $0$ (, i.e. $\A\:=1-\eps$ be sufficiently close to $1$).
+For simplicity, we assume the following:
+\begin{align} 
+\frac{w_3}{d_p}>\frac{1}{3}, \qquad \frac{w_4}{d_p}>\frac{1}{3}. \label{weight-assumption}
+\end{align}
+From \eqref{weight-assumption}, The following transport plan is optimal:
+\begin{itemize}
+    \item The weight $\mu_{p}^\eps(v_1)$ and $\mu_{p}^\eps(v_2)$ is not moved.
+    \item[\red($\bullet$)] Since $v_3\notin\supp\nu_{v_2}^\eps$, we must transport all of the weight $\mu_{p}^\eps(v_3)$.
+    If we transport all of them to $v_2$, then this cost is not minimum since the transfer distance is $2$.
+    Hence, We transport a part of the weight to $v_1$ at transfer distance $1$.
+    \item[\blue($\bullet$)] The weight $\A$ of node $p$ is ``large" since it is sufficiently close to 1.
+    Therefore, We transport the differences of weights $\mu_{p}^\eps(v_4)-\eps/3$ and $\mu_{p}^\eps(p)-\eps/3$ to $v_2$.
+\end{itemize}
+
+The transport flow with this otimal transport plan is shown in \autoref{flow-2}.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (2,2) node (p) [draw] {$p$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw (v1)--(p);
+\draw (v2)--(p);
+\draw (v4)--(p);
+\draw (v3)--(p);
+\draw[arrows=->, ultra thick, draw=red] ($(v3)+(-0.3,0.6)$) to ($(v1)+(-0.3,-0.6)$);
+\path[arrows=->, ultra thick, draw=red] ($(v3)+(0.2,0.5)$) 
+to[out=60,in=225] ($(p)+(-0.4,0.4)$)
+to[out=45,in=210] ($(v2)+(-0.5,-0.2)$);
+\draw[arrows=->, ultra thick, draw=blue] ($(p)+(0.5,0.2)$) to ($(v2)+(-0.2,-0.5)$);
+\draw[arrows=->, ultra thick, draw=blue] ($(v4)+(0.3,0.6)$) to ($(v2)+(0.3,-0.6)$);
+\end{tikzpicture}
+\caption{The transport flow from $\mu_p^\eps$ to $\nu_{v_2}^\eps$.
+The colors of the arrows correspond to the colors of the optimal transport plan described immediately above.} \label{flow-2}
+\end{center}
+\end{figure}
+
+Therefore, we obtain the following:
+\begin{align*}
+    W_1\big(\mu_p^\eps,\nu_{v_2}^\eps\big) &= 
+     \bigg( \left(\nu_{v_2}(v_1)-\mu_{p}^\eps(v_2)\right)\cdot1 + \Big\{\mu_{p}^\eps(v_3)-\left(\nu_{v_2}(v_1)-\mu_{p}^\eps(v_2)\right)\Big\}\cdot2 \bigg) \\
+    &\qquad + \left(\mu_{p}^\eps(v_4)-\nu_{v_2}(v_4)\right)\cdot1 + \left(\mu_{p}^\eps(p)-\nu_{v_2}(p)\right)\cdot1 \\
+    &= \Bigg(\frac{-w_1+2w_3+2w_1}{d_p}\cdot\eps-\frac{1}{3}\Bigg) 
+       + \Bigg( (1-\eps)-\frac{\eps}{3} \Bigg) + \Bigg( \frac{w_4}{d_p}-\frac{1}{3} \Bigg)\eps \\
+    &= 1 - \frac{4}{3}\eps + \frac{w_1+2w_3+w_4}{d_p}\eps.
+\end{align*}
+Thus, we obtain 
+\begin{align}
+    \K(p,v_2) &= 
+     \lim_{\eps\dto0}\frac{1}{\eps}\Bigg(1-\frac{W_1\big(\mu_p^\eps,\nu_{v_2}^\eps\big)}{d(p,v_2)}\Bigg) 
+    = \frac{4}{3} - \frac{w_1+2w_3+w_4}{d_p}
+    =\frac{4}{3} - \frac{w_3}{d_p} - \Bigg( 1-\frac{w_2}{d_p} \Bigg) \notag \\ 
+    &= \frac{1}{3} - \frac{w_3-w_2}{d_p} \quad \Bigg(<\frac{1}{3}\Bigg). \label{weighted-curv-p2}
+\end{align}
+
+As can be seen from \eqref{weighted-curv-p2}, the value of LLY--Ricci-type curvature determines whether node $p$ is stronger ``connected'' with $v_2$ or $v_3$ in the weighted graph.
+In fact, as the difference between the weights of edge $pv_2$ and $pv_3$ increases, the difference between the values of $\K(p,v_2)$ and $\K(p,v_3)$ increases.
+
+\subsection*{Calculation of $W_1\big(\mu_p^\eps,\nu_{v_3}^\eps\big)$ and $\K(p,v_3)$}
+
+Under the same assumption for \eqref{weight-assumption}, we calculate for $W_1\big(\mu_p^\eps,\nu_{v_3}^\eps\big)$ and $\K(p,v_3)$ in the same way.
+$\supp\mu_p^\eps$ remains \autoref{p-p.m.}, and $\supp\nu_{v_3}^\eps$ is as \autoref{v3-p.m.}.
+Note that $(w_1+w_2)/d_p>1/3$ then holds by \eqref{weight-assumption}, and the transport flow is as in \autoref{flow-2}.
+
+\begin{figure}[H]
+\begin{tabular}{ccc}
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\draw (0,4) node (v1) [draw, fill=cyan] {$\dis \frac{\eps}{3}$};
+\draw (0,0) node (v2) [draw, fill=cyan] {$\A$};
+\draw (4,4) node (v3) [draw] { };
+\draw (4,0) node (v4) [draw, fill=cyan] {$\dis \frac{\eps}{3}$};
+\draw (2,2) node (p) [draw, fill=cyan] {$\dis \frac{\eps}{3}$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw (v1)--(p);
+\draw (v2)--(p);
+\draw (v4)--(p);
+\draw (v3)--(p);
+\end{tikzpicture}
+\caption{$\supp\nu_{v_3}^\eps$.} \label{v3-p.m.}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (2,2) node (p) [draw] {$p$};
+\draw (2,4.4) node (x) {};
+\draw (2,-0.5) node (y) {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw (v1)--(p);
+\draw (v2)--(p);
+\draw (v4)--(p);
+\draw (v3)--(p);
+\draw[arrows=->, ultra thick, draw=red] ($(v2)+(-0.6,-0.3)$) to ($(v1)+(0.6,-0.3)$);
+\draw[arrows=->, ultra thick, draw=red] ($(v4)+(-0.6,0.3)$) to ($(v3)+(0.6,0.3)$);
+\draw[arrows=->, ultra thick, draw=blue] ($(p)+(-0.5,0.2)$) to ($(v1)+(0.2,-0.5)$);
+\draw[arrows=->, ultra thick, draw=blue] ($(p)+(-0.5,-0.2)$) to ($(v3)+(0.2,0.5)$);
+\end{tikzpicture}
+\caption{The transport flow from $\mu_p^\eps$ to $\nu_{v_3}^\eps$.} \label{flow-3}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure}
+
+Therefore, we obtain the following:
+\begin{align*}
+    W_1\big(\mu_p^\eps,\nu_{v_3}^\eps\big) &= 
+     \mu_p(v_2)\cdot1 + \Big(\mu_p^\eps(v_4)-\nu_{v_3}^\eps(v_4)\Big)\cdot1
+       -\Big(\mu_p^\eps(p)-\mu_{v_2}^p\Big)\cdot1 \\
+    &= \frac{w_2}{d_p}\cdot\eps+\Bigg(\frac{w_4}{d_p}-\frac{1}{3}\Bigg)\cdot\eps 
+       + \Bigg( \A-\frac{\eps}{3} \Bigg) \\
+    &= 1 + \Bigg( -\frac{5}{3} + \frac{w_2+w_4}{d_p} \Bigg)\cdot\eps.
+\end{align*}
+Thus, we obtain 
+\begin{align}
+    \K(p,v_3) = 
+     \lim_{\eps\dto0}\frac{1}{\eps}\Bigg(1-\frac{W_1\big(\mu_p^\eps,\nu_{v_3}^\eps\big)}{d(p,v_3)}\Bigg) 
+    = \frac{5}{3} - \frac{w_2+w_4}{d_p}
+    =\frac{5}{3} - \Bigg( 1-\frac{w_1+w_3}{d_p} \Bigg) %\notag \\ 
+    = \frac{2}{3} + \frac{w_1+w_3}{d_p}. \label{weighted-curv-p3}
+\end{align}
+From \eqref{weighted-curv-p2} and \eqref{weighted-curv-p3}, we obtain
+\begin{align*}
+    \K(p,v_3)-\K(p,v_2) = \frac{1}{3} + \frac{w_1-w_2+2w_3}{d_p}. 
+\end{align*}
+
+\subsection*{Construction of weighted graphs with speed and direction information}
+
+In \autoref{traj-p}, let nodes $v_1,v_2,v_3,v_4$ be the nodes of the road network and $p$ be the trajectory points.
+We want to construct a weighted graph that takes speed and direction information into account so that we can determine which route this $p$ passed through: $v_1\to v_2\to v_4$ or $v_1\to v_3\to v_4$.
+We note here that \autoref{3-pieces} takes full advantage of the duality of Wasserstein distance.
+Therefore, we should not modify the object function considering Wasserstein distance as an optimization problem.
+However, in order to take into account the location of $p$ with other nodes, the distance used in the object function is replaced from the graph distance to $d_{\R^2}$ at the distance in $\R^2$.
+In other words, we consider the transition probability on the graph and the transport in $\R^2$.
+Here, we assume $d_{\R^2}(p,v_i)=1$ for any $i=1,2,3,4$ for simplicity.
+
+\subsubsection*{Definition of edge weight depending on speed and direction information}
+
+Consider a trajectory point $p$ with an direction such that \autoref{speed-angle}.
+
+\begin{figure}[H]
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (theta1) at (1.75,1) {\blue($\theta^1$)};
+\node (theta2) at (2.6,1) {\blue($\theta^2$)};
+\draw (0,4) node (v1) [draw] {$v_1$};
+\draw (4,4) node (v2) [draw] {$v_2$};
+\draw (0,0) node (v3) [draw] {$v_3$};
+\draw (4,0) node (v4) [draw] {$v_4$};
+\draw (2,2) node (p) [draw] {$p$};
+\draw (2,4.6) node (x) {};
+\draw (2,-0.6) node (y) {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw (v1)--(p);
+\draw (v2)--(p);
+\draw (v4)--(p);
+\draw (v3)--(p);
+\draw[arrows=->, ultra thick, draw=red] ($(p)+(0,-0.3)$) to ($(v4)+(-1.5,0.3)$);
+\end{tikzpicture}
+\caption{A graph $G$.} \label{speed-angle}
+\end{center}
+\end{figure}
+
+We define the edge weights $w_i\:=w(p,v_i)\,(i=1,2,3,4)$ by the following procedure.
+We denote $\vect(p,v_i)$ as the vector from $p$ to $v_i$.
+\begin{enumerate}
+    \item Denote $\vect(p,v^1)$ and $\vect(p,v^2)$ of $\big\{ \vect(p,v_i) \big\}_{i=1,2,3,4}$ in the order of smaller angles to $u_p$.
+    \item For $j=1,2$,
+    \begin{align*}
+        \theta^j \:= \angle\big(u_p,\vect(p,v^j)\big), \qquad w^j = w_{pv^j} \:= \spd(p)\cos\theta^j+\B,
+    \end{align*}
+    where $\B>0$ is a hyperparameter.
+    \item The definition of for $v_i\neq v^1,v^2$ (\textbf{this is still a prototype stage}):
+    \begin{itemize}
+        \item We define $w_i=w_{pv_i}\:=\B$ for any $v_i\neq v^1,v^2$.
+    \end{itemize}
+\end{enumerate}
+
+Now, We have $d_p=\spd(p)(\cos\theta^1+\cos\theta^2)+4\B$.
+Then, assigning \eqref{weighted-curv-p2} and \eqref{weighted-curv-p3} to each weight \big(, i.e.  $\supp\nu_{v_2}^\eps$ and $\supp\nu_{v_3}^\eps$\big) yields the following: 
+\begin{align*}
+    \K(p,v_2) = \frac{1}{3} - \frac{\spd(p)\cos\theta^2}{\spd(p)(\cos\theta^1+\cos\theta^2)+4\B}, \qquad 
+    \K(p,v_3) = \frac{2}{3} + \frac{\spd(p)\cos\theta^2+2\B}{\spd(p)(\cos\theta^1+\cos\theta^2)+4\B}.
+\end{align*}
+Moreover, we obtain,
+\begin{align}
+    \K(p,v_3)-\K(p,v_2) = \frac{1}{3} + 2\cdot\frac{\spd(p)\cos\theta^2+\B}{\spd(p)(\cos\theta^1+\cos\theta^2)+4\B}. \label{curv-difference}
+\end{align}
+
+\bigskip
+
+I would like to use this curvature difference \eqref{curv-difference} as a quantitative indicator for the route determination method$\dots$ (how can we do it?)
+\section{Week 4}
+We prepared midterm presentation
+
+
+
+
+\section{Week 5}
+\subsubsection*{Katelynn}
+I am reading the FMM paper, so that I can understand and apply their pre-processing step to the Wasserstein distance method.
+
+\subsubsection*{Tomoya}
+Progress no good!w
+
+\section{Week 6}
+\subsection{July 26, 27th}
+\subsubsection*{Tomoya}
+I summarized what I have been thinking about recently.
+However, note that this is different from the treatment of weighted graphs in \autoref{section:weighted graph}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{``Ricci curvature" between the trajectory and each route}
+
+According to \autoref{LLY-curv}, we introduce a ``curvature" between the trajectory and each route.
+It is this quantity that determines which routes the trajectory is closer to.
+
+The denominator $d(x,y)$ used in the \autoref{LLY-curv} (i.e. \autoref{eps-curv}) was the distance between the two vertices $x,y$ of the target.
+In this setting, the target to be measured is not two vertices but two ``sets of vertices".
+Therefore, it is necessary to first consider what the quantity corresponding to $d(x,y)$ should be in this setting.
+In conclusion, we adopt $W_1(\mu_\mathbf{p}, \nu_A)$ (with respect to the route $A$) as described in the midterm presentation.
+This is because $W_1(\mu_\mathbf{p}, \nu_A)$ was quantifying the distance between the trajectory and route using only the location information of the trajectory.
+We next need to consider the amount of the numerator of \autoref{eps-curv}.
+In the idea of \autoref{LLY-curv}, they perturbed the Dirac measures\footnote{
+Here, notice that $d(x,y)$ can be transformed to $d(x,y)=W_1(\dex,\dey)$ and $\mu_x^0=\dex$, $\mu_y^0=\dey$.
+This means that the fraction \autoref{eps-curv}: $W_1(\mu_x^\eps,\mu_y^\eps)/W_1(\dex,\dey)$ measures the fundamental probability measures $\dex,\dey$ in the denominator and the $\eps$-perturbations $\mu_x^\eps,\mu_y^\eps$ of them in the numerator, with $W_1$ between them, respectively.}
+at $x,y$ by $\eps$ along the graph structure.
+In this setting, the vertices of the (local) road network graph are only the trajectory and the divided points $\{a_1,\ldots,a_m,b_1,\dots,b_m\}$ of each route $A$ and $B$, and thus it is a problem of how to introduce the edges.
+Note that, as described in the previous section, we define the transition probabilities for routes as \textbf{combinatorial graphs}.
+Then, we consider introducing weighted edges using the input speed and direction at each trajectory point.
+
+\subsection*{Introduction of weighted edges to include speed and dierection information}
+
+First, review the present setup again.
+
+\begin{setdef}[``Local" Road Network Graph, GPS error $\err$, the distance with error $d_\err$] \label{setdef}
+$ $\newline
+\begin{itemize} \vspace{-6mm}
+\item We consider a local area, \emph{``local" road network graph}, where we cannot judge the superiority or inferiority of two candidate routes $A,B$.
+We will also denote the local road network graph as $G=(V,E)$ to simplify the symbols. \\ \vspace{-5mm}
+\item $G=(V,E)\;(\subset\R^2)$ consists of the following:
+\begin{itemize} \vspace{-2mm}
+    \item[$\diamond$] $V = \{p_1,\ldots,p_n,a_1,\dots,a_m,b_1,\dots,b_m\} \; \eqqcolon \mathbf{p}\sqcup V(A)\sqcup V(B)$,
+    \item[$\diamond$] $E = \{e_A \;|\; e_A\in\text{route }A\} \sqcup \{e_B \;|\; e_B\in\text{route }B\}$.
+\end{itemize} 
+\item Set the \emph{GPS error} as $\err:\mathbf{p}\to\R_{\ge0}$.
+Then, suppose that the \emph{(ball-)symmetric probability measure}\footnote{
+For example, consider a Gaussian measure parameterized so that the total measure is close enough to $1$ in the bounded domain $B\big(p;\err(p)\big)$.
+One can then cut off the measure by $B\big(p;\err(p)\big)$ and normalize it so that the total measure is $1$.}
+$\gamma_p$ is given such that $\supp\gamma_p=B\big(p;\err(p)\big)\:=\{v\in\R^2\;|\;d_{\R^2}(v,p)\leq\err(p)\}$.
+We assume that \textbf{$p$ is truly located at $v$ with probability $\gamma_p(v)$}.
+Remark that for any $p\in\mathbf{p}$, there exists $e\in E$ such that $B\big(p;\err(p)\big)\cap e\neq\emptyset$.
+\item We define the \emph{distance with error}\footnote{
+We use $d_\err$ when calculating how far away the trajectory point $p\in\mathbf{p}$ is from a edge $e\in E$ in our strategy.
+Therefore, this $d_\err$ is a quantity that describes ``how far away $p$ and $e$ can be considered to be" and not used as a ``distance function".}
+$d_\err$ between $p$ and $e\in E$ as 
+\begin{align*}
+    d_\err(p,e) \:= \int_{v\in B\big(p;\err(p)\big)} d_{\R^2}(v,e)\, \dd\gamma_p(v).
+\end{align*}
+\item In the following, unless otherwise noted, we use $d_{\R^2}$-distance: $d=d_{\R^2}$.
+\end{itemize}
+\end{setdef}
+
+\begin{observation}
+If $p\in e$, i.e. $d_{\R^2}(p,e)=0$, then $d_\err(p,e)=0$.
+It is only in this case that $d_\err(p,e)=0$.
+\end{observation}
+
+We will put additional weighed edges in this vertex set $V$.
+Our method quantifies the distance between $\mathbf{p}$ and each route separately.
+Therefore, it is necessary to consider two types of weighted edges, since each of them is evaluated from a different point of view.
+
+The first type is a ``natural" weight in the sense that it decides which routes to consider.
+
+\begin{definition}[Natural weights for each route] \label{normal-weight}
+For each trajectory point $p\in\mathbf{p}$ and each route $A$ and $B$, we define $w_{p,A},\,w_{p,B}:V\to\{0,1\}$ as
+\begin{center} \vspace{-6mm}
+\[ w_{p,A}(v) \:= \left.
+\begin{cases}
+1 & (v\in V(A)),   \\
+0 & (\text{otherwise}), 
+\end{cases}
+\right.
+\qquad\qquad
+w_{p,B}(v) \:=
+\begin{cases}
+1 & (v\in V(B)),   \\
+0 & (\text{otherwise}). 
+\end{cases}\]
+\end{center} 
+\end{definition}
+
+Next, we introduce a weight that takes speed and direction information into account.
+This weight is a quantity that depends on the input data at each trajectory point $p\in\mathbf{p}$, and is commonly defined independent of which route is considered.
+
+We will make some preparations to define this weight.
+
+\begin{definition}[Weights depending on speed and direction information] \label{s&d-weight}
+$ $\newline
+\begin{itemize} \vspace{-6mm}
+    \item For each $p\in\mathbf{p}$ and $e\in E$, we define 
+    \begin{align*}
+        \cc_{p,e}\:= \spd(p)\cdot\frac{\abs[\big]{\langle u_p,\ee \rangle}}{\exp\big(d_\err(p,e)\big)},
+    \end{align*}
+    where $\ee$ is the unit vector parallel to $e$ for each $e\in E$.
+    Although there is a $180^\circ$ degree of freedom in the direction of $\ee$, either is fine for practical purposes.
+    Then, we define $\cc_p\:=\sum_{e\in E}\cc_{p,e}$.
+    \item With the above preparations, we define $w_p:V\to\R_{\ge0}$ for each $p\in\mathbf{p}$ as follows:
+    \begin{align*} \vspace{-6mm}
+    w_p(v) \:=
+    \frac{\cc_{p,e}}{\cc_p}\cdot\frac{1}{\#e} \qquad (v\in e\in E).
+    \end{align*} 
+    \end{itemize}
+\end{definition}
+
+\begin{observation}[Weighted local road network graph]
+The weight introduced in \autoref{normal-weight} and \autoref{s&d-weight} modifies the local road network graph $G=(V,E)$ to the \textbf{weighted graph} $G=(V,E,w)$.
+\textbf{Notice that the weights of each $e_A\in E(A)$, $e_B\in E(B)$ are all zero, so these edges were vanished.}
+In order to consider the perturbation (of the probability measure $\mu_{\mathbf{p}}$ associated with the trajectory) at $G=(V,E,w)$, let us now calculate the \emph{weighted degree} $d_{p,A}$ and $d_{p,B}$ of each $p\in\mathbf{p}$, which can be considered in two types depending on the different weights $w_{p,A}$ and $w_{p,B}$, but the values are the same:
+\begin{align*}
+    d_{p,A} \:= 
+    \sum_{v\in V} \big\{ w_{p,A}(v)+w_p(v) \big\} =
+    \left(\sum_{v\in V(A)}1\right) + \frac{1}{\cc_p} \sum_{e\in E} \cc_{p,e} \sum_{v\in e} \frac{1}{\#e}
+    = m+1 \quad (=d_{p,B}).
+\end{align*}
+\end{observation}
+
+Finally, we get to the definition of $\eps$-perturbations $\mu_{\mathbf{p},\cdot}^\eps$ and $\nu_\cdot^\eps$.
+
+\begin{definition}[The $\eps$-perturbations of the probability measures associated with the trajectory and routes]
+For each $\eps\in[0,1]$, $p\in\mathbf{p}$, routes $A,B$, $a\in V(A)$ and $b\in V(B)$, we define as follows:
+\begin{center} \vspace{-6mm}
+\[ \mu_{p,A}^\eps(v) \:= \left.
+\begin{cases}
+1-\eps & (v=p),   \\
+\eps\cdot\frac{w_{p,A}(x)+w_p(x)}{d_{p,A}} & (\text{otherwise}), 
+\end{cases}
+\right.
+\qquad
+\mu_{p,B}^\eps(v) \:=
+\begin{cases}
+1-\eps & (v=p),   \\
+\eps\cdot\frac{w_{p,A}(x)+w_p(x)}{d_{p,A}} & (\text{otherwise}), 
+\end{cases}\]
+\end{center} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{center} \vspace{-4mm}
+\[ \nu_a^\eps(v) \:= \left.
+\begin{cases}
+1-\eps & (v=a),   \\
+\eps\cdot\frac{1}{n} & (v\in\mathbf{p}),   \\
+0 & (\text{otherwise}), 
+\end{cases}
+\right.
+\qquad
+\nu_b^\eps(v) \:=
+\begin{cases}
+1-\eps & (v=b),   \\
+\eps\cdot\frac{1}{n} & (v\in\mathbf{p}),   \\
+0 & (\text{otherwise}).
+\end{cases}\]
+\end{center} 
+Next, we define the \emph{$\eps$-perturbations} of the probability measures associated with the trajectory and routes as follows, respectively:
+\begin{align*}
+    \mu_{\mathbf{p},A}^\eps\:=\frac{1}{n}\sum_{p\in\mathbf{p}}\mu_{p,A}^\eps, \qquad
+    \mu_{\mathbf{p},B}^\eps\:=\frac{1}{n}\sum_{p\in\mathbf{p}}\mu_{p,B}^\eps, \qquad
+    \nu_A^\eps\:=\frac{1}{m}\sum_{a\in V(A)}\nu_a^\eps, \qquad
+    \nu_B^\eps\:=\frac{1}{m}\sum_{b\in V(B)}\nu_b^\eps.
+\end{align*}
+\end{definition}
+
+\begin{remark}
+It is clear from the definition that $\mu_{\mathbf{p},A}^0=\mu_\mathbf{p}=\mu_{\mathbf{p},B}^0$, $\nu_A^0=\nu_A$ and $\nu_B^0=\nu_B$ hold.
+\end{remark}
+
+\subsection*{LLY-type Ricci curvature between the trajectory and each routes}
+
+Now that $\eps$-perturbation measures has been defined, we can define the ``curvature" between the trajectory and routes as in \autoref{eps-curv} and \autoref{LLY-curv}.
+In the following, we will write about route $A$ only, since the definition is the same for both routes $A$ and $B$.
+
+\begin{definition}[$\eps$-Ricci curvature between the trajectory and route]
+Let $\eps\in[0,1]$.
+The \emph{$\eps$-Ricci curvature} $\kepa$ between the trajectory $\mathbf{p}$ and route $A$ is defined as: 
+\begin{align}
+    \kepa \:= 1-\frac{W_1(\mu_{\mathbf{p},A}^\eps,\nu_A^\eps)}{W_1(\mu_\mathbf{p},\nu_A)}. \label{eq:kepa}
+\end{align}
+\end{definition}
+
+We next prove the corresponding properties for \autoref{LLY-bdd} and \autoref{3-pieces}.
+However, we prove only the concavity of the function $h:[0,1]\ni\eps\mapsto\kepa\in\R$ because the piecewise linearity of $h$ like \autoref{3-pieces} is not yet clearly known (see \autoref{LLY-concavity}).
+
+\begin{proposition}[$\eps$-boundedness of $\kepa$] \label{eps-bounded}
+For any $\eps\in[0,1]$, we have
+\begin{align*}
+    \abs{\kepa} \le \frac{2\eps}{W_1(\mu_\mathbf{p},\nu_A)}. 
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+By the triangle inequality of $W_1$, we obtain
+\begin{align*}
+    W_1(\mu_{\mathbf{p},A}^\eps,\nu_A^\eps) 
+    &\le W_1(\mu_{\mathbf{p},A}^\eps,\mu_\mathbf{p}^0) + W_1(\mu_{\mathbf{p},A}^0,\nu_A^0) + W_1(\nu_A^0,\nu_A^\eps)
+    = W_1(\mu_{\mathbf{p},A}^0,\nu_A^0) + 2\eps
+    = W_1(\mu_\mathbf{p},\nu_A) + 2\eps, \\
+    W_1(\mu_{\mathbf{p},A}^\eps,\nu_A^\eps) 
+    &\ge W_1(\mu_{\mathbf{p},A}^0,\nu_A^0) - W_1(\mu_{\mathbf{p},A}^0,\mu_{\mathbf{p},A}^\eps) - W_1(\nu_A^0,\nu_A^\eps)
+    = W_1(\mu_{\mathbf{p},A}^0,\nu_A^0) - 2\eps
+    = W_1(\mu_\mathbf{p},\nu_A) - 2\eps.
+\end{align*}
+This implies the following:
+\begin{align*}
+    -\frac{2\eps}{W_1(\mu_\mathbf{p},\nu_A)} \le \kepa 
+    \:= 1-\frac{W_1(\mu_{\mathbf{p},A}^\eps,\nu_A^\eps)}{W_1(\mu_\mathbf{p},\nu_A)} \le \frac{2\eps}{W_1(\mu_\mathbf{p},\nu_A)}.
+\end{align*}
+\end{proof}
+
+\begin{proposition}[Concavity of $\kepa$] \label{kepa-concavity}
+The function $h:[0,1]\ni\eps\mapsto\kepa\in\R$ is concave.
+\end{proposition}
+
+\begin{proof}
+Let $\eps_1,\eps_2,\eps_3$ be $0\le\eps_1<\eps_2<\eps_3\le1$ and $t\:=(\eps_3-\eps_2)/(\eps_3-\eps_1)$.
+Then, $\eps_2=t\eps_1+(1-t)\eps_3$ holds.
+We show that 
+\begin{align}
+    \K(\eps_2;\mathbf{p},A) \ge t\K(\eps_1;\mathbf{p},A) + (1-t)\K(\eps_3;\mathbf{p},A) \label{ineq:kepa-concavity}
+\end{align}
+holds.
+First, we show the following. \vspace{2mm} \\
+\underline{\textbf{Claim}} 
+Let $\pi_j$ be the optimal coupling between $\mu_{\mathbf{p},A}^{\eps_j}$ and $\nu_A^{\eps_j}$, with respect to $j=1,3$.
+Then, $\pi_2\:=t\pi_1+(1-t)\pi_3$ is a coupling between $\mu_{\mathbf{p},A}^{\eps_2}$ and $\nu_A^{\eps_2}$.
+\vspace{1mm} \\
+\underline{\textit{Proof of \textbf{Claim}}}
+$ $\newline
+By the definition of $\pi_2$, we obtain 
+\begin{align}
+    \sum_{v_1\in V}\pi_2(v_1,v_2)
+    &= t\sum_{v_1\in V}\pi_1(v_1,v_2) + (1-t)\sum_{v_1\in V}\pi_3(v_1,v_2)
+    = t\nu_A^{\eps_1}(v_2) + (1-t)\nu_A^{\eps_3}(v_2) \notag \\
+    &= t\cdot\frac{1}{m}\sum_{a\in V(A)}\nu_a^{\eps_1}(v_2) + (1-t)\cdot\frac{1}{m}\sum_{a\in V(A)}\nu_a^{\eps_3}(v_2) 
+    \label{nu-coupling}, \\
+    \sum_{v_2\in V}\pi_2(v_1,v_2)
+    &= t\sum_{v_2\in V}\pi_1(v_1,v_2) + (1-t)\sum_{v_2\in V}\pi_3(v_1,v_2)
+    = t\mu_{\mathbf{p},A}^{\eps_1}(v_1) + (1-t)\mu_{\mathbf{p},A}^{\eps_3}(v_1) \notag \\
+    &= t\cdot\frac{1}{n}\sum_{p\in \mathbf{p}}\mu_{p,A}^{\eps_1}(v_1) + (1-t)\cdot\frac{1}{n}\sum_{p\in \mathbf{p}}\mu_{p,A}^{\eps_3}(v_1). \label{mu-coupling}
+\end{align}
+It is sufficient to check that the right hand side of \eqref{nu-coupling} and \eqref{mu-coupling} coincide with $\nu_A^{\eps_2}(v_2)$ and $\mu_{\mathbf{p},A}^{\eps_2}(v_1)$, respectively. \\
+\underline{\eqref{nu-coupling}}
+$\rm(\hspace{.18em}i\hspace{.18em})$ 
+In the case of $v_2\in V(A)$: it holds that
+\begin{align*}
+    \eqref{nu-coupling} = t\cdot\frac{1}{m}(1-\eps_1) + (1-t)\cdot\frac{1}{m}(1-\eps_3)
+    = \frac{1}{m}(1-\eps_2) = \frac{1}{m}\sum_{a\in V(A)}\nu_a^{\eps_2}(v_2) = \nu_A^{\eps_2}(v_2).
+\end{align*}
+$\rm(\hspace{.08em}ii\hspace{.08em})$ 
+In the case of $v_2\in \mathbf{p}$: it holds that
+\begin{align*}
+    \eqref{nu-coupling} 
+    = t\cdot\frac{1}{m}\bigg(\eps_1\cdot\frac{1}{n}\bigg)\cdot m + (1-t)\cdot\frac{1}{m}\bigg(\eps_3\cdot\frac{1}{n}\bigg)\cdot m
+    = \frac{1}{m}\bigg(\eps_2\cdot\frac{1}{n}\bigg)\cdot m = \frac{1}{m}\sum_{a\in V(A)}\nu_a^{\eps_2}(v_2) = \nu_A^{\eps_2}(v_2).
+\end{align*}
+$\rm(i\hspace{-.08em}i\hspace{-.08em}i)$ 
+In the case of $v_2\in V(B)$: it holds that $\eqref{nu-coupling} = 0 = \nu_A^{\eps_2}(v_2)$. \vspace{1mm} \\
+\underline{\eqref{mu-coupling}}
+$\rm(i\hspace{-.08em}v\hspace{-.06em})$ 
+In the case of $v_1\in \mathbf{p}$: it holds that
+\begin{align*}
+    \eqref{mu-coupling} = t\cdot\frac{1}{n}(1-\eps_1) + (1-t)\cdot\frac{1}{n}(1-\eps_3)
+    = \frac{1}{n}(1-\eps_2) = \frac{1}{n}\sum_{p\in \mathbf{p}}\mu_{p,A}^{\eps_2}(v_1) = \mu_{\mathbf{p},A}^{\eps_2}(v_1).
+\end{align*}
+$\rm(\hspace{.06em}v\hspace{.06em})$ 
+In the case of $v_1\in V(A)$: it holds that
+\begin{align*}
+    \eqref{mu-coupling} 
+    &= t\cdot\frac{1}{n}\sum_{p\in\mathbf{p}}\Bigg(\eps_1\cdot\frac{1+w_p(v_1)}{m+1}\Bigg) + (1-t)\cdot\frac{1}{n}\sum_{p\in\mathbf{p}}\Bigg(\eps_3\cdot\frac{1+w_p(v_1)}{m+1}\Bigg)
+    = \frac{1}{n}\sum_{p\in\mathbf{p}}\Bigg(\eps_2\cdot\frac{1+w_p(v_1)}{m+1}\Bigg) \\
+    &= \frac{1}{n}\sum_{p\in\mathbf{p}}\mu_{p,A}^{\eps_2}(v_2) = \mu_{\mathbf{p},A}^{\eps_2}(v_2).
+\end{align*}
+$\rm(\hspace{-.06em}v\hspace{-.08em}i)$ 
+In the case of $v_1\in V(B)$: it holds that 
+\begin{align*}
+    \eqref{mu-coupling} 
+    &= t\cdot\frac{1}{n}\sum_{p\in\mathbf{p}}\Bigg(\eps_1\cdot\frac{w_p(v_1)}{m+1}\Bigg) + (1-t)\cdot\frac{1}{n}\sum_{p\in\mathbf{p}}\Bigg(\eps_3\cdot\frac{w_p(v_1)}{m+1}\Bigg)
+    = \frac{1}{n}\sum_{p\in\mathbf{p}}\Bigg(\eps_2\cdot\frac{w_p(v_1)}{m+1}\Bigg) \\
+    &= \frac{1}{n}\sum_{p\in\mathbf{p}}\mu_{p,A}^{\eps_2}(v_2) = \mu_{\mathbf{p},A}^{\eps_2}(v_2).
+\end{align*}
+This concludes the proof of \textbf{Claim}. $\blacksquare$
+
+\vspace{2mm}
+From \textbf{Claim}, we obtain 
+\begin{align*}
+    W_1(\mu_{\mathbf{p},A}^{\eps_2},\nu_A) &\le \sum_{v_1,v_2\in V}\pi_2(v_1,v_2)d(v_1,v_2)
+    = t\sum_{v_1,v_2\in V}\pi_1(v_1,v_2)d(v_1,v_2) + (1-t)\sum_{v_1,v_2\in V}\pi_3(v_1,v_2)d(v_1,v_2) \\
+    &= tW_1(\mu_{\mathbf{p},A}^{\eps_1},\nu_A) + (1-t)W_1(\mu_{\mathbf{p},A}^{\eps_3},\nu_A).
+\end{align*}
+This yields the following:
+\begin{align*}
+    \K(\eps_2;\mathbf{p},A) 
+    &\:= 1-\frac{W_1(\mu_{\mathbf{p},A}^{\eps_2},\nu_A^{\eps_2})}{W_1(\mu_\mathbf{p},\nu_A)}
+    \ge t\Bigg( 1-\frac{W_1(\mu_{\mathbf{p},A}^{\eps_1},\nu_A^{\eps_1})}{W_1(\mu_\mathbf{p},\nu_A)} \Bigg)
+    + (1-t)\Bigg( 1-\frac{W_1(\mu_{\mathbf{p},A}^{\eps_3},\nu_A^{\eps_3})}{W_1(\mu_\mathbf{p},\nu_A)} \Bigg) \\
+    &= t\K(\eps_1;\mathbf{p},A) + (1-t)\K(\eps_3;\mathbf{p},A).
+\end{align*}
+This proves \eqref{ineq:kepa-concavity}.
+\end{proof}
+
+\begin{definition}[Ricci curvature between the trajectory and route]
+The existence of the value of the limit $\lim_{\eps\dto0}\kepa/\eps$ 
+is guaranteed by \autoref{eps-bounded} and \autoref{kepa-concavity}.
+We define this value as \emph{Ricci curvature} $\kpa$ between the trajectory and route $A$:
+\begin{align*}
+    \kpa \:= \lim_{\eps\dto0} \frac{\kepa}{\eps}.
+\end{align*}
+\end{definition}
+
+\begin{remark}
+As mentioned above, we have not shown the piecewise linearity like \autoref{3-pieces} in LLY--Ricci curvature yet.
+This is due to the complexity of our setting, and I think it will almost certainly be piecewise linear.
+However, the number of segments will depend on $n$ and $m$, not 3.
+Therefore, we will calculate $\kepa/\eps$ by assigning a value sufficiently close to 0 to $\eps$.
+\end{remark}
+
+\begin{remark}
+This value may require modifications in the way the weights (\autoref{s&d-weight}) are assigned, as we have not yet calculated the concrete examples.
+\end{remark}
+
+\subsection*{Concrete examples and their intuitive explanations}
+
+Consider an extreme example such as \autoref{test-case}.
+Suppose that each $p_i$ is located between edges $v_1v_3$ and $v_2v_4$ for $i=1,2,3$, and each $p_j$ is located between edges $v_1v_2$ and $v_3v_4$ for $j=4,5,6$.
+Moreover, suppose that $\spd(p)$, $\err(p)$ are constant at each $p\in\mathbf{p}$ ($\spd(p)\eqqcolon\mathsf{S}$), $\vect(p(i))\perp\overrightarrow{v_1v_3}$ for $i=1,2,3$ and $\vect(p(j))\perp\overrightarrow{v_1v_2}$ for $j=4,5,6$.
+In this case, the GPS data is probably noisy due to skyscrapers and other factors, making the location data unreliable.
+Also, since direction should have a small margin of error even in such cases, we would like to judge route from the direction information as much as possible.
+Thus, in this case, the true route would be the route $B$.
+
+\begin{figure}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (p1) at (0,2.25) {\red(\;\bu)};
+\node (p2) at (0,1.5) {\red(\;\bu)};
+\node (p3) at (0,0.75) {\red(\;\bu)};
+\node (p4) at (0.75,0) {\red(\;\bu)};
+\node (p5) at (1.5,0) {\red(\;\bu)};
+\node (p6) at (2.25,0) {\red(\;\bu)};
+\node (pp1) at (-0.45,2.25) {\red($p_1$)};
+\node (pp2) at (-0.45,1.5) {\red($p_2$)};
+\node (pp3) at (-0.45,0.75) {\red($p_3$)};
+\node (pp4) at (0.75,-0.45) {\red($p_4$)};
+\node (pp5) at (1.5,-0.45) {\red($p_5$)};
+\node (pp6) at (2.25,-0.45) {\red($p_6$)};
+\draw (-3,3) node (v1) [draw] {$v_1$};
+\draw (3,3) node (v2) [draw] {$v_2$};
+\draw (-3,-3) node (v3) [draw] {$v_3$};
+\draw (3,-3) node (v4) [draw] {$v_4$};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\draw[arrows=->, very thick] ($(p1)+(0,-0.05)$) to ($(p2)+(0,0.2)$);
+\draw[arrows=->, very thick] ($(p2)+(0,-0.05)$) to ($(p3)+(0,0.2)$);
+\draw[arrows=->, very thick] ($(p3)+(0,-0.05)$) to ($(0,0.2)$);
+\draw[arrows=->, very thick] ($(p4)+(0.05,0)$) to ($(p5)+(-0.2,0)$);
+\draw[arrows=->, very thick] ($(p5)+(0.05,0)$) to ($(p6)+(-0.2,0)$);
+\draw[arrows=->, very thick] ($(p6)+(0.05,0)$) to ($(2.8,0)$);
+\path[arrows=->, ultra thick, draw=hanpurple] ($(v1)+(0.1125,0.7)$) 
+to[out=0,in=180] ($(v2)+(0,0.7)$)
+to[out=0,in=90] ($(v2)+(0.7,0)$)
+to[out=270,in=90] ($(v4)+(0.7,0.1125)$);
+\path[arrows=->, ultra thick, draw=hanpurple] ($(v1)+(-0.7,-0.1125)$) 
+to[out=270,in=90] ($(v3)+(-0.7,0)$)
+to[out=270,in=180] ($(v3)+(0,-0.7)$)
+to[out=0,in=180] ($(v4)+(-0.1125,-0.7)$);
+\node (rA) at (4.7,0) {\hanpurple(Route $A$)};
+\node (rB) at (-4.7,0) {\hanpurple(Route $B$)};
+\end{tikzpicture}
+\caption{A local network graph $G$.
+The trajectory is close to the route $A$, while the unit vector is similar to the shape of the route $B$.
+We should judge the route $B$ in such a case.} \label{test-case}
+\end{center}
+\end{figure}
+
+\subsubsection*{The calculation of weights} \label{calculate}
+
+First, we find each $\cc$.
+From our assumption, we obtain for $i=1,2,3$
+\begin{align*}
+    \cc_{p_i,v_1v_3} = \cc_{p_i,v_2v_4} 
+    = \spd(p_i)\cdot\frac{\abs[\big]{\langle u_{p_i},\ee \rangle}}{\exp\big(d_\err(p,e)\big)} 
+    = \frac{\mathsf{S}}{\exp\big(d_\err(p,e)\big)}, \quad
+    \cc_{p_i,v_1v_2} = \cc_{p_i,v_3v_4} = 0,
+\end{align*}
+where $\exp\big(d_\err(p,e)\big)\:=\exp\big(d_\err(p,v_1v_3)\big)=\exp\big(d_\err(p,v_2v_4)\big)$.
+We also obtain for $j=4,5,6$
+\begin{align*}
+    \cc_{p_j,v_1v_3} = \cc_{p_j,v_2v_4} = 0, \quad
+    \cc_{p_j,v_1v_2} = \cc_{p_j,v_3v_4} 
+    = \spd(p_j)\cdot\frac{\abs[\big]{\langle u_{p_j},\ee \rangle}}{\exp\big(d_\err(p,e)\big)}
+    = \frac{\mathsf{S}}{\exp\big(d_\err(p,e)\big)},
+\end{align*}
+where $\exp\big(d_\err(p,e)\big)\:=\exp\big(d_\err(p,v_1v_2)\big)=\exp\big(d_\err(p,v_3v_4)\big)$.
+Then, we have for $i=1,2,3$ and $j=4,5,6$
+\begin{align*}
+    \frac{\cc_{p_i,v_1v_3}}{\cc_{p_i}} = \frac{1}{2} = \frac{\cc_{p_i,v_2v_4}}{\cc_{p_i}}, \quad
+    \frac{\cc_{p_i,v_1v_2}}{\cc_{p_i}} = 0 = \frac{\cc_{p_i,v_3v_4}}{\cc_{p_i}}, \\
+    \frac{\cc_{p_j,v_1v_3}}{\cc_{p_j}} = 0 = \frac{\cc_{p_j,v_2v_4}}{\cc_{p_j}}, \quad
+    \frac{\cc_{p_j,v_1v_2}}{\cc_{p_j}} = \frac{1}{2} = \frac{\cc_{p_j,v_3v_4}}{\cc_{p_j}}.
+\end{align*}
+Suppose that we divide the routes $A$ and $B$ into $m=2\mathsf{m}+1$ equal parts.
+Then, the weight $w_p(\cdot)$ is distributed as follows:
+\begin{center} \vspace{-6mm}
+\[ w_{p_1}(v) = w_{p_2}(v) = w_{p_3}(v) = 
+\begin{cases}
+\frac{1}{2}\cdot\frac{1}{\mathsf{m}+1} & (v=a_{\mathsf{m}+1},\ldots,a_{2\mathsf{m}+1},b_1,\ldots,b_{\mathsf{m}+1}),   \\
+0 & (\text{otherwise}), 
+\end{cases}\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\[ w_{p_4}(v) = w_{p_5}(v) = w_{p_6}(v) = 
+\begin{cases}
+\frac{1}{2}\cdot\frac{1}{\mathsf{m}+1} & (v=a_1,\ldots,a_{\mathsf{m}+1},b_{\mathsf{m}+1},\ldots,b_{2\mathsf{m}+1}),   \\
+0 & (\text{otherwise}).
+\end{cases}\]
+\end{center} 
+Then, it holds that $\mu_{\mathbf{p},A}^\eps=\mu_{\mathbf{p},B}^\eps$ for any $\eps\in[0,1]$.
+The distributions of probability measures $\mu_\mathbf{p},\nu_A,\nu_B,\mu_{\mathbf{p},A}^\eps(=\mu_{\mathbf{p},B}^\eps),\nu_A^\eps$ and $\nu_B^\eps$ are illustrated below.
+Let $\A$ be $\A\:=1-\eps$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\begin{tabular}{ccccc}
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (p1) at (2,3.5) {\red(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\red(\bu)};
+\node (p4) at (2.5,2) {\red(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\red(\bu)};
+\draw (0,4) node (v1) [draw] {};
+\draw (4,4) node (v2) [draw] {};
+\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{$\supp\mu_\mathbf{p}$.
+\red(\bu)$=1/6$.} 
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}] %\hanpurple
+\draw (0,4) node (v1) [draw] {};
+\draw (4,4) node (v2) [draw] {};
+\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\node (a1) at (0.5,3.99) {\hanpurple(\bu)};
+\node (a2) at (1,3.99) {\hanpurple(\bu)};
+\node (a3) at (3.5,3.99) {\hanpurple(\bu)};
+\node (a4) at (4.06,3.99) {\hanpurple(\bu)};
+\node (a5) at (4.06,3.5) {\hanpurple(\bu)};
+\node (a6) at (4.06,1) {\hanpurple(\bu)};
+\node (a7) at (4.06,0.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(a5)+(0.12,-0.15)$)--($(a6)+(0.12,0.15)$); %右
+\draw[hanpurple, dashed] ($(a2)+(0.2,0.15)$)--($(a3)+(-0.15,0.15)$); %上
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{$\supp\nu_A$.
+\hanpurple(\bu)$=1/m$.}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\draw (0,4) node (v1) [draw] {};
+\draw (4,4) node (v2) [draw] {};
+\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\node (b1) at (3.5,-0.01) {\hanpurple(\bu)};
+\node (b2) at (3,-0.01) {\hanpurple(\bu)};
+\node (b3) at (0.5,-0.01) {\hanpurple(\bu)};
+\node (a4) at (0.06,-0.01) {\hanpurple(\bu)};
+\node (b5) at (0.06,0.5) {\hanpurple(\bu)};
+\node (b6) at (0.06,3) {\hanpurple(\bu)};
+\node (b7) at (0.06,3.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(b5)+(-0.2,0.2)$)--($(b6)+(-0.2,-0.15)$); %左
+\draw[hanpurple, dashed] ($(b2)+(-0.2,-0.15)$)--($(b3)+(0.15,-0.15)$); %下
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{$\supp\nu_B$.
+\hanpurple(\bu)$=1/m$.} 
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\begin{tabular}{ccccc}
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (p1) at (2,3.5) {\red(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\red(\bu)};
+\node (p4) at (2.5,2) {\red(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\red(\bu)};
+\node (a1) at (0.5,3.99) {\hanpurple(\bu)};
+\node (a2) at (1,3.99) {\hanpurple(\bu)};
+\node (a3) at (3.5,3.99) {\hanpurple(\bu)};
+\node (a4) at (4.06,3.99) {\green(\bu)};
+\node (a5) at (4.06,3.5) {\hanpurple(\bu)};
+\node (a6) at (4.06,1) {\hanpurple(\bu)};
+\node (a7) at (4.06,0.5) {\hanpurple(\bu)};
+\node (b1) at (3.5,-0.01) {\hanpurple(\bu)};
+\node (b2) at (3,-0.01) {\hanpurple(\bu)};
+\node (b3) at (0.5,-0.01) {\hanpurple(\bu)};
+\node (a4) at (0.06,-0.01) {\green(\bu)};
+\node (b5) at (0.06,0.5) {\hanpurple(\bu)};
+\node (b6) at (0.06,3) {\hanpurple(\bu)};
+\node (b7) at (0.06,3.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(a5)+(0.12,-0.15)$)--($(a6)+(0.12,0.15)$); %右
+\draw[hanpurple, dashed] ($(b5)+(-0.2,0.2)$)--($(b6)+(-0.2,-0.15)$); %左
+\draw[hanpurple, dashed] ($(a2)+(0.2,0.15)$)--($(a3)+(-0.15,0.15)$); %上
+\draw[hanpurple, dashed] ($(b2)+(-0.2,-0.15)$)--($(b3)+(0.15,-0.15)$); %下
+\draw (0,4) node (v1) [draw] {};
+%\draw (4,4) node (v2) [draw] {};
+%\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{$\supp\mu_{\mathbf{p},A}^\eps=\supp\mu_{\mathbf{p},B}^\eps$.
+\red(\bu)$=\A/6$, \hanpurple(\bu)$=\eps/4(\mathsf{m}+1)$ and \green(\bu)$=\eps/2(\mathsf{m}+1)$.} \label{mpae}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}] %\hanpurple
+\node (p1) at (2,3.5) {\red(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\red(\bu)};
+\node (p4) at (2.5,2) {\red(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\red(\bu)};
+\node (a1) at (0.5,3.99) {\hanpurple(\bu)};
+\node (a2) at (1,3.99) {\hanpurple(\bu)};
+\node (a3) at (3.5,3.99) {\hanpurple(\bu)};
+\node (a4) at (4.06,3.99) {\hanpurple(\bu)};
+\node (a5) at (4.06,3.5) {\hanpurple(\bu)};
+\node (a6) at (4.06,1) {\hanpurple(\bu)};
+\node (a7) at (4.06,0.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(a5)+(0.12,-0.15)$)--($(a6)+(0.12,0.15)$); %右
+\draw[hanpurple, dashed] ($(a2)+(0.2,0.15)$)--($(a3)+(-0.15,0.15)$); %上
+\draw (0,4) node (v1) [draw] {};
+%\draw (4,4) node (v2) [draw] {};
+\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{$\supp\nu_A^\eps$.
+\red(\bu)$=\eps/6$ and \hanpurple(\bu)$=\A/m$.} \label{nae}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.25\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}] %\hanpurple
+\node (p1) at (2,3.5) {\red(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\red(\bu)};
+\node (p4) at (2.5,2) {\red(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\red(\bu)};
+\node (b1) at (3.5,-0.01) {\hanpurple(\bu)};
+\node (b2) at (3,-0.01) {\hanpurple(\bu)};
+\node (b3) at (0.5,-0.01) {\hanpurple(\bu)};
+\node (a4) at (0.06,-0.01) {\hanpurple(\bu)};
+\node (b5) at (0.06,0.5) {\hanpurple(\bu)};
+\node (b6) at (0.06,3) {\hanpurple(\bu)};
+\node (b7) at (0.06,3.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(b5)+(-0.2,0.2)$)--($(b6)+(-0.2,-0.15)$); %左
+\draw[hanpurple, dashed] ($(b2)+(-0.2,-0.15)$)--($(b3)+(0.15,-0.15)$); %下
+\draw (0,4) node (v1) [draw] {};
+\draw (4,4) node (v2) [draw] {};
+%\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{$\supp\nu_B^\eps$.
+\red(\bu)$=\eps/6$ and \hanpurple(\bu)$=\A/m$.} \label{nbe}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure}
+
+Then, (one example of) the optimal\footnote{
+Perhaps there is a more efficient flow.
+Even if these flows are not optimal, it does not affect the results of the following discussion.} 
+transport flows from $\mu_{\mathbf{p},A}^\eps$ to $\nu_A^\eps$ and $\mu_{\mathbf{p},B}^\eps$ to $\mu_\mathbf{p},\nu_B$ can be illustrated as follows, respectively.
+Although some of the colors have been changed to make the flows clearer, the amount of transport is the amount described in \autoref{mpae}, \autoref{nae} and \autoref{nbe}:
+\orange(\bu)$=$\red(\bu) and \cyan(\bu)$=$\hanpurple(\bu).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[H]
+\begin{tabular}{ccc}
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (p1) at (2,3.5) {\orange(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\orange(\bu)};
+\node (p4) at (2.5,2) {\orange(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\orange(\bu)};
+\node (a1) at (0.5,3.99) {\hanpurple(\bu)};
+\node (a2) at (1,3.99) {\hanpurple(\bu)};
+\node (a3) at (3.5,3.99) {\hanpurple(\bu)};
+\node (a4) at (4.06,3.99) {\green(\bu)};
+\node (a5) at (4.06,3.5) {\hanpurple(\bu)};
+\node (a6) at (4.06,1) {\hanpurple(\bu)};
+\node (a7) at (4.06,0.5) {\hanpurple(\bu)};
+\node (b1) at (3.5,-0.01) {\hanpurple(\bu)};
+\node (b2) at (3,-0.01) {\hanpurple(\bu)};
+\node (b3) at (0.5,-0.01) {\hanpurple(\bu)};
+\node (b4) at (0.06,-0.01) {\green(\bu)};
+\node (b5) at (0.06,0.5) {\hanpurple(\bu)};
+\node (b6) at (0.06,3) {\hanpurple(\bu)};
+\node (b7) at (0.06,3.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(a5)+(0.12,-0.15)$)--($(a6)+(0.12,0.15)$); %右
+\draw[hanpurple, dashed] ($(b5)+(-0.2,0.2)$)--($(b6)+(-0.2,-0.15)$); %左
+\draw[hanpurple, dashed] ($(a2)+(0.2,0.15)$)--($(a3)+(-0.15,0.15)$); %上
+\draw[hanpurple, dashed] ($(b2)+(-0.2,-0.15)$)--($(b3)+(0.15,-0.15)$); %下
+\draw[arrows=->, orange] ($(p1)+(-0.1,0)$) to ($(a1)+(0,-0.1)$);
+\draw[arrows=->, orange] ($(p1)+(-0.1,0)$) to ($(a2)+(0,-0.1)$);
+\draw[arrows=->, orange] ($(p1)+(-0.1,0)$) to ($(a2)+(0.3,-0.1)$);
+\draw[arrows=->, red, dashed] ($(p2)+(-0.1,0)$) to ($(a2)+(0.6,-0.1)$);
+\draw[arrows=->, red, dashed] ($(p2)+(-0.06,0)$) to ($(a2)+(0.9,-0.1)$);
+\draw[arrows=->, red, dashed] ($(p2)+(0,0)$) to ($(a2)+(1.3,-0.1)$);
+\draw[arrows=->, orange] ($(p3)+(0,0.05)$) to ($(a3)+(-0.75,-0.1)$);
+\draw[arrows=->, orange] ($(p3)+(0,0.05)$) to ($(a3)+(-0.45,-0.1)$);
+\draw[arrows=->, orange] ($(p3)+(0,0.05)$) to ($(a3)+(-0.15,-0.1)$);
+\draw[arrows=->, orange] ($(p3)+(0,0.05)$) to ($(a4)+(-0.2,-0.1)$);
+\draw[arrows=->, orange] ($(p4)+(0,0.1)$) to ($(a4)+(-0.2,-0.1)$);
+\draw[arrows=->, orange] ($(p4)+(0,0.1)$) to ($(a5)+(-0.18,0)$);
+\draw[arrows=->, orange] ($(p4)+(0,0.1)$) to ($(a5)+(-0.18,-0.3)$);
+\draw[arrows=->, orange] ($(p4)+(0,0.1)$) to ($(a5)+(-0.18,-0.6)$);
+\draw[arrows=->, red, dashed] ($(p5)+(0,0)$) to ($(a5)+(-0.18,-1)$);
+\draw[arrows=->, red, dashed] ($(p5)+(0,0)$) to ($(a6)+(-0.18,1.1)$);
+\draw[arrows=->, red, dashed] ($(p5)+(0,0)$) to ($(a6)+(-0.18,0.7)$);
+\draw[arrows=->, orange] ($(p6)+(-0.05,-0.1)$) to ($(a6)+(-0.18,0.3)$);
+\draw[arrows=->, orange] ($(p6)+(-0.05,-0.1)$) to ($(a6)+(-0.18,0)$);
+\draw[arrows=->, orange] ($(p6)+(-0.05,-0.1)$) to ($(a7)+(-0.18,0)$);
+\draw (0,4) node (v1) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{The part of the transport flow from the trajectory $\mathbf{p}$ to the route $A$ of the flow from $\mu_{\mathbf{p},A}^\eps$ (\autoref{mpae}) to $\nu_A^\eps$ (\autoref{nae}).
+This corresponds to the flow of $A(\eps)$ in \eqref{A(e)}.} 
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}] %\hanpurple
+\node (p1) at (2,3.5) {\red(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\red(\bu)};
+\node (p4) at (2.5,2) {\red(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\red(\bu)};
+\node (a1) at (0.5,3.99) {\hanpurple(\bu)};
+\node (a2) at (1,3.99) {\hanpurple(\bu)};
+\node (a3) at (3.5,3.99) {\hanpurple(\bu)};
+\node (a4) at (4.06,3.99) {\green(\bu)};
+\node (a5) at (4.06,3.5) {\hanpurple(\bu)};
+\node (a6) at (4.06,1) {\hanpurple(\bu)};
+\node (a7) at (4.06,0.5) {\hanpurple(\bu)};
+\node (b1) at (3.5,-0.01) {\cyan(\bu)};
+\node (b2) at (3,-0.01) {\hanpurple(\bu)};
+\node (b3) at (0.5,-0.01) {\hanpurple(\bu)};
+\node (b4) at (0.06,-0.01) {\green(\bu)};
+\node (b5) at (0.06,0.5) {\hanpurple(\bu)};
+\node (b6) at (0.06,3) {\hanpurple(\bu)};
+\node (b7) at (0.06,3.5) {\cyan(\bu)};
+\draw[hanpurple, dashed] ($(a5)+(0.12,-0.15)$)--($(a6)+(0.12,0.15)$); %右
+\draw[hanpurple, dashed] ($(b5)+(-0.2,0.2)$)--($(b6)+(-0.2,-0.15)$); %左
+\draw[hanpurple, dashed] ($(a2)+(0.2,0.15)$)--($(a3)+(-0.15,0.15)$); %上
+\draw[hanpurple, dashed] ($(b2)+(-0.2,-0.15)$)--($(b3)+(0.15,-0.15)$); %下
+\draw[arrows=->, officegreen] ($(b4)+(0.04,0.09)$) to ($(a1)+(-0.05,-0.1)$);
+\draw[arrows=->, officegreen] ($(b4)+(0.04,0.09)$) to ($(a7)+(-0.18,0)$);
+\draw[arrows=->, hanpurple] ($(b5)+(0.04,0.09)$) to ($(a2)+(-0.05,-0.1)$);
+\draw[arrows=->, hanpurple] ($(b6)+(0.04,0)$) to ($(a3)+(-0.05,-0.1)$);
+\draw[arrows=->, cyan, dashed] ($(b7)+(0.04,0)$) to ($(a4)+(-0.2,-0.1)$);
+\draw[arrows=->, hanpurple] ($(b3)+(-0.04,0.09)$) to ($(a6)+(-0.18,0)$);
+\draw[arrows=->, hanpurple] ($(b2)+(-0.04,0.09)$) to ($(a5)+(-0.18,0)$);
+\draw[arrows=->, cyan, dashed] ($(b1)+(-0.04,0.09)$) to ($(a4)+(-0.15,-0.2)$);
+\draw (0,4) node (v1) [draw] {};
+%\draw (4,4) node (v2) [draw] {};
+%\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{The part of the transport flow from the route $B$ to the route $A$ of the flow from $\mu_{\mathbf{p},A}^\eps$ (\autoref{mpae}) to $\nu_A^\eps$ (\autoref{nae}).
+This corresponds to the flow of $\delta(\eps)$ in \eqref{A(e)}.}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\begin{tabular}{ccc}
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}]
+\node (p1) at (2,3.5) {\red(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\red(\bu)};
+\node (p4) at (2.5,2) {\red(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\red(\bu)};
+\node (a1) at (0.5,3.99) {\hanpurple(\bu)};
+\node (a2) at (1,3.99) {\hanpurple(\bu)};
+\node (a3) at (3.5,3.99) {\hanpurple(\bu)};
+\node (a4) at (4.06,3.99) {\green(\bu)};
+\node (a5) at (4.06,3.5) {\hanpurple(\bu)};
+\node (a6) at (4.06,1) {\hanpurple(\bu)};
+\node (a7) at (4.06,0.5) {\hanpurple(\bu)};
+\node (b1) at (3.5,-0.01) {\hanpurple(\bu)};
+\node (b2) at (3,-0.01) {\hanpurple(\bu)};
+\node (b3) at (0.5,-0.01) {\hanpurple(\bu)};
+\node (b4) at (0.06,-0.01) {\green(\bu)};
+\node (b5) at (0.06,0.5) {\hanpurple(\bu)};
+\node (b6) at (0.06,3) {\hanpurple(\bu)};
+\node (b7) at (0.06,3.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(a5)+(0.12,-0.15)$)--($(a6)+(0.12,0.15)$); %右
+\draw[hanpurple, dashed] ($(b5)+(-0.2,0.2)$)--($(b6)+(-0.2,-0.15)$); %左
+\draw[hanpurple, dashed] ($(a2)+(0.2,0.15)$)--($(a3)+(-0.15,0.15)$); %上
+\draw[hanpurple, dashed] ($(b2)+(-0.2,-0.15)$)--($(b3)+(0.15,-0.15)$); %下
+\draw[arrows=->, red] ($(p1)+(-0.1,0)$) to ($(b7)+(0.04,0)$);
+\draw[arrows=->, red] ($(p1)+(-0.1,0)$) to ($(b6)+(0.04,0)$);
+\draw[arrows=->, red] ($(p1)+(-0.1,0)$) to ($(b6)+(0.04,-0.4)$);
+\draw[arrows=->, red] ($(p2)+(-0.05,0)$) to ($(b6)+(0.04,-0.8)$);
+\draw[arrows=->, red] ($(p2)+(-0.05,0)$) to ($(b6)+(0.04,-1.2)$);
+\draw[arrows=->, red] ($(p2)+(-0.05,0)$) to ($(b6)+(0.04,-1.6)$);
+\draw[arrows=->, red] ($(p3)+(-0.05,0)$) to ($(b5)+(0.04,0.49)$);
+\draw[arrows=->, red] ($(p3)+(-0.05,0)$) to ($(b5)+(0.04,0.09)$);
+\draw[arrows=->, red] ($(p3)+(-0.05,0)$) to ($(b4)+(0.05,0.18)$);
+\draw[arrows=->, red] ($(p4)+(-0.05,0)$) to ($(b4)+(0.13,0.1)$);
+\draw[arrows=->, red] ($(p4)+(-0.05,0)$) to ($(b3)+(-0.04,0.09)$);
+\draw[arrows=->, red] ($(p4)+(-0.05,0)$) to ($(b3)+(0.36,0.09)$);
+\draw[arrows=->, red] ($(p5)+(-0.07,-0.05)$) to ($(b3)+(0.76,0.09)$);
+\draw[arrows=->, red] ($(p5)+(-0.07,-0.05)$) to ($(b3)+(1.18,0.09)$);
+\draw[arrows=->, red] ($(p5)+(-0.07,-0.05)$) to ($(b3)+(1.6,0.09)$);
+\draw[arrows=->, red] ($(p6)+(-0.07,-0.05)$) to ($(b2)+(-0.46,0.09)$);
+\draw[arrows=->, red] ($(p6)+(-0.07,-0.05)$) to ($(b2)+(-0.04,0.09)$);
+\draw[arrows=->, red] ($(p6)+(-0.07,-0.05)$) to ($(b1)+(-0.04,0.09)$);
+\draw (0,4) node (v1) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{The part of the transport flow from the trajectory $\mathbf{p}$ to the route $B$ of the flow from $\mu_{\mathbf{p},B}^\eps$ (\autoref{mpae}) to $\nu_B^\eps$ (\autoref{nbe}).
+This corresponds to the flow of $B(\eps)$ in \eqref{B(e)}.} 
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.1\hsize}
+\begin{center}
+\end{center}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}{0.43\hsize}
+\begin{center}
+\begin{tikzpicture}[every node/.style={circle,fill=white}] %\hanpurple
+\node (p1) at (2,3.5) {\red(\bu)};
+\node (p2) at (2,3) {\red(\bu)};
+\node (p3) at (2,2.5) {\red(\bu)};
+\node (p4) at (2.5,2) {\red(\bu)};
+\node (p5) at (3,2) {\red(\bu)};
+\node (p6) at (3.5,2) {\red(\bu)};
+\node (a1) at (0.5,3.99) {\cyan(\bu)};
+\node (a2) at (1,3.99) {\hanpurple(\bu)};
+\node (a3) at (3.5,3.99) {\hanpurple(\bu)};
+\node (a4) at (4.06,3.99) {\green(\bu)};
+\node (a5) at (4.06,3.5) {\hanpurple(\bu)};
+\node (a6) at (4.06,1) {\hanpurple(\bu)};
+\node (a7) at (4.06,0.5) {\cyan(\bu)};
+\node (b1) at (3.5,-0.01) {\hanpurple(\bu)};
+\node (b2) at (3,-0.01) {\hanpurple(\bu)};
+\node (b3) at (0.5,-0.01) {\hanpurple(\bu)};
+\node (b4) at (0.06,-0.01) {\green(\bu)};
+\node (b5) at (0.06,0.5) {\hanpurple(\bu)};
+\node (b6) at (0.06,3) {\hanpurple(\bu)};
+\node (b7) at (0.06,3.5) {\hanpurple(\bu)};
+\draw[hanpurple, dashed] ($(a5)+(0.12,-0.15)$)--($(a6)+(0.12,0.15)$); %右
+\draw[hanpurple, dashed] ($(b5)+(-0.2,0.2)$)--($(b6)+(-0.2,-0.15)$); %左
+\draw[hanpurple, dashed] ($(a2)+(0.2,0.15)$)--($(a3)+(-0.15,0.15)$); %上
+\draw[hanpurple, dashed] ($(b2)+(-0.2,-0.15)$)--($(b3)+(0.15,-0.15)$); %下
+\draw[arrows=->, cyan, dashed] ($(a1)+(-0.05,-0.1)$) to ($(b4)+(0.04,0.15)$);
+\draw[arrows=->, cyan, dashed] ($(a7)+(-0.18,0)$) to ($(b4)+(0.1,0.09)$);
+\draw[arrows=->, hanpurple] ($(a2)+(-0.05,-0.1)$) to ($(b5)+(0.04,0.09)$);
+\draw[arrows=->, hanpurple] ($(a3)+(-0.05,-0.1)$) to ($(b6)+(0.04,0)$);
+\draw[arrows=->, officegreen] ($(a4)+(-0.175,-0.15)$) to ($(b7)+(0.04,0)$);
+\draw[arrows=->, hanpurple] ($(a6)+(-0.18,0)$) to ($(b3)+(-0.04,0.09)$);
+\draw[arrows=->, hanpurple] ($(a5)+(-0.18,0)$) to ($(b2)+(-0.04,0.09)$);
+\draw[arrows=->, officegreen] ($(a4)+(-0.175,-0.15)$) to ($(b1)+(-0.04,0.09)$);
+\draw (0,4) node (v1) [draw] {};
+%\draw (4,4) node (v2) [draw] {};
+%\draw (0,0) node (v3) [draw] {};
+\draw (4,0) node (v4) [draw] {};
+\draw (v1)--(v2);
+\draw (v2)--(v4);
+\draw (v4)--(v3);
+\draw (v3)--(v1);
+\end{tikzpicture}
+\caption{The part of the transport flow from the route $A$ to the route $B$ of the flow from $\mu_{\mathbf{p},B}^\eps$ (\autoref{mpae}) to $\nu_B^\eps$ (\autoref{nbe}).
+This corresponds to the flow of $\delta(\eps)$ in \eqref{B(e)}.}
+\end{center}
+\end{minipage}
+\end{tabular}
+\end{figure}
+
+Now note that the fraction in \eqref{eq:kepa} can be decomposed as follows:
+\begin{align}
+    \frac{W_1(\mu_{\mathbf{p},A}^\eps,\nu_A^\eps)}{W_1(\mu_\mathbf{p},\nu_A)}
+    &= \frac{A(\eps)+\delta(\eps)}{W_1(\mu_\mathbf{p},\nu_A)} 
+    = \frac{A(\eps)}{W_1(\mu_\mathbf{p},\nu_A)} + \frac{\delta(\eps)}{W_1(\mu_\mathbf{p},\nu_A)}, \label{A(e)} \\
+    \frac{W_1(\mu_{\mathbf{p},B}^\eps,\nu_B^\eps)}{W_1(\mu_\mathbf{p},\nu_B)} 
+    &= \frac{B(\eps)+\delta(\eps)}{W_1(\mu_\mathbf{p},\nu_B)} 
+    = \frac{B(\eps)}{W_1(\mu_\mathbf{p},\nu_B)} + \frac{\delta(\eps)}{W_1(\mu_\mathbf{p},\nu_B)}, \label{B(e)}
+\end{align}
+where $A(\eps)$ and $B(\eps)$ are the transport costs from the trajectory to each route, respectively, and $\delta(\eps)$ is the transport cost from one route to the other.
+Note that $\delta(\eps)$ is a common quantity in both transports.
+Moreover, we can see that 
+\begin{align*}
+    \frac{A(\eps)}{W_1(\mu_\mathbf{p},\nu_A)} \fallingdotseq \frac{B(\eps)}{W_1(\mu_\mathbf{p},\nu_B)}
+\end{align*}
+is valid when $\eps$ is close enough to $0$.
+Then, the magnitude relationship between $\K(\eps;\mathbf{p},A)$ and $\K(\eps;\mathbf{p},B)$ is determined by the magnitude relationship between $W_1(\mu_\mathbf{p},\nu_A)$ and $W_1(\mu_\mathbf{p},\nu_B)$.
+Hence, we can conclude that
+\begin{align*}
+    W_1(\mu_\mathbf{p},\nu_A) < W_1(\mu_\mathbf{p},\nu_B) &\quad\text{\comar}\quad 
+     \frac{W_1(\mu_{\mathbf{p},A}^\eps,\nu_A^\eps)}{W_1(\mu_\mathbf{p},\nu_A)} 
+    > \frac{W_1(\mu_{\mathbf{p},B}^\eps,\nu_B^\eps)}{W_1(\mu_\mathbf{p},\nu_B)} \\
+    &\quad\text{\comar}\quad \K(\eps;\mathbf{p},A) < \K(\eps;\mathbf{p},B) \\
+    &\quad\text{\comar}\quad \K(\mathbf{p},A) < \K(\mathbf{p},B).
+\end{align*}
+Therefore, we can select the route $B$ in the situation like \autoref{test-case}.
+
+\subsection{July 28th}
+\subsubsection*{Tomoya}
+After the meeting, I updated the above draft.
+Tomorrow I will try to associate $\lambda$ (in \autoref{s&d-weight}) with the error of the coordinate information.
+
+\subsection{July 29th}
+\subsubsection*{Tomoya}
+I modified \autoref{s&d-weight} and accordingly modified the calculation of \autoref{calculate} (a.m.). \\
+\textbf{Postscript} (p.m.):
+Discussions with Seiya allowed us to introduce a distance, \emph{distance with error}, that takes into account the error between the trajectory points and the edges, which we further reflected (in particular \autoref{setdef}).
+We believe this allows us to handle GPS errors more appropriately.
+
+\section{Week 7}
+\subsection{August 1st}
+\subsubsection*{Tomoya}
+
+I am writing section4 and \S 4.1, \S 4.2.1 and (the beginning of) \S 4.2.2 of the final report.
+It is taking me quite a while to write the midterm report and dailylog content together.
+I have written up the first draft of ``The case in which input data is only the trajectory coordinates and timestamps" in \S 4.2.2.
+
+\subsection{August 2nd}
+\subsubsection*{Tomoya}
+
+I had made presentation documents.
+``Mathematical formulation" needs a major revision.
+The distance with error part has been drawn, but it may still need to be revised.
+By the way, the equation for a point and an edge with error was wrong, so I corrected it as well as the final report.
+In addition, questions were raised about the handling of errors.
+I will manage to cover it up in my presentation...
+Wasserstein method will make 5 slides including a slide for review of the midterm presentation.
+I am struggling to find a good way to explain it.
+
+\subsection{August 3rd}
+\subsubsection*{Tomoya}
+
+It was so difficult to explain the introduction of the two types of weights, but by using animation, I was able to fit it into one slide.
+I am glad that it is now possible to divide it into two sides.
+On the other hand, I think the Summary slide is a little low quality, but since I have no other ideas, I will leave it as it is.
+I want to finish the slides of the future problem before the meeting.
+
+
+\bibliographystyle{unsrt}
+\begin{thebibliography}{CKLLS}
+%\bibitem[Ak]{Ak} T. Akamatsu, \textit{A new transport distance and its associated Ricci curvature of hypergraphs},  Anal. Geom. Metr. Spaces \textbf{10}(1) (2022), 90–108.
+\bibitem[BCLMP]{BCLMP} D. P. Bourne, D. Cushing, S. Liu, F. M\"{u}nch and N. Peyerimhoff, \textit{Ollivier-Ricci idleness functions of graphs}, SIAM J. Discrete Math. \textbf{32}(2) (2018), 1408--1424.
+\bibitem[CK]{CK} D. Cushing and S. Kamtue, \textit{Long-scale Ollivier Ricci curvature of graphs}, Anal. Geom. Metr. Spaces. \textbf{7}(1) (2019), 22--44. 
+\bibitem[CKLLS]{CKLLS} D. Cushing, R. Kangaslampi, V. Lipi\"{a}inen, S. Liu and G. W. Stagg, \textit{The Graph Curvature Calculator and the curvatures of cubic graphs}, Exp. Math. (2019), 13pp. \\
+\url{https://doi.org/10.1080/10586458.2019.1660740}
+\bibitem[JL]{JL} J. Jost and S. Liu, \textit{Ollivier's Ricci Curvature, Local Clustering and Curvature-Dimension Inequalities on Graphs},  Discrete Comput. Geom. \textbf{51}(2) (2014), 300--322.
+\bibitem[LLY]{LLY} Y. Lin, L. Lu and S.-T. Yau, \textit{Ricci curvature of graphs}, Tohoku Math. J. (2) \textbf{63}(4) (2011), 605--627.
+%\bibitem[MW]{MW} F. M\"unch and R. K. Wojciechowski, \textit{Ollivier Ricci curvature for general graph Laplacians: heat equation, Laplacian comparison, non-explosion and diameter bounds}, Adv. Math. 356 (2019), 106759, 45pp.
+\bibitem[NLGGS]{NLGGS} C.-C. Ni, Y.-Y. Lin, J. Gao, X. D. Gu and E. Saucan, \textit{Ricci Curvature of the Internet Topology}, In: IEEE Conference on Computer Communications. (2015), 2758--2766.
+\bibitem[NLLG]{NLLG} C.-C. Ni, Y.-Y. Lin, F. Luo and J. Gao, \textit{Community Detection on Networks with Ricci Flow}, Sci Rep \textbf{9}, 9984 (2019), 12pp. \\
+\url{https://doi.org/10.1038/s41598-019-46380-9}
+\bibitem[Ol]{Ol}  Y. Ollivier, \textit{Ricci curvature of Markov chains on metric spaces}, J. Funct. Anal. \textbf{256}(3) (2009), 810--864.
+\end{thebibliography}
+
+\end{document}

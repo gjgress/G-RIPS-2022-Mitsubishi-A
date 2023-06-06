@@ -1,0 +1,1879 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2021) (preloaded format=pdflatex 2021.8.24)  30 MAY 2023 21:33
+entering extended mode
+ \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"M2P Presentation - 2022 g-RIPS Mitsubishi-A.tex"
+(./M2P Presentation - 2022 g-RIPS Mitsubishi-A.tex
+LaTeX2e <2021-06-01> patch level 1
+L3 programming layer <2021-07-12> (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamer.cls
+Document Class: beamer 2021/05/26 v3.63 A class for typesetting presentations
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasemodes.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count182
+)
+\beamer@tempbox=\box50
+\beamer@tempcount=\count183
+\c@beamerpauses=\count184
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasedecode.sty
+\beamer@slideinframe=\count185
+\beamer@minimum=\count186
+\beamer@decode@box=\box51
+)
+\beamer@commentbox=\box52
+\beamer@modecount=\count187
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/iftex/ifpdf.sty
+Package: ifpdf 2019/10/25 v3.4 ifpdf legacy package. Use iftex instead.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+))
+\headdp=\dimen138
+\footheight=\dimen139
+\sidebarheight=\dimen140
+\beamer@tempdim=\dimen141
+\beamer@finalheight=\dimen142
+\beamer@animht=\dimen143
+\beamer@animdp=\dimen144
+\beamer@animwd=\dimen145
+\beamer@leftmargin=\dimen146
+\beamer@rightmargin=\dimen147
+\beamer@leftsidebar=\dimen148
+\beamer@rightsidebar=\dimen149
+\beamer@boxsize=\dimen150
+\beamer@vboxoffset=\dimen151
+\beamer@descdefault=\dimen152
+\beamer@descriptionwidth=\dimen153
+\beamer@lastskip=\skip47
+\beamer@areabox=\box53
+\beamer@animcurrent=\box54
+\beamer@animshowbox=\box55
+\beamer@sectionbox=\box56
+\beamer@logobox=\box57
+\beamer@linebox=\box58
+\beamer@sectioncount=\count188
+\beamer@subsubsectionmax=\count189
+\beamer@subsectionmax=\count190
+\beamer@sectionmax=\count191
+\beamer@totalheads=\count192
+\beamer@headcounter=\count193
+\beamer@partstartpage=\count194
+\beamer@sectionstartpage=\count195
+\beamer@subsectionstartpage=\count196
+\beamer@animationtempa=\count197
+\beamer@animationtempb=\count198
+\beamer@xpos=\count199
+\beamer@ypos=\count266
+\beamer@ypos@offset=\count267
+\beamer@showpartnumber=\count268
+\beamer@currentsubsection=\count269
+\beamer@coveringdepth=\count270
+\beamer@sectionadjust=\count271
+\beamer@toclastsection=\count272
+\beamer@tocsectionnumber=\count273
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseoptions.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks16
+))
+\beamer@paperwidth=\skip48
+\beamer@paperheight=\skip49
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count274
+\Gm@cntv=\count275
+\c@Gm@tempcnt=\count276
+\Gm@bindingoffset=\dimen154
+\Gm@wd@mp=\dimen155
+\Gm@odd@mp=\dimen156
+\Gm@even@mp=\dimen157
+\Gm@layoutwidth=\dimen158
+\Gm@layoutheight=\dimen159
+\Gm@layouthoffset=\dimen160
+\Gm@layoutvoffset=\dimen161
+\Gm@dimlist=\toks17
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/base/size11.clo
+File: size11.clo 2021/02/12 v1.4n Standard LaTeX file (size option)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2020/12/05 v1.2c Enhanced LaTeX Graphics (DPC,SPQR)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen162
+\Gin@req@width=\dimen163
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks18
+\pgfutil@tempdima=\dimen164
+\pgfutil@tempdimb=\dimen165
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgfutil-common-lists.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box59
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/pgf.revision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
+
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks19
+\pgfkeys@temptoks=\toks20
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks21
+))
+\pgf@x=\dimen166
+\pgf@y=\dimen167
+\pgf@xa=\dimen168
+\pgf@ya=\dimen169
+\pgf@xb=\dimen170
+\pgf@yb=\dimen171
+\pgf@xc=\dimen172
+\pgf@yc=\dimen173
+\pgf@xd=\dimen174
+\pgf@yd=\dimen175
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count277
+\c@pgf@countb=\count278
+\c@pgf@countc=\count279
+\c@pgf@countd=\count280
+\t@pgf@toka=\toks22
+\t@pgf@tokb=\toks23
+\t@pgf@tokc=\toks24
+\pgf@sys@id@count=\count281
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count282
+\pgfsyssoftpath@bigbuffer@items=\count283
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen176
+\pgfmath@count=\count284
+\pgfmath@box=\box60
+\pgfmath@toks=\toks25
+\pgfmath@stack@operand=\toks26
+\pgfmath@stack@operation=\toks27
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count285
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen177
+\pgf@picmaxx=\dimen178
+\pgf@picminy=\dimen179
+\pgf@picmaxy=\dimen180
+\pgf@pathminx=\dimen181
+\pgf@pathmaxx=\dimen182
+\pgf@pathminy=\dimen183
+\pgf@pathmaxy=\dimen184
+\pgf@xx=\dimen185
+\pgf@xy=\dimen186
+\pgf@yx=\dimen187
+\pgf@yy=\dimen188
+\pgf@zx=\dimen189
+\pgf@zy=\dimen190
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen191
+\pgf@path@lasty=\dimen192
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen193
+\pgf@shorten@start@additional=\dimen194
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box61
+\pgf@hbox=\box62
+\pgf@layerbox@main=\box63
+\pgf@picture@serial@count=\count286
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen195
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen196
+\pgf@pt@y=\dimen197
+\pgf@pt@temp=\dimen198
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen199
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen256
+\pgf@sys@shading@range@num=\count287
+\pgf@shadingcount=\count288
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box64
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/basiclayer/pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/utilities/xxcolor.sty
+Package: xxcolor 2003/10/24 ver 0.1
+\XC@nummixins=\count289
+\XC@countmixins=\count290
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2021-06-07 v7.00m Hypertext links for LaTeX
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/letltxmacro/letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/auxhook/auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+)
+\@linkdim=\dimen257
+\Hy@linkcounter=\count291
+\Hy@pagecounter=\count292
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2021-06-07 v7.00m Hyperref: PDFDocEncoding definition (HO)
+Now handling font encoding PD1 ...
+... no UTF-8 mapping file for font encoding PD1
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/hyperref/hyperref-langpatches.def
+File: hyperref-langpatches.def 2021-06-07 v7.00m Hyperref: patches for babel languages
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count293
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2021-06-07 v7.00m Hyperref: PDF Unicode definition (HO)
+Now handling font encoding PU ...
+... no UTF-8 mapping file for font encoding PU
+)
+Package hyperref Info: Option `bookmarks' set `true' on input line 4073.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 4073.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4073.
+Package hyperref Info: Option `implicit' set `false' on input line 4073.
+Package hyperref Info: Hyper figures OFF on input line 4192.
+Package hyperref Info: Link nesting OFF on input line 4197.
+Package hyperref Info: Hyper index ON on input line 4200.
+Package hyperref Info: Plain pages OFF on input line 4207.
+Package hyperref Info: Backreferencing OFF on input line 4212.
+Package hyperref Info: Implicit mode OFF; no redefinition of LaTeX internals.
+Package hyperref Info: Bookmarks ON on input line 4445.
+\c@Hy@tempcnt=\count294
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip16
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4804.
+\XeTeXLinkMargin=\dimen258
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count295
+\Field@Width=\dimen259
+\Fld@charsize=\dimen260
+Package hyperref Info: Hyper figures OFF on input line 6076.
+Package hyperref Info: Link nesting OFF on input line 6081.
+Package hyperref Info: Hyper index ON on input line 6084.
+Package hyperref Info: backreferencing OFF on input line 6091.
+Package hyperref Info: Link coloring ON on input line 6094.
+Package hyperref Info: Link coloring with OCG OFF on input line 6101.
+Package hyperref Info: PDF/A mode OFF on input line 6106.
+LaTeX Info: Redefining \ref on input line 6146.
+LaTeX Info: Redefining \pageref on input line 6150.
+\Hy@abspage=\count296
+
+
+Package hyperref Message: Stopped early.
+
+)
+Package hyperref Info: Driver (autodetected): hpdftex.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2021-06-07 v7.00m Hyperref driver for pdfTeX
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atvery package
+with kernel methods
+)
+\Fld@listcount=\count297
+\c@bookmark@seq@number=\count298
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 286.
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaserequires.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasecompatibility.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasefont.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks28
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/sansmathaccent/sansmathaccent.sty
+Package: sansmathaccent 2020/01/31
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/koma-script/scrlfile.sty
+Package: scrlfile 2021/06/25 v3.34 KOMA-Script package (file load hooks)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/koma-script/scrlfile-hook.sty
+Package: scrlfile-hook 2021/06/25 v3.34 KOMA-Script package (using LaTeX hooks)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/koma-script/scrlogo.sty
+Package: scrlogo 2021/06/25 v3.34 KOMA-Script package (logo)
+))))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasetranslator.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/translator/translator.sty
+Package: translator 2021-05-31 v1.12d Easy translation of strings in LaTeX
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasemisc.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasetwoscreens.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseoverlay.sty
+\beamer@argscount=\count299
+\beamer@lastskipcover=\skip50
+\beamer@trivlistdepth=\count300
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasetitle.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasesection.sty
+\c@lecture=\count301
+\c@part=\count302
+\c@section=\count303
+\c@subsection=\count304
+\c@subsubsection=\count305
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseframe.sty
+\beamer@framebox=\box65
+\beamer@frametitlebox=\box66
+\beamer@zoombox=\box67
+\beamer@zoomcount=\count306
+\beamer@zoomframecount=\count307
+\beamer@frametextheight=\dimen261
+\c@subsectionslide=\count308
+\beamer@frametopskip=\skip51
+\beamer@framebottomskip=\skip52
+\beamer@frametopskipautobreak=\skip53
+\beamer@framebottomskipautobreak=\skip54
+\beamer@envbody=\toks29
+\framewidth=\dimen262
+\c@framenumber=\count309
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseverbatim.sty
+\beamer@verbatimfileout=\write4
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseframesize.sty
+\beamer@splitbox=\box68
+\beamer@autobreakcount=\count310
+\beamer@autobreaklastheight=\dimen263
+\beamer@frametitletoks=\toks30
+\beamer@framesubtitletoks=\toks31
+)
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseframecomponents.sty
+\beamer@footins=\box69
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasecolor.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasenotes.sty
+\beamer@frameboxcopy=\box70
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasetoc.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasetemplates.sty
+\beamer@sbttoks=\toks32
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseauxtemplates.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaseboxes.sty
+\bmb@box=\box71
+\bmb@colorbox=\box72
+\bmb@boxwidth=\dimen264
+\bmb@boxheight=\dimen265
+\bmb@prevheight=\dimen266
+\bmb@temp=\dimen267
+\bmb@dima=\dimen268
+\bmb@dimb=\dimen269
+\bmb@prevheight=\dimen270
+)
+\beamer@blockheadheight=\dimen271
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbaselocalstructure.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2015/07/23 v3.00 enumerate extensions (DPC)
+\@enLab=\toks33
+)
+\beamer@bibiconwidth=\skip55
+\c@figure=\count311
+\c@table=\count312
+\abovecaptionskip=\skip56
+\belowcaptionskip=\skip57
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasenavigation.sty
+\beamer@section@min@dim=\dimen272
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasetheorems.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2021/04/20 v2.17j AMS math features
+\@mathmargin=\skip58
+
+For additional information on amsmath, use the `?' option.
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks34
+\ex@=\dimen273
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen274
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count313
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count314
+\leftroot@=\count315
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count316
+\DOTSCASE@=\count317
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box73
+\strutbox@=\box74
+\big@size=\dimen275
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count318
+\c@MaxMatrixCols=\count319
+\dotsspace@=\muskip17
+\c@parentequation=\count320
+\dspbrk@lvl=\count321
+\tag@help=\toks35
+\row@=\count322
+\column@=\count323
+\maxfields@=\count324
+\andhelp@=\toks36
+\eqnshift@=\dimen276
+\alignsep@=\dimen277
+\tagshift@=\dimen278
+\tagwidth@=\dimen279
+\totwidth@=\dimen280
+\lineht@=\dimen281
+\@envbody=\toks37
+\multlinegap=\skip59
+\multlinetaggap=\skip60
+\mathdisplay@stack=\toks38
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/amscls/amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks39
+\thm@bodyfont=\toks40
+\thm@headfont=\toks41
+\thm@notefont=\toks42
+\thm@headpunct=\toks43
+\thm@preskip=\skip61
+\thm@postskip=\skip62
+\thm@headsep=\skip63
+\dth@everypar=\toks44
+)
+\c@theorem=\count325
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerbasethemes.sty)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerthemedefault.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerfontthemedefault.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamercolorthemedefault.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerinnerthemedefault.sty
+\beamer@dima=\dimen282
+\beamer@dimb=\dimen283
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerouterthemedefault.sty))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamertheme-metropolis/beamerthememetropolis.sty
+Package: beamerthememetropolis 2017/01/23 v1.2 Metropolis Beamer theme
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgfopts/pgfopts.sty
+Package: pgfopts 2014/07/10 v2.1a LaTeX package options with pgfkeys
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+\pgfopts@list@add@a@toks=\toks45
+\pgfopts@list@add@b@toks=\toks46
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamertheme-metropolis/beamerinnerthememetropolis.sty
+Package: beamerinnerthememetropolis 2017/01/23 Metropolis inner theme
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count326
+\calc@Bcount=\count327
+\calc@Adimen=\dimen284
+\calc@Bdimen=\dimen285
+\calc@Askip=\skip64
+\calc@Bskip=\skip65
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count328
+\calc@Cskip=\skip66
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box75
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen286
+\pgf@nodesepend=\dimen287
+)
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/utilities/pgffor.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgf/math/pgfmath.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex)
+\pgffor@iter=\dimen288
+\pgffor@skip=\dimen289
+\pgffor@stack=\toks47
+\pgffor@toks=\toks48
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count329
+\pgfplotmarksize=\dimen290
+)
+\tikz@lastx=\dimen291
+\tikz@lasty=\dimen292
+\tikz@lastxsaved=\dimen293
+\tikz@lastysaved=\dimen294
+\tikz@lastmovetox=\dimen295
+\tikz@lastmovetoy=\dimen296
+\tikzleveldistance=\dimen297
+\tikzsiblingdistance=\dimen298
+\tikz@figbox=\box76
+\tikz@figbox@bg=\box77
+\tikz@tempbox=\box78
+\tikz@tempbox@bg=\box79
+\tikztreelevel=\count330
+\tikznumberofchildren=\count331
+\tikznumberofcurrentchild=\count332
+\tikz@fig@count=\count333
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count334
+\pgfmatrixcurrentcolumn=\count335
+\pgf@matrix@numberofcolumns=\count336
+)
+\tikz@expandcount=\count337
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)))
+\metropolis@titleseparator@linewidth=\skip67
+\metropolis@progressonsectionpage=\skip68
+\metropolis@progressonsectionpage@linewidth=\skip69
+\metropolis@blocksep=\skip70
+\metropolis@blockadjust=\skip71
+\metropolis@parskip=\skip72
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamertheme-metropolis/beamerouterthememetropolis.sty
+Package: beamerouterthememetropolis 2017/01/23 Metropolis outer theme
+\metropolis@frametitle@padding=\skip73
+\metropolis@progressinheadfoot=\skip74
+\metropolis@progressinheadfoot@linewidth=\skip75
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamertheme-metropolis/beamercolorthememetropolis.sty
+Package: beamercolorthememetropolis 2017/01/23 Metropolis color theme
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamertheme-metropolis/beamerfontthememetropolis.sty
+Package: beamerfontthememetropolis 2017/01/23 Metropolis font theme
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/iftex/ifxetex.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/iftex/ifluatex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+)
+
+Package beamerthememetropolis Warning: You need to compile with XeLaTeX or LuaLaTeX to use the Fira fonts on input line 95.
+
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamerfontthemeprofessionalfonts.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/here/here.sty) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count338
+\float@exts=\toks49
+\float@box=\box80
+\@float@everytoks=\toks50
+\@floatcapt=\box81
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup6
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/mathtools/mathtools.sty
+Package: mathtools 2021/04/12 v1.27 mathematical typesetting tools
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/mathtools/mhsetup.sty
+Package: mhsetup 2021/03/18 v1.4 programming setup (MH)
+)
+LaTeX Info: Thecontrolsequence`\('isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 130.
+LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 130.
+\g_MT_multlinerow_int=\count339
+\l_MT_multwidth_dim=\dimen299
+\origjot=\skip76
+\l_MT_shortvdotswithinadjustabove_dim=\dimen300
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen301
+\l_MT_above_intertext_sep=\dimen302
+\l_MT_below_intertext_sep=\dimen303
+\l_MT_above_shortintertext_sep=\dimen304
+\l_MT_below_shortintertext_sep=\dimen305
+\xmathstrut@box=\box82
+\xmathstrut@dim=\dimen306
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tools/multicol.sty
+Package: multicol 2019/12/09 v1.8y multicolumn formatting (FMi)
+\c@tracingmulticols=\count340
+\mult@box=\box83
+\multicol@leftmargin=\dimen307
+\c@unbalance=\count341
+\c@collectmore=\count342
+\doublecol@number=\count343
+\multicoltolerance=\count344
+\multicolpretolerance=\count345
+\full@width=\dimen308
+\page@free=\dimen309
+\premulticols=\dimen310
+\postmulticols=\dimen311
+\multicolsep=\skip77
+\multicolbaselineskip=\skip78
+\partial@page=\box84
+\last@line=\box85
+\maxbalancingoverflow=\dimen312
+\mult@rightbox=\box86
+\mult@grightbox=\box87
+\mult@gfirstbox=\box88
+\mult@firstbox=\box89
+\@tempa=\box90
+\@tempa=\box91
+\@tempa=\box92
+\@tempa=\box93
+\@tempa=\box94
+\@tempa=\box95
+\@tempa=\box96
+\@tempa=\box97
+\@tempa=\box98
+\@tempa=\box99
+\@tempa=\box100
+\@tempa=\box101
+\@tempa=\box102
+\@tempa=\box103
+\@tempa=\box104
+\@tempa=\box105
+\@tempa=\box106
+\@tempa=\box107
+\@tempa=\box108
+\@tempa=\box109
+\@tempa=\box110
+\@tempa=\box111
+\@tempa=\box112
+\@tempa=\box113
+\@tempa=\box114
+\@tempa=\box115
+\@tempa=\box116
+\@tempa=\box117
+\@tempa=\box118
+\@tempa=\box119
+\@tempa=\box120
+\@tempa=\box121
+\@tempa=\box122
+\@tempa=\box123
+\@tempa=\box124
+\@tempa=\box125
+\@tempa=\box126
+\c@minrows=\count346
+\c@columnbadness=\count347
+\c@finalcolumnbadness=\count348
+\last@try=\dimen313
+\multicolovershoot=\dimen314
+\multicolundershoot=\dimen315
+\mult@nat@firstbox=\box127
+\colbreak@box=\box128
+\mc@col@check@num=\count349
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/subfig/subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen316
+\captionmargin@=\dimen317
+\captionwidth=\dimen318
+\caption@tempdima=\dimen319
+\caption@indent=\dimen320
+\caption@parindent=\dimen321
+\caption@hangindent=\dimen322
+Package caption Info: beamer document class detected.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/caption/caption-beamer.sto
+File: caption-beamer.sto 2020/08/22 v2.0 Adaption of the caption package to the beamer document classes (AR)
+))
+\c@caption@flags=\count350
+\c@continuedfloat=\count351
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: Hyperref support is turned off
+(caption)             because hyperref has stopped early.
+)
+\c@KVtest=\count352
+\sf@farskip=\skip79
+\sf@captopadj=\dimen323
+\sf@capskip=\skip80
+\sf@nearskip=\skip81
+\c@subfigure=\count353
+\c@subfigure@save=\count354
+\c@depth=\count355
+\c@subtable=\count356
+\c@subtable@save=\count357
+\sf@top=\skip82
+\sf@bottom=\skip83
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/svg/svg.sty
+Package: svg 2020/11/26 v2.02k (include SVG pictures)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/koma-script/scrbase.sty
+Package: scrbase 2021/06/25 v3.34 KOMA-Script package (KOMA-Script-independent basics and keyval usage)
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line 368.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/trimspaces/trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tools/shellesc.sty
+Package: shellesc 2019/11/08 v1.0c unified shell escape interface for LaTeX
+Package shellesc Info: Unrestricted shell escape enabled on input line 75.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2017/10/13 v0.4a Testing for the operating system
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/catchfile/catchfile.sty
+Package: catchfile 2019/12/09 v1.8 Catch the contents of a file (HO)
+)
+runsystem(uname -s > ""M2P Presentation - 2022 g-RIPS Mitsubishi-A".w18")...executed.
+
+
+
+/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/ifplatform/ifplatform.sty:92: Package catchfile Error: File `"M2P Presentation - 2022 g-RIPS Mitsubishi-A".w18' not found.
+
+See the catchfile package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.92     \CatchFileDef\@tempa{\ip@file}{}
+                                         
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+runsystem(rm -- ""M2P Presentation - 2022 g-RIPS Mitsubishi-A".w18")...executed.
+
+/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/ifplatform/ifplatform.sty:94: Argument of \zap@space has an extra }.
+<inserted text> 
+                \par 
+l.94 ...empa{\expandafter\zap@space\@tempa\@empty}
+                                                  
+I've run across a `}' that doesn't seem to match anything.
+For example, `\def\a#1{...}' and `\a}' would produce
+this error. If you simply proceed now, the `\par' that
+I've just inserted will cause me to report a runaway
+argument that might be the root of the problem. But if
+your `}' was spurious, just type `2' and it will go away.
+
+Runaway argument?
+\@empty 
+/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/ifplatform/ifplatform.sty:94: Paragraph ended before \zap@space was complete.
+<to be read again> 
+                   \par 
+l.94 ...empa{\expandafter\zap@space\@tempa\@empty}
+                                                  
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+Runaway argument?
+/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/ifplatform/ifplatform.sty:104: Paragraph ended before \ip@only@six was complete.
+<to be read again> 
+                   \par 
+l.104 ...ef\@tempc{\expandafter\ip@only@six\@tempa
+                                                  ------\@nil}
+I suspect you've forgotten a `}', causing me to apply this
+control sequence to too much text. How can we recover?
+My plan is to forget the whole thing and hope for the best.
+
+/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/ifplatform/ifplatform.sty:104: Undefined control sequence.
+l.104 ...expandafter\ip@only@six\@tempa------\@nil
+                                                  }
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+)
+\c@svg@param@lastpage=\count358
+\svg@box=\box129
+\c@svg@param@currpage=\count359
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/transparent/transparent.sty
+Package: transparent 2019/11/29 v1.4 Transparency via pdfTeX's color stack (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
+Package: tcolorbox 2021/06/14 version 4.51 text color boxes
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tools/verbatim.sty
+Package: verbatim 2020-07-07 v1.5u LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks51
+\verbatim@line=\toks52
+\verbatim@in@stream=\read3
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/environ/environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+)
+\tcb@titlebox=\box130
+\tcb@upperbox=\box131
+\tcb@lowerbox=\box132
+\tcb@phantombox=\box133
+\c@tcbbreakpart=\count360
+\c@tcblayer=\count361
+\c@tcolorbox@number=\count362
+\tcb@temp=\box134
+\tcb@temp=\box135
+\tcb@temp=\box136
+\tcb@temp=\box137
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pgfplots/pgfplots.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplots.revision.tex)
+Package: pgfplots 2021/05/15 v1.18.1 Data Visualization (1.18.1)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplots.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplotscore.code.tex
+\t@pgfplots@toka=\toks53
+\t@pgfplots@tokb=\toks54
+\t@pgfplots@tokc=\toks55
+\pgfplots@tmpa=\dimen324
+\c@pgfplots@coordindex=\count363
+\c@pgfplots@scanlineindex=\count364
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/sys/pgfplotssysgeneric.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/libs/pgfplotslibrary.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/oldpgfcompatib/pgfplotsoldpgfsupp_loader.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryfpu.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructure.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsliststructureext.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsarray.code.tex
+\c@pgfplotsarray@tmp=\count365
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsmatrix.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/numtable/pgfplotstableshared.code.tex
+\c@pgfplotstable@counta=\count366
+\t@pgfplotstable@a=\toks56
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/liststructure/pgfplotsdeque.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.code.tex
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/util/pgfplotsbinary.data.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/util/pgfplotsutil.verb.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/libs/pgflibrarypgfplots.surfshading.code.tex
+\c@pgfplotslibrarysurf@no=\count367
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/sys/pgflibrarypgfplots.surfshading.pgfsys-pdftex.def))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/util/pgfplotscolormap.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/util/pgfplotscolor.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplotsstackedplots.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplotsplothandlers.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplothandler.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplotsmeshplotimage.code.tex))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplots.scaling.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplotscoordprocessing.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplots.errorbars.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplots.markers.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplotsticks.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/pgfplots.paths.code.tex) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/modules/pgfmoduledecorations.code.tex
+\pgfdecoratedcompleteddistance=\dimen325
+\pgfdecoratedremainingdistance=\dimen326
+\pgfdecoratedinputsegmentcompleteddistance=\dimen327
+\pgfdecoratedinputsegmentremainingdistance=\dimen328
+\pgf@decorate@distancetomove=\dimen329
+\pgf@decorate@repeatstate=\count368
+\pgfdecorationsegmentamplitude=\dimen330
+\pgfdecorationsegmentlength=\dimen331
+)
+\tikz@lib@dec@box=\box138
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathmorphing.code.tex
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathmorphing.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.pathreplacing.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.pathreplacing.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgfplots/libs/tikzlibrarypgfplots.contourlua.code.tex)
+\pgfplots@numplots=\count369
+\pgfplots@xmin@reg=\dimen332
+\pgfplots@xmax@reg=\dimen333
+\pgfplots@ymin@reg=\dimen334
+\pgfplots@ymax@reg=\dimen335
+\pgfplots@zmin@reg=\dimen336
+\pgfplots@zmax@reg=\dimen337
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryplotmarks.code.tex
+File: tikzlibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryplotmarks.code.tex
+File: pgflibraryplotmarks.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypatterns.code.tex
+File: tikzlibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibrarypatterns.code.tex
+File: pgflibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymatrix.code.tex
+File: tikzlibrarymatrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.code.tex
+File: pgflibraryarrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\arrowsize=\dimen338
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.meta.code.tex
+File: pgflibraryarrows.meta.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowinset=\dimen339
+\pgfarrowlength=\dimen340
+\pgfarrowwidth=\dimen341
+\pgfarrowlinewidth=\dimen342
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex
+File: tikzlibrarybackgrounds.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@layerbox@background=\box139
+\pgf@layerboxsaved@background=\box140
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.code.tex
+File: tikzlibraryshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.geometric.code.tex
+File: tikzlibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.geometric.code.tex
+File: pgflibraryshapes.geometric.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.misc.code.tex
+File: tikzlibraryshapes.misc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.misc.code.tex
+File: pgflibraryshapes.misc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.symbols.code.tex
+File: tikzlibraryshapes.symbols.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.symbols.code.tex
+File: pgflibraryshapes.symbols.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.arrows.code.tex
+File: tikzlibraryshapes.arrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.arrows.code.tex
+File: pgflibraryshapes.arrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.callouts.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.callouts.code.tex)) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryshapes.multipart.code.tex
+File: tikzlibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/shapes/pgflibraryshapes.multipart.code.tex
+File: pgflibraryshapes.multipart.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodepartlowerbox=\box141
+\pgfnodeparttwobox=\box142
+\pgfnodepartthreebox=\box143
+\pgfnodepartfourbox=\box144
+\pgfnodeparttwentybox=\box145
+\pgfnodepartnineteenbox=\box146
+\pgfnodeparteighteenbox=\box147
+\pgfnodepartseventeenbox=\box148
+\pgfnodepartsixteenbox=\box149
+\pgfnodepartfifteenbox=\box150
+\pgfnodepartfourteenbox=\box151
+\pgfnodepartthirteenbox=\box152
+\pgfnodeparttwelvebox=\box153
+\pgfnodepartelevenbox=\box154
+\pgfnodeparttenbox=\box155
+\pgfnodepartninebox=\box156
+\pgfnodeparteightbox=\box157
+\pgfnodepartsevenbox=\box158
+\pgfnodepartsixbox=\box159
+\pgfnodepartfivebox=\box160
+))) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.text.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.text.code.tex
+\pgf@lib@dec@text@box=\box161
+)
+\tikz@lib@dec@te@box=\box162
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryscopes.code.tex
+File: tikzlibraryscopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarydecorations.markings.code.tex (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/decorations/pgflibrarydecorations.markings.code.tex))
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex
+File: tikzlibrarypositioning.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tools/array.sty
+Package: array 2021/04/20 v2.5e Tabular extension package (FMi)
+\col@sep=\dimen343
+\ar@mcellbox=\box163
+\extrarowheight=\dimen344
+\NC@list=\toks57
+\extratabsurround=\skip84
+\backup@length=\skip85
+\ar@cellbox=\box164
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen345
+\lightrulewidth=\dimen346
+\cmidrulewidth=\dimen347
+\belowrulesep=\dimen348
+\belowbottomsep=\dimen349
+\aboverulesep=\dimen350
+\abovetopsep=\dimen351
+\cmidrulesep=\dimen352
+\cmidrulekern=\dimen353
+\defaultaddspace=\dimen354
+\@cmidla=\count370
+\@cmidlb=\count371
+\@aboverulesep=\dimen355
+\@belowrulesep=\dimen356
+\@thisruleclass=\count372
+\@lastruleclass=\count373
+\@thisrulewidth=\dimen357
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/tools/tabularx.sty
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+\TX@col@width=\dimen358
+\TX@old@table=\dimen359
+\TX@old@col=\dimen360
+\TX@target=\dimen361
+\TX@delta=\dimen362
+\TX@cols=\count374
+\TX@ftn=\toks58
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/pgf/libraries/pgflibraryshadings.code.tex
+File: pgflibraryshadings.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/txfonts.sty
+Package: txfonts 2008/01/22 v3.2.1
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/txr/m/n on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/m/n on input line 21.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/txr/m/n --> OT1/txr/bx/n on input line 22.
+\symitalic=\mathgroup7
+LaTeX Font Info:    Overwriting symbol font `italic' in version `bold'
+(Font)                  OT1/txr/m/it --> OT1/txr/bx/it on input line 26.
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/bx/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/txr/bx/n on input line 29.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/txr/m/it on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/txr/m/it on input line 30.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/txr/m/it --> OT1/txr/bx/it on input line 31.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/txss/m/n on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/txss/m/n on input line 40.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/txss/m/n --> OT1/txss/b/n on input line 41.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/txtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/txtt/m/n on input line 50.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/txtt/m/n --> OT1/txtt/b/n on input line 51.
+LaTeX Font Info:    Redeclaring symbol font `letters' on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/txmi/m/it on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/txmi/m/it on input line 58.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/txmi/m/it --> OML/txmi/bx/it on input line 59.
+\symlettersA=\mathgroup8
+LaTeX Font Info:    Overwriting symbol font `lettersA' in version `bold'
+(Font)                  U/txmia/m/it --> U/txmia/bx/it on input line 67.
+LaTeX Font Info:    Redeclaring math alphabet \mathfrak on input line 70.
+LaTeX Font Info:    Redeclaring symbol font `symbols' on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/txsy/m/n on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/txsy/m/n on input line 77.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/txsy/m/n --> OMS/txsy/bx/n on input line 78.
+LaTeX Font Info:    Redeclaring symbol font `AMSa' on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `normal'
+(Font)                  U/msa/m/n --> U/txsya/m/n on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/msa/m/n --> U/txsya/m/n on input line 93.
+LaTeX Font Info:    Overwriting symbol font `AMSa' in version `bold'
+(Font)                  U/txsya/m/n --> U/txsya/bx/n on input line 94.
+LaTeX Font Info:    Redeclaring symbol font `AMSb' on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `normal'
+(Font)                  U/msb/m/n --> U/txsyb/m/n on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/msb/m/n --> U/txsyb/m/n on input line 102.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/txsyb/m/n --> U/txsyb/bx/n on input line 103.
+\symsymbolsC=\mathgroup9
+LaTeX Font Info:    Overwriting symbol font `symbolsC' in version `bold'
+(Font)                  U/txsyc/m/n --> U/txsyc/bx/n on input line 113.
+LaTeX Font Info:    Redeclaring symbol font `largesymbols' on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/txex/m/n on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/txex/m/n on input line 120.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/txex/m/n --> OMX/txex/bx/n on input line 121.
+\symlargesymbolsA=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `largesymbolsA' in version `bold'
+(Font)                  U/txexa/m/n --> U/txexa/bx/n on input line 129.
+LaTeX Font Info:    Redeclaring math symbol \mathsterling on input line 164.
+LaTeX Info: Redefining \not on input line 1043.
+LaTeX Info: Redefining \textsquare on input line 1063.
+LaTeX Info: Redefining \openbox on input line 1064.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+txss on input line 112.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/t1txss.fd
+File: t1txss.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 10.40245pt on input line 112.
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/comment/comment.sty
+\CommentStream=\write5
+ Excluding comment 'comment') (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/jknapltx/mathrsfs.sty
+Package: mathrsfs 1996/01/01 Math RSFS package v1.0 (jk)
+\symrsfs=\mathgroup11
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/media9/media9.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2021-07-12 L3 programming layer (loader) 
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+File: l3backend-pdftex.def 2021-08-04 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count375
+\l__pdf_internal_box=\box165
+))
+Package: l3keys2e 2021-08-04 LaTeX2e option processing using LaTeX3 keys
+)
+Package: media9 2021/08/13 v1.20 acrobat-9/X compatible media
+\g_mix_pkgresizeflag_int=\count376
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/media9/pdfbase.sty
+Package: pdfbase 2021/08/13 v0.51 driver independent access to low-level PDF features
+\g_pbs_page_int=\count377
+\g_pbs_oc_int=\count378
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/ocgx2/ocgbase.sty
+Package: ocgbase 2021/06/11 v0.20 support package for ocgx2.sty
+\g_ocgbase_nd_int=\count379
+)
+\l_mix_poster_box=\box166
+\g_mix_wd_dim=\dimen363
+\g_mix_ht_dim=\dimen364
+\g_mix_dp_dim=\dimen365
+\g_mix_rmcnt_int=\count380
+\l_mix_viewcnt_int=\count381
+\g@mix@page@int=\count382
+\g_mix_resizeflag_int=\count383
+\l_mix_lineno_int=\count384
+\l_mix_pbtn_box=\box167
+\g_mix_mbtncnt_int=\count385
+\mix@btn@dim=\dimen366
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/multimedia.sty
+Package: multimedia 2012/05/02 ver 0.02
+\mm@movie=\count386
+)
+Package hyperref Info: Option `colorlinks' set `true' on input line 169.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count387
+\lst@gtempboxa=\box168
+\lst@token=\toks59
+\lst@length=\count388
+\lst@currlwidth=\dimen367
+\lst@column=\count389
+\lst@pos=\count390
+\lst@lostspace=\dimen368
+\lst@width=\dimen369
+\lst@newlines=\count391
+\lst@lineno=\count392
+\lst@maxwidth=\dimen370
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2020/03/24 1.8d (Carsten Heinz)
+\c@lstnumber=\count393
+\lst@skipnumbers=\count394
+\lst@framebox=\box169
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2020/03/24 1.8d listings configuration
+))
+Package: listings 2020/03/24 1.8d (Carsten Heinz)
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/pythonhighlight/pythonhighlight.sty
+Package: pythonhighlight 2017/02/09 python code highlighting; provided by Olivier Verdier <olivier.verdier@gmail.com>
+)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 302.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\\' on input line 302.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\new@ifnextchar' on input line 315.
+
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamertheme-metropolis/pgfplotsthemetol.sty
+Package: pgfplotsthemetol 2017/01/23 PGFplots colors based on Paul Tol's SRON technical note
+) (compiled/M2P Presentation - 2022 g-RIPS Mitsubishi-A.aux
+
+LaTeX Warning: Label `fig:' multiply defined.
+
+)
+\openout1 = `"M2P Presentation - 2022 g-RIPS Mitsubishi-A.aux"'.
+
+LaTeX Font Info:    Checking defaults for OML/txmi/m/it on input line 315.
+LaTeX Font Info:    Trying to load font information for OML+txmi on input line 315.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/omltxmi.fd
+File: omltxmi.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for OMS/txsy/m/n on input line 315.
+LaTeX Font Info:    Trying to load font information for OMS+txsy on input line 315.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/omstxsy.fd
+File: omstxsy.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 315.
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 315.
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 315.
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for OMX/txex/m/n on input line 315.
+LaTeX Font Info:    Trying to load font information for OMX+txex on input line 315.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/omxtxex.fd
+File: omxtxex.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for U/txexa/m/n on input line 315.
+LaTeX Font Info:    Trying to load font information for U+txexa on input line 315.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/utxexa.fd
+File: utxexa.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 315.
+LaTeX Font Info:    ... okay on input line 315.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 315.
+LaTeX Font Info:    ... okay on input line 315.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: includehead includefoot 
+* h-part:(L,W,R)=(28.45274pt, 398.3386pt, 28.45274pt)
+* v-part:(T,H,B)=(0.0pt, 256.0748pt, 0.0pt)
+* \paperwidth=455.24408pt
+* \paperheight=256.0748pt
+* \textwidth=398.3386pt
+* \textheight=227.62207pt
+* \oddsidemargin=-43.81725pt
+* \evensidemargin=-43.81725pt
+* \topmargin=-72.26999pt
+* \headheight=14.22636pt
+* \headsep=0.0pt
+* \topskip=11.0pt
+* \footskip=14.22636pt
+* \marginparwidth=4.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(/home/gjgress/.local/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count395
+\scratchdimen=\dimen371
+\scratchbox=\box170
+\nofMPsegments=\count396
+\nofMParguments=\count397
+\everyMPshowfont=\toks60
+\MPscratchCnt=\count398
+\MPscratchDim=\dimen372
+\MPnumerator=\count399
+\makeMPintoPDFobject=\count400
+\everyMPtoPDFconversion=\toks61
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
+))
+Package hyperref Info: Link coloring ON on input line 315.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count401
+)
+LaTeX Info: Redefining \ref on input line 315.
+LaTeX Info: Redefining \pageref on input line 315.
+LaTeX Info: Redefining \nameref on input line 315.
+ (compiled/M2P Presentation - 2022 g-RIPS Mitsubishi-A.out) (compiled/M2P Presentation - 2022 g-RIPS Mitsubishi-A.out)
+\@outlinefile=\write6
+\openout6 = `"M2P Presentation - 2022 g-RIPS Mitsubishi-A.out"'.
+
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/translator/translator-basic-dictionary-English.dict
+Dictionary: translator-basic-dictionary, Language: English 
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/translator/translator-bibliography-dictionary-English.dict
+Dictionary: translator-bibliography-dictionary, Language: English 
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/translator/translator-environment-dictionary-English.dict
+Dictionary: translator-environment-dictionary, Language: English 
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/translator/translator-months-dictionary-English.dict
+Dictionary: translator-months-dictionary, Language: English 
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/translator/translator-numbers-dictionary-English.dict
+Dictionary: translator-numbers-dictionary, Language: English 
+) (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/translator/translator-theorem-dictionary-English.dict
+Dictionary: translator-theorem-dictionary, Language: English 
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+Package pgfplots notification 'compat/show suggested version=true': you might benefit from \pgfplotsset{compat=1.18} (current compat level: 1.9).
+
+\c@lstlisting=\count402
+(compiled/M2P Presentation - 2022 g-RIPS Mitsubishi-A.nav)
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 5.69998pt on input line 315.
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 7.59998pt on input line 315.
+Package svg Info: Last page of `./svg-inkscape/tohoku-university-logo-vector_svg-tex.pdf' is 1 on input line 318.
+ (./svg-inkscape/tohoku-university-logo-vector_svg-tex.pdf_tex
+<./svg-inkscape/tohoku-university-logo-vector_svg-tex.pdf, id=91, page=1, 278.42137pt x 376.40625pt>
+File: ./svg-inkscape/tohoku-university-logo-vector_svg-tex.pdf Graphic file (type pdf)
+<use ./svg-inkscape/tohoku-university-logo-vector_svg-tex.pdf, page 1>
+Package pdftex.def Info: ./svg-inkscape/tohoku-university-logo-vector_svg-tex.pdf , page1 used on input line 56.
+(pdftex.def)             Requested size: 59.74835pt x 80.77069pt.
+)
+<Mitsubishi_Electric_logo.png, id=92, 1003.75pt x 299.1175pt>
+File: Mitsubishi_Electric_logo.png Graphic file (type png)
+<use Mitsubishi_Electric_logo.png>
+Package pdftex.def Info: Mitsubishi_Electric_logo.png  used on input line 318.
+(pdftex.def)             Requested size: 99.58464pt x 29.67616pt.
+
+Overfull \vbox (101.5804pt too high) detected at line 318
+ []
+
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 13.67995pt on input line 318.
+LaTeX Font Info:    Font shape `T1/txss/b/n' in size <14.4> not available
+(Font)              Font shape `T1/txss/bx/n' tried instead on input line 318.
+LaTeX Font Info:    Font shape `T1/txss/bx/n' will be
+(Font)              scaled to size 13.67995pt on input line 318.
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 9.49997pt on input line 318.
+
+Overfull \vbox (15.63992pt too high) detected at line 318
+ []
+
+[1
+
+{/home/gjgress/.local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./svg-inkscape/tohoku-university-logo-vector_svg-tex.pdf> <./Mitsubishi_Electric_logo.png>]
+LaTeX Font Info:    Trying to load font information for OT1+txr on input line 320.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/ot1txr.fd
+File: ot1txr.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Trying to load font information for U+txsya on input line 320.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/utxsya.fd
+File: utxsya.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Trying to load font information for U+txsyb on input line 320.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/utxsyb.fd
+File: utxsyb.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Trying to load font information for U+lasy on input line 320.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    Trying to load font information for U+txmia on input line 320.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/utxmia.fd
+File: utxmia.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Trying to load font information for U+txsyc on input line 320.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/utxsyc.fd
+File: utxsyc.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 320.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/jknapltx/ursfs.fd
+File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
+) [2
+
+]
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 3.79999pt on input line 325.
+ [3
+
+] [4
+
+]
+LaTeX Font Info:    Font shape `T1/txss/b/n' in size <10.95> not available
+(Font)              Font shape `T1/txss/bx/n' tried instead on input line 347.
+LaTeX Font Info:    Font shape `T1/txss/bx/n' will be
+(Font)              scaled to size 10.40245pt on input line 347.
+<googlemaps.png, id=126, 1167.36125pt x 1166.3575pt>
+File: googlemaps.png Graphic file (type png)
+<use googlemaps.png>
+Package pdftex.def Info: googlemaps.png  used on input line 347.
+(pdftex.def)             Requested size: 116.74297pt x 116.64258pt.
+<selfdriving.jpeg, id=127, 359.3425pt x 256.96pt>
+File: selfdriving.jpeg Graphic file (type jpg)
+<use selfdriving.jpeg>
+Package pdftex.def Info: selfdriving.jpeg  used on input line 347.
+(pdftex.def)             Requested size: 172.48244pt x 123.33939pt.
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 11.39996pt on input line 347.
+LaTeX Font Info:    Font shape `T1/txss/b/n' in size <12> not available
+(Font)              Font shape `T1/txss/bx/n' tried instead on input line 347.
+LaTeX Font Info:    Font shape `T1/txss/bx/n' will be
+(Font)              scaled to size 11.39996pt on input line 347.
+ [5
+
+ <./googlemaps.PNG> <./selfdriving.jpeg>]
+<trajectoryandroads.png, id=140, 346.1733pt x 475.5366pt>
+File: trajectoryandroads.png Graphic file (type png)
+<use trajectoryandroads.png>
+Package pdftex.def Info: trajectoryandroads.png  used on input line 367.
+(pdftex.def)             Requested size: 155.77654pt x 213.98949pt.
+
+./M2P Presentation - 2022 g-RIPS Mitsubishi-A.tex:367: Missing $ inserted.
+<inserted text> 
+                $
+l.367 \end{frame}
+                 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./M2P Presentation - 2022 g-RIPS Mitsubishi-A.tex:367: Extra }, or forgotten $.
+\overset ... {\mathop {\kern \z@ #2}\limits ^{#1}}
+                                                  
+l.367 \end{frame}
+                 
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+<trueroute.png, id=141, 346.1733pt x 475.5366pt>
+File: trueroute.png Graphic file (type png)
+<use trueroute.png>
+Package pdftex.def Info: trueroute.png  used on input line 367.
+(pdftex.def)             Requested size: 155.77654pt x 213.98949pt.
+./M2P Presentation - 2022 g-RIPS Mitsubishi-A.tex:367: Missing $ inserted.
+<inserted text> 
+                $
+l.367 \end{frame}
+                 
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./M2P Presentation - 2022 g-RIPS Mitsubishi-A.tex:367: Missing } inserted.
+<inserted text> 
+                }
+l.367 \end{frame}
+                 
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+
+Overfull \vbox (11.12625pt too high) detected at line 367
+ []
+
+[6
+
+ <./trajectoryandroads.png> <./trueroute.png>] [7
+
+]
+LaTeX Font Info:    Trying to load font information for TS1+txss on input line 382.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/ts1txss.fd
+File: ts1txss.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Font shape `TS1/txss/m/n' will be
+(Font)              scaled to size 10.40245pt on input line 382.
+LaTeX Font Info:    Trying to load font information for OT1+txss on input line 382.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/ot1txss.fd
+File: ot1txss.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 10.40245pt on input line 382.
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 7.59998pt on input line 382.
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 5.69998pt on input line 382.
+ [8
+
+] [9
+
+]
+<roadnetwork.png, id=185, 462.528pt x 614.295pt>
+File: roadnetwork.png Graphic file (type png)
+<use roadnetwork.png>
+Package pdftex.def Info: roadnetwork.png  used on input line 413.
+(pdftex.def)             Requested size: 198.88315pt x 264.1417pt.
+<localroadnetwork.png, id=186, 665.48625pt x 887.315pt>
+File: localroadnetwork.png Graphic file (type png)
+<use localroadnetwork.png>
+Package pdftex.def Info: localroadnetwork.png  used on input line 413.
+(pdftex.def)             Requested size: 146.40742pt x 195.2099pt.
+
+Overfull \vbox (264.62802pt too high) detected at line 413
+ []
+
+[10
+
+pdfTeX warning (ext4): destination with the same identifier (name{fig:}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.413 \end{frame}
+                  <./roadnetwork.png> <./localroadnetwork.png>] [11
+
+]
+File: trueroute.png Graphic file (type png)
+<use trueroute.png>
+Package pdftex.def Info: trueroute.png  used on input line 446.
+(pdftex.def)             Requested size: 76.15836pt x 104.61836pt.
+ [12
+
+]
+<candidate_routes1.png, id=209, 657.45625pt x 257.96375pt>
+File: candidate_routes1.png Graphic file (type png)
+<use candidate_routes1.png>
+Package pdftex.def Info: candidate_routes1.png  used on input line 455.
+(pdftex.def)             Requested size: 398.3386pt x 156.29486pt.
+ [13
+
+ <./candidate_routes1.png>] [14
+
+] [15
+
+]
+LaTeX Font Info:    Font shape `T1/txss/b/n' in size <10> not available
+(Font)              Font shape `T1/txss/bx/n' tried instead on input line 610.
+LaTeX Font Info:    Font shape `T1/txss/bx/n' will be
+(Font)              scaled to size 9.49997pt on input line 610.
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 9.49997pt on input line 610.
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 6.64998pt on input line 610.
+LaTeX Font Info:    Font shape `TS1/txss/m/n' will be
+(Font)              scaled to size 9.49997pt on input line 610.
+LaTeX Font Info:    Font shape `T1/txss/m/it' in size <10> not available
+(Font)              Font shape `T1/txss/m/sl' tried instead on input line 610.
+LaTeX Font Info:    Font shape `T1/txss/m/sl' will be
+(Font)              scaled to size 9.49997pt on input line 610.
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 8.54997pt on input line 610.
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 8.54997pt on input line 610.
+ [16
+
+] [17
+
+] [18
+
+]
+LaTeX Font Info:    Font shape `T1/txss/b/it' in size <10.95> not available
+(Font)              Font shape `T1/txss/bx/it' tried instead on input line 759.
+LaTeX Font Info:    Font shape `T1/txss/bx/it' in size <10.95> not available
+(Font)              Font shape `T1/txss/bx/sl' tried instead on input line 759.
+LaTeX Font Info:    Font shape `T1/txss/bx/sl' will be
+(Font)              scaled to size 10.40245pt on input line 759.
+
+Overfull \hbox (10.90726pt too wide) in paragraph at lines 759--759
+ [] 
+ []
+
+[19
+
+]
+<Wass.png, id=261, 691.58376pt x 331.2375pt>
+File: Wass.png Graphic file (type png)
+<use Wass.png>
+Package pdftex.def Info: Wass.png  used on input line 772.
+(pdftex.def)             Requested size: 380.37224pt x 182.18118pt.
+ [20
+
+ <./Wass.png>] [21
+
+] [22
+
+] [23
+
+] [24
+
+] [25
+
+] [26
+
+]
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 6.64998pt on input line 998.
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 4.74998pt on input line 998.
+LaTeX Font Info:    Font shape `T1/txss/m/n' will be
+(Font)              scaled to size 16.41594pt on input line 998.
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 16.41594pt on input line 998.
+LaTeX Font Info:    Font shape `OT1/txss/m/n' will be
+(Font)              scaled to size 11.39996pt on input line 998.
+ [27
+
+] [28
+
+]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1000.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `math shift' on input line 1000.
+
+[29
+
+] [30
+
+]
+Overfull \hbox (20.39406pt too wide) in paragraph at lines 1165--1165
+ [] 
+ []
+
+
+Overfull \hbox (3.65543pt too wide) in paragraph at lines 1165--1165
+ [] 
+ []
+
+[31
+
+]
+Overfull \hbox (3.65543pt too wide) in paragraph at lines 1366--1366
+ [] 
+ []
+
+[32
+
+] [33
+
+]
+Overfull \hbox (10.59624pt too wide) in paragraph at lines 1463--1463
+ [] 
+ []
+
+LaTeX Font Info:    Font shape `T1/txss/m/it' in size <10.95> not available
+(Font)              Font shape `T1/txss/m/sl' tried instead on input line 1463.
+LaTeX Font Info:    Font shape `T1/txss/m/sl' will be
+(Font)              scaled to size 10.40245pt on input line 1463.
+
+Overfull \hbox (24.95352pt too wide) detected at line 1463
+[]
+ []
+
+[34
+
+]
+Overfull \hbox (18.39262pt too wide) in paragraph at lines 1565--1565
+[] 
+ []
+
+[35
+
+] [36
+
+]
+Overfull \hbox (18.39262pt too wide) in paragraph at lines 1823--1823
+ [] 
+ []
+
+[37
+
+]
+Overfull \hbox (20.39406pt too wide) in paragraph at lines 2106--2106
+ [] 
+ []
+
+
+Overfull \hbox (3.42159pt too wide) in paragraph at lines 2106--2106
+ [] 
+ []
+
+
+Overfull \hbox (3.42159pt too wide) in paragraph at lines 2106--2106
+ [] 
+ []
+
+
+Overfull \hbox (3.65543pt too wide) in paragraph at lines 2106--2106
+ [] 
+ []
+
+[38
+
+] [39
+
+]
+<MaxNN.jpeg, id=391, 691.58376pt x 331.2375pt>
+File: MaxNN.jpeg Graphic file (type jpg)
+<use MaxNN.jpeg>
+Package pdftex.def Info: MaxNN.jpeg  used on input line 2140.
+(pdftex.def)             Requested size: 380.37224pt x 182.18118pt.
+ [40
+
+ <./MaxNN.jpeg>] [41
+
+]
+<Jupyter Notebook LaTeX/codeexample.png, id=406, 1129.97156pt x 740.7675pt>
+File: Jupyter Notebook LaTeX/codeexample.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/codeexample.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/codeexample.png  used on input line 2154.
+(pdftex.def)             Requested size: 305.09639pt x 200.00989pt.
+ [42
+
+ <./Jupyter Notebook LaTeX/codeexample.png>]
+<Jupyter Notebook LaTeX/codeexample1.png, id=413, 1015.54407pt x 156.585pt>
+File: Jupyter Notebook LaTeX/codeexample1.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/codeexample1.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/codeexample1.png  used on input line 2162.
+(pdftex.def)             Requested size: 507.7708pt x 78.2923pt.
+
+Overfull \hbox (109.4322pt too wide) in paragraph at lines 2162--2162
+ [][] 
+ []
+
+[43
+
+ <./Jupyter Notebook LaTeX/codeexample1.png (PNG copy)>] [44
+
+] [45
+
+]
+File: trajectoryandroads.png Graphic file (type png)
+<use trajectoryandroads.png>
+Package pdftex.def Info: trajectoryandroads.png  used on input line 2201.
+(pdftex.def)             Requested size: 145.39178pt x 199.724pt.
+ [46
+
+] [47
+
+]
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 2236.
+ (/home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/txfonts/t1txtt.fd
+File: t1txtt.fd 2000/12/15 v3.1
+) [48
+
+] [49
+
+] [50
+
+]
+<Jupyter Notebook LaTeX/oldfmmresults.png, id=466, 910.40125pt x 624.3325pt>
+File: Jupyter Notebook LaTeX/oldfmmresults.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/oldfmmresults.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/oldfmmresults.png  used on input line 2281.
+(pdftex.def)             Requested size: 191.1899pt x 131.1137pt.
+
+Overfull \vbox (2.92049pt too high) detected at line 2281
+ []
+
+[51
+
+ <./Jupyter Notebook LaTeX/oldfmmresults.png>]
+<Jupyter Notebook LaTeX/leastsquaressendai.png, id=474, 665.48625pt x 903.375pt>
+File: Jupyter Notebook LaTeX/leastsquaressendai.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/leastsquaressendai.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/leastsquaressendai.png  used on input line 2287.
+(pdftex.def)             Requested size: 139.75623pt x 189.71434pt.
+ [52
+
+ <./Jupyter Notebook LaTeX/leastsquaressendai.png>]
+<Jupyter Notebook LaTeX/electricsendai.png, id=482, 665.48625pt x 903.375pt>
+File: Jupyter Notebook LaTeX/electricsendai.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/electricsendai.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/electricsendai.png  used on input line 2293.
+(pdftex.def)             Requested size: 139.75623pt x 189.71434pt.
+ [53
+
+ <./Jupyter Notebook LaTeX/electricsendai.png>]
+<Jupyter Notebook LaTeX/wassersteinsendai.png, id=490, 665.48625pt x 903.375pt>
+File: Jupyter Notebook LaTeX/wassersteinsendai.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/wassersteinsendai.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/wassersteinsendai.png  used on input line 2298.
+(pdftex.def)             Requested size: 139.75623pt x 189.71434pt.
+ [54
+
+ <./Jupyter Notebook LaTeX/wassersteinsendai.png>]
+<Jupyter Notebook LaTeX/preprocessing.png, id=498, 1901.4237pt x 1055.8647pt>
+File: Jupyter Notebook LaTeX/preprocessing.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/preprocessing.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/preprocessing.png  used on input line 2320.
+(pdftex.def)             Requested size: 342.2415pt x 190.04744pt.
+ [55
+
+ <./Jupyter Notebook LaTeX/preprocessing.png>] [56
+
+]
+<Jupyter Notebook LaTeX/complexity1.png, id=513, 1890.5832pt x 1055.8647pt>
+File: Jupyter Notebook LaTeX/complexity1.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/complexity1.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/complexity1.png  used on input line 2330.
+(pdftex.def)             Requested size: 340.2903pt x 190.04744pt.
+ [57
+
+ <./Jupyter Notebook LaTeX/complexity1.png>]
+<Jupyter Notebook LaTeX/complexity2.png, id=521, 1890.5832pt x 1055.8647pt>
+File: Jupyter Notebook LaTeX/complexity2.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/complexity2.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/complexity2.png  used on input line 2336.
+(pdftex.def)             Requested size: 340.2903pt x 190.04744pt.
+ [58
+
+ <./Jupyter Notebook LaTeX/complexity2.png>] [59
+
+] [60
+
+]
+<Jupyter Notebook LaTeX/fmmerror.png, id=541, 370.38374pt x 280.04625pt>
+File: Jupyter Notebook LaTeX/fmmerror.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/fmmerror.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/fmmerror.png  used on input line 2357.
+(pdftex.def)             Requested size: 129.63625pt x 98.01764pt.
+<Jupyter Notebook LaTeX/leastsquareerror.png, id=542, 366.36874pt x 280.04625pt>
+File: Jupyter Notebook LaTeX/leastsquareerror.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/leastsquareerror.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/leastsquareerror.png  used on input line 2357.
+(pdftex.def)             Requested size: 128.23097pt x 98.01764pt.
+<Jupyter Notebook LaTeX/electricerror.png, id=543, 363.3575pt x 280.04625pt>
+File: Jupyter Notebook LaTeX/electricerror.png Graphic file (type png)
+<use Jupyter Notebook LaTeX/electricerror.png>
+Package pdftex.def Info: Jupyter Notebook LaTeX/electricerror.png  used on input line 2357.
+(pdftex.def)             Requested size: 127.17702pt x 98.01764pt.
+ [61
+
+ <./Jupyter Notebook LaTeX/fmmerror.png> <./Jupyter Notebook LaTeX/leastsquareerror.png> <./Jupyter Notebook LaTeX/electricerror.png>] [62
+
+]
+Overfull \vbox (29.39568pt too high) detected at line 2437
+ []
+
+[63
+
+ </home/gjgress/.local/texlive/2021/texmf-dist/tex/latex/beamer/beamericonarticle.pdf>]
+\tf@nav=\write7
+\openout7 = `"M2P Presentation - 2022 g-RIPS Mitsubishi-A.nav"'.
+
+\tf@toc=\write8
+\openout8 = `"M2P Presentation - 2022 g-RIPS Mitsubishi-A.toc"'.
+
+\tf@snm=\write9
+\openout9 = `"M2P Presentation - 2022 g-RIPS Mitsubishi-A.snm"'.
+
+ (compiled/M2P Presentation - 2022 g-RIPS Mitsubishi-A.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package rerunfilecheck Info: File `"M2P Presentation - 2022 g-RIPS Mitsubishi-A".out' has not changed.
+(rerunfilecheck)             Checksum: 6D3A91154B37DEC71E3671867F3CC013;3128.
+ ) 
+Here is how much of TeX's memory you used:
+ 47314 strings out of 478542
+ 1110618 string characters out of 5845385
+ 1665688 words of memory out of 5000000
+ 64063 multiletter control sequences out of 15000+600000
+ 540669 words of font info for 258 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 128i,18n,124p,1824b,1254s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/home/gjgress/.local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/rtcxss.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/rtxmi.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/rtxr.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/t1xtt.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/txex.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/txsy.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/txsya.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/txsyb.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/public/txfonts/txsyc.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></home/gjgress/.local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on "compiled/M2P Presentation - 2022 g-RIPS Mitsubishi-A.pdf" (63 pages, 2463919 bytes).
+PDF statistics:
+ 685 PDF objects out of 1000 (max. 8388607)
+ 527 compressed objects within 6 object streams
+ 161 named destinations out of 1000 (max. 500000)
+ 329 words of extra memory for PDF output out of 10000 (max. 10000000)
+

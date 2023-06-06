@@ -1,0 +1,17 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Problem Summary and Statement}{2}{section.2}%
+\contentsline {section}{\numberline {3}Background}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Geometric Model}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Hidden Markov Model}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Mathematical Background}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Our Approach}{5}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Wasserstein Distance Method}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Euclidean inner product method}{8}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Energy functional method}{9}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Implementation}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Evaluation}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Data Fusion}{11}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Extension to Higher Dimensions}{11}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Deliverables}{11}{section.6}%
+\contentsline {section}{\numberline {7}Timeline}{11}{section.7}%

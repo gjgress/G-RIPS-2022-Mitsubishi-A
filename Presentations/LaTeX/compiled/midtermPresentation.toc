@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{Introduction to map-matching}{2}{0}{1}
+\beamer@sectionintoc {2}{``Wasserstein" method}{14}{0}{2}
+\beamer@sectionintoc {3}{``Electrical charge'' method}{18}{0}{3}
+\beamer@sectionintoc {4}{Implementation}{21}{0}{4}

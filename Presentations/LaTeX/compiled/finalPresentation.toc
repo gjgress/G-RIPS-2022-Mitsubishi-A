@@ -1,0 +1,17 @@
+\beamer@sectionintoc {1}{Introduction to map-matching}{2}{0}{1}
+\beamer@subsectionintoc {1}{1}{Mathematical assumption}{13}{0}{1}
+\beamer@subsectionintoc {1}{2}{The ``distance" with error}{14}{0}{1}
+\beamer@sectionintoc {2}{Wasserstein method}{15}{0}{2}
+\beamer@subsectionintoc {2}{1}{Review of mid-term presentation}{15}{0}{2}
+\beamer@subsectionintoc {2}{2}{Motivation}{17}{0}{2}
+\beamer@subsectionintoc {2}{3}{Our strategy}{23}{0}{2}
+\beamer@subsectionintoc {2}{4}{Summary $\&$ Future problem}{25}{0}{2}
+\beamer@sectionintoc {3}{``Physical'' method}{26}{0}{3}
+\beamer@subsectionintoc {3}{1}{``Electric'' Method}{26}{0}{3}
+\beamer@subsectionintoc {3}{2}{``Harmonic oscillator'' method}{29}{0}{3}
+\beamer@sectionintoc {4}{Numerical Results}{36}{0}{4}
+\beamer@subsectionintoc {4}{1}{Implementation}{36}{0}{4}
+\beamer@subsectionintoc {4}{2}{Sendai Revisited}{38}{0}{4}
+\beamer@subsectionintoc {4}{3}{Computational Complexity}{49}{0}{4}
+\beamer@subsectionintoc {4}{4}{Preliminary Numerical Results}{54}{0}{4}
+\beamer@subsectionintoc {4}{5}{Future Work}{56}{0}{4}

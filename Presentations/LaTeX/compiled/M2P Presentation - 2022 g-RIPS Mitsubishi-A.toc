@@ -1,0 +1,19 @@
+\beamer@sectionintoc {1}{What is g-RIPS?}{2}{0}{1}
+\beamer@sectionintoc {2}{Introduction to map-matching}{4}{0}{2}
+\beamer@sectionintoc {3}{How do we model this mathematically?}{7}{0}{3}
+\beamer@subsectionintoc {3}{1}{Mathematical assumption}{16}{0}{3}
+\beamer@subsectionintoc {3}{2}{The ``distance" with error}{17}{0}{3}
+\beamer@sectionintoc {4}{Wasserstein method}{18}{0}{4}
+\beamer@subsectionintoc {4}{1}{Review of mid-term presentation}{19}{0}{4}
+\beamer@subsectionintoc {4}{2}{Motivation}{21}{0}{4}
+\beamer@subsectionintoc {4}{3}{Our strategy}{27}{0}{4}
+\beamer@subsectionintoc {4}{4}{Summary $\&$ Future problem}{29}{0}{4}
+\beamer@sectionintoc {5}{``Physical'' method}{30}{0}{5}
+\beamer@subsectionintoc {5}{1}{``Electric'' Method}{31}{0}{5}
+\beamer@subsectionintoc {5}{2}{``Harmonic oscillator'' method}{34}{0}{5}
+\beamer@sectionintoc {6}{Numerical Results}{41}{0}{6}
+\beamer@subsectionintoc {6}{1}{Implementation}{42}{0}{6}
+\beamer@subsectionintoc {6}{2}{Sendai Revisited}{44}{0}{6}
+\beamer@subsectionintoc {6}{3}{Computational Complexity}{55}{0}{6}
+\beamer@subsectionintoc {6}{4}{Preliminary Numerical Results}{60}{0}{6}
+\beamer@subsectionintoc {6}{5}{Future Work}{62}{0}{6}
