@@ -4,6 +4,7 @@
 """
 (Generalized) Metric-based Map Matching Algorithm
 Created on 2022-07-25
+Last Modified: 2022-07-25
 @author: gjgress
 
 This is a modular algorithm designed to use arbitrary metric-based functions in conjunction with nearest neighbors. Candidate routes and GPS tracks are dissected into n and m nodes respectively; we then calculate the Euclidean distance to the (k-)nearest neighbor for both the candidate route and the GPS track. Then the user can apply a loss function of their choice onto this data. We provide two samples in this module: least squares, and inverse squares.

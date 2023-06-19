@@ -8,6 +8,8 @@ Last Modified: 2022-07-21
 @author: gjgress
 This python module is a wrapper which allows one to use fmm more simply.
 It still requires fmm to be installed separately.
+
+Update (2023-06-19): The python module for FMM is no longer functional due to deprecated dependencies. So, one must use Docker to use FMM. Rewriting this python module to be compatible with the Docker implementation of FMM would require a whole restructuring, so this module is deprecated indefinitely.
 """
 
 # import

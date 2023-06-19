@@ -19,6 +19,8 @@ from ctypes import *
 from ctypes import wintypes
 from scipy import spatial # for proximity fuse
 from sklearn.neighbors import BallTree
+from skspatial.objects import Line as SKLine
+from skspatial.objects import Point as SKPoint
 from shapely.geometry import box, Point, LineString
 
 # globals
@@ -353,6 +355,33 @@ def get_nearest(src_points, candidates, k_neighbors=3):
 
     # Return indices and distances
     return (indices, distances)
+
+#def get_nearest_edges_new(src_points, candidates, k_neighbors=4):
+#    """
+#    New method using scikit tools to get nearest edges; hopefully will speed up former algorithm
+#
+#    Find nearest neighbors for all source points from a set of candidate LineStrings, via R-tree intersection
+#    src_points: A GeoDataFrame of Point geometry objects
+#    candidates: A GeoDataFrame of LineString geometry objects
+#    k_neighbors: The (maximum) number of candidates to return
+#    """
+#    knn = []
+#    for i in range(len(src_points)):
+#        point = SKPoint(src_points['geometry'].iloc[i])
+#        polylines = [line.geometry.coords for line in candidates]
+#        lines = [[SKLine(polyline[i], polyline[i+1]) for i in len(polyline)-1] for polyline in polylines]
+#
+#        all_projs = [[[line.project_point(point)] for line in polyline] for polyline in lines]
+#
+#        dists = [[[point.distance_point(projs[i][1])] if projs[i][0].contains_point(projs[i][1]) for i in len(projs) else [point.distance_point(projs[i][0])]] for projs in all_projs]
+#
+#        cand
+#
+#        nn = []
+        
+
+
+
 
 def get_nearest_edges(src_points, candidates, k_neighbors=4, r = 0.001):
     """
