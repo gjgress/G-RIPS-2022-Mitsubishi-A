@@ -12,7 +12,7 @@ import numpy as np
 # import fuzzy logic 
 import skfuzzy as fuzz
 import skfuzzy.membership as mf
-from algorithms import mm_utils
+import mm_utils
 # for plotting 
 import matplotlib.pyplot as plt
 

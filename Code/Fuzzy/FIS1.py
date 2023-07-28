@@ -14,7 +14,7 @@ import numpy as np
 # import fuzzy logic 
 import skfuzzy as fuzz
 import skfuzzy.membership as mf
-from algorithms import mm_utils
+import mm_utils
 # for plotting 
 import matplotlib.pyplot as plt
 
@@ -177,8 +177,8 @@ def FIS1(data_temp, plot):
     weight[0,1] = np.fmin(speed_fit_high, HE_fit_large)
     weight[0,2] = np.fmin(HDOP_fit_good, PD_fit_short)
     weight[0,3] = np.fmin(HDOP_fit_good, PD_fit_long)
-    weight[0,4] = np.fmin(speed_fit_high, HE_fit_small)
-    weight[0,5] = np.fmin(speed_fit_high, HE_fit_small)
+    weight[0,4] = np.fmin(PD_fit_short, HE_fit_small)
+    weight[0,5] = np.fmin(PD_fit_long, HE_fit_large)
 
     # standardize the weigth 
     std_weight = weight / weight.sum()
