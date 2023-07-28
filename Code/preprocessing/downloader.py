@@ -4,8 +4,12 @@ import json
 import os
 
 import geopandas as gpd
+import gpxpy
+import gpxpy.gpx
+from shapely.geometry import Point, shape
+import numpy as np
 
-import preprocessing.constants
+from preprocessing.constants import EPSG4326
 
 def read_file_content(file_path):
     with open(file_path, "r") as file:
@@ -34,11 +38,13 @@ def GPX_to_GeoDataFrame(gpx):
 def to_utm_gdf(gdf):
     utm_crs = gdf.estimate_utm_crs()
     # print('utm_crs: ', utm_crs)
+    # print('gdf: ', gdf)
     utm_gdf = gdf.to_crs(crs=utm_crs)
+    # print('utm_gdf: ', utm_gdf)
     utm_gdf['lat_lon']  = gdf['geometry']
     return utm_gdf
 
-def download_from_envirocar(id):
+def download_from_envirocar(id, save_file=True, threhold=None):
     """
     Download trajectory data from envirocar.org.
 
@@ -49,13 +55,14 @@ def download_from_envirocar(id):
         GeoDataFrame: trajectory data
     """
     
-    cache_dir = "cache/envirocar"
-    cache_path = os.path.join(cache_dir, f"envirocar-{id}.geojson")
-    if os.path.isfile(cache_path):
-        gdf = gpd.read_file(cache_path)
-        if len(gdf) <= 10:
-            return None
-        return to_utm_gdf(gdf)
+    if save_file:
+        cache_dir = "cache/envirocar"
+        cache_path = os.path.join(cache_dir, f"envirocar-{id}.geojson")
+        if os.path.isfile(cache_path):
+            gdf = gpd.read_file(cache_path)
+            if len(gdf) <= 10:
+                return None
+            return to_utm_gdf(gdf)
     
     # Download trajectory data from envirocar.org.
     url = urllib.parse.urljoin('https://envirocar.org/api/stable/tracks/', id)
@@ -73,14 +80,98 @@ def download_from_envirocar(id):
     gdf = gpd.GeoDataFrame(data=attributes, geometry=geometries)
     gdf = gdf.set_crs(EPSG4326)
     # Save to the file. It may be better to specify parameters when saving. The official doc is here: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html
-    gdf.to_file(cache_path)
-    if len(gdf) <= 10:
+    if save_file:
+        gdf.to_file(cache_path)
+        
+    if threhold is not None and len(gdf) <= threhold:
         return None
+    
     return to_utm_gdf(gdf)
 
-def all_ids_on_envirocar():
-    # Currently only downloads 100 tracks
-    url = 'https://envirocar.org/api/stable/tracks/'
+import pandas as pd
+
+def save_trajecotory_from_envirocar_as_npz(id, dir, compressed):
+    utm_gdf = download_from_envirocar(id)
+    utm_gdf['time'] = pd.to_datetime(utm_gdf['time'])
+    start_time = utm_gdf['time'][0]
+    
+    x = []
+    y = []
+    t = []
+    speed = []
+    direction = []
+    HDOP = []
+    default_HDOP = 100 # Note: higer values have lower precision
+    print(id)
+    for i in range(len(utm_gdf)):
+        if 'Speed' not in utm_gdf['phenomenons'][i]:
+            # print(f'Skipped: {id} (a trajectory point does not have the speed field)')
+            return
+        x.append(utm_gdf['geometry'][i].x)
+        y.append(utm_gdf['geometry'][i].y)
+        t.append((pd.to_datetime(utm_gdf['time'][i]) - start_time).seconds)
+        speed.append(utm_gdf['phenomenons'][i]['Speed']['value'])
+        HDOP.append(utm_gdf['phenomenons'][i]['GPS HDOP']['value'] if 'GPS HDOP' in utm_gdf['phenomenons'][i].keys() else default_HDOP)
+        
+    x = np.array(x)
+    y = np.array(y)
+    t = np.array(t)
+    speed = np.array(speed)
+    direction = np.array(direction)
+    HDOP = np.array(HDOP)
+    file_name = f'envirocar-{id}.npz'
+    file_path = os.path.join(dir, file_name)
+    if compressed:
+        np.savez_compressed(file_path, x, y, t, speed, direction, HDOP)
+    else:
+        np.savez(file_path, x, y, t, speed, direction, HDOP)
+    # print(f'Saved: {file_path}')
+    
+    # # Test whether the loaded information is the same as the saved information
+    # npzfile = np.load(file_path)
+    # print(npzfile)
+    # lx, ly, lt, ls, ld, lh = npzfile['arr_0'], npzfile['arr_1'], npzfile['arr_2'], npzfile['arr_3'], npzfile['arr_4'], npzfile['arr_5']
+    # assert np.array_equal(x, lx)
+    # assert np.array_equal(y, ly)
+    # assert np.array_equal(t, lt)
+    # assert np.array_equal(speed, ls)
+    # assert np.array_equal(direction, ld)
+    # assert np.array_equal(HDOP, lh)
+
+def load_npz(file_path):
+    npzfile = np.load(file_path)
+    x, y, t, speed, direction, HDOP = npzfile['arr_0'], npzfile['arr_1'], npzfile['arr_2'], npzfile['arr_3'], npzfile['arr_4'], npzfile['arr_5']
+    return x, y, t, speed, direction, HDOP
+    
+def save_trajectories_from_envirocar_as_npz(num_trajectories, dir, compressed):
+    """
+    Download GPS trajectories from envirocar and save them as npz files.
+    
+    Args:
+        num_trajectories: # of downloaded trajectories
+        dir: where to save the npz files
+        compressed: if save the GPS trajectories as compressed npz files
+    
+    Notes:
+        It may happen that some GPS trajectories are unavailable or lack the speed field in some trajectories points.
+        In these cases, this functions just skips those GPS trajectories.
+        Thus, the number of downloaded GPS trajectories may less than the num_trajectories parameter.
+    """
+    ids = fetch_ids_on_envirocar(num_trajectories)
+    for id in ids:
+        save_trajecotory_from_envirocar_as_npz(id, dir, compressed)
+
+def fetch_ids_on_envirocar(num_trajectories):
+    """
+    Fetch GPS trajectory ids from envirocar.
+    
+    Args:
+        num_trajectories: # of ids fetched from envirocar
+    
+    Returns:
+        list[str]: the list of the fetched ids
+    """
+    url = f'https://envirocar.org/api/stable/tracks?limit={num_trajectories}'
     response = requests.get(url)
     data = json.loads(response.text)
     ids = []

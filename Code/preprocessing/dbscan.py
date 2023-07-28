@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.cluster import DBSCAN
 import pandas as pd
 import geopandas as gpd
+from shapely.geometry import Point, shape
 
 import preprocessing.plotter as plotter
 
@@ -68,8 +69,8 @@ def knn_distances(gdf, k):
         knn_distances.append(knn_distance(gdf, i, k))
     return sorted(knn_distances)
 
-def plot_skewed(x, y, W, H, degree):
-    skewed_x, skewed_y = skew(x, y, W, H)
+def plot_skewed(x, y, W, H, degree, slope):
+    skewed_x, skewed_y = skew(x, y, W, H, slope)
     plt.scatter(skewed_x, skewed_y, label="Skewed sorted K-NN distances", color="cyan")
     plt.title("Skewed sorted K-NN distances")
     draw_polynomial_fitting(skewed_x, skewed_y, degree)
@@ -252,9 +253,9 @@ def trajectory_DBSCAN(trajectory, eps, min_samples):
     # labels = dbscan.fit_predict(points)
     return labels
 
-def mitigate_stay_points(gdf):
+def mitigate_stay_points(gdf, slope):
     # Find out clusters by DBSCAN
-    eps_candidates = DBSCAN_eps_candidates(gdf)
+    eps_candidates = DBSCAN_eps_candidates(gdf, slope=slope)
     eps = eps_candidates[0]
     min_samples = 6 #4
     gdf["cluster"] = trajectory_DBSCAN(

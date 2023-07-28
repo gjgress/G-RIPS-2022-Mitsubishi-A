@@ -1,8 +1,10 @@
+import random
+
 import networkx as nx
 import osmnx as ox
 import matplotlib.pyplot as plt
 
-import preprocessing.constants
+from preprocessing.constants import EPSG4326
 
 def plot_trajectory(
     trajectory, title=None, plot_trajectory_edges=False, plot_clusters=False, color_mapping=None
