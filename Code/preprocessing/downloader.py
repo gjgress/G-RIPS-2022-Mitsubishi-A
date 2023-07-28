@@ -8,6 +8,7 @@ import gpxpy
 import gpxpy.gpx
 from shapely.geometry import Point, shape
 import numpy as np
+import osmnx as ox
 
 from preprocessing.constants import EPSG4326
 
@@ -41,10 +42,10 @@ def to_utm_gdf(gdf):
     # print('gdf: ', gdf)
     utm_gdf = gdf.to_crs(crs=utm_crs)
     # print('utm_gdf: ', utm_gdf)
-    utm_gdf['lat_lon']  = gdf['geometry']
+    utm_gdf['lon_lat']  = gdf['geometry']
     return utm_gdf
 
-def download_from_envirocar(id, save_file=True, threhold=None):
+def download_from_envirocar(id, use_cache=True, cache_dir='cache/envirocar', extension='geojson', threhold=10):
     """
     Download trajectory data from envirocar.org.
 
@@ -55,12 +56,15 @@ def download_from_envirocar(id, save_file=True, threhold=None):
         GeoDataFrame: trajectory data
     """
     
-    if save_file:
-        cache_dir = "cache/envirocar"
-        cache_path = os.path.join(cache_dir, f"envirocar-{id}.geojson")
+    def make_cache_path():
+        cache_dir = dir
+        return os.path.join(cache_dir, f"envirocar-{id}.{extension}")
+    
+    if use_cache:
+        cache_dir = make_cache_path()
         if os.path.isfile(cache_path):
             gdf = gpd.read_file(cache_path)
-            if len(gdf) <= 10:
+            if len(gdf) <= threhold:
                 return None
             return to_utm_gdf(gdf)
     
@@ -79,9 +83,10 @@ def download_from_envirocar(id, save_file=True, threhold=None):
     
     gdf = gpd.GeoDataFrame(data=attributes, geometry=geometries)
     gdf = gdf.set_crs(EPSG4326)
-    # Save to the file. It may be better to specify parameters when saving. The official doc is here: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html
-    if save_file:
-        gdf.to_file(cache_path)
+    
+    if use_cache:
+        cache_dir = make_cache_path()
+        gdf.to_file(cache_path) # Save to the file. It may be better to specify parameters when saving. The official doc is here: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html
         
     if threhold is not None and len(gdf) <= threhold:
         return None
@@ -91,7 +96,7 @@ def download_from_envirocar(id, save_file=True, threhold=None):
 import pandas as pd
 
 def save_trajecotory_from_envirocar_as_npz(id, dir, compressed):
-    utm_gdf = download_from_envirocar(id)
+    utm_gdf = download_from_envirocar(id, use_cache=False)
     utm_gdf['time'] = pd.to_datetime(utm_gdf['time'])
     start_time = utm_gdf['time'][0]
     
@@ -210,3 +215,91 @@ def load_GPStrace_from_OSM(id, save_local=True):
 
     gdf = GPX_to_GeoDataFrame(gpxpy.parse(response.text)).set_crs(EPSG4326)
     return to_utm_gdf(GPX_to_GeoDataFrame(gpxpy.parse(response.text)).to_crs(EPSG4326))
+
+def to_fuzzy_AHP_input(gdf):
+    """
+    Create the input for the fuzzy logic MM and AHP MM from the given GeoDataFrame
+    
+    Args:
+        gdf: GeoDataFrame
+    
+    Returns:
+        tuple[GeoDataFrame, GeoDataFrame, GeoDataFrame]: (gdf, nodes, edges)
+    """
+    def conc(a):
+        #function to convert list or integer in osmid into a unique string id 
+        if type(a) is int:
+            return str(a)
+        ans = ",".join(map(str, a))
+        return ans
+
+    #### phenomenons contains trajectory information of each time point in dictionary format
+    # create array that save trajectory information that we want to extract 
+    key_list = ['GPS Speed', 'GPS HDOP', 'GPS Bearing']
+
+    # Initialize data frame 
+    df = pd.DataFrame()
+
+    # loop to get trajectory infos for each point 
+    for key in key_list:
+        temp = []
+        for i in range(gdf.shape[0]):
+            dict_temp = gdf['phenomenons'][i]
+            if key in dict_temp:
+                temp.append(dict_temp[key]['value'])
+            else:
+                temp.append(float("nan"))
+        df[key] = temp
+
+    # combine geodata frame with the new extracted info    
+    gdf = pd.concat([gdf, df],axis = 1)
+
+    
+    #### get road network 
+    # Get the bounding box
+    # bbox = gdf.total_bounds
+    bbox = gdf.to_crs(EPSG4326).total_bounds
+
+    # 'total_bounds' returns a tuple with (minx, miny, maxx, maxy) values
+    minx, miny, maxx, maxy = bbox
+
+    # Download a map by specifying the bounding box
+    # and draw the graph
+    G = ox.graph.graph_from_bbox(maxy, miny, maxx, minx, network_type='drive') 
+
+    graph_proj = ox.project_graph(G)
+    nodes_utm, edges_utm = ox.graph_to_gdfs(graph_proj, nodes=True, edges=True)
+
+    # extract road info 
+    nodes, edges = ox.graph_to_gdfs(G)
+
+    # append latitude and longitude to utm edges 
+    edges_utm['lon_lat'] = edges['geometry']
+
+    # convert osmid into unique string id 
+    edges_utm['str_id'] = edges_utm['osmid'].apply(conc)
+
+    # append latitude and longitude to utm edges 
+    nodes_utm['lon_lat'] = nodes['geometry']
+
+
+    #### convert gdf to utm projection
+    gdf = gdf.copy()
+    if gdf.crs is None:
+        gdf = gdf.set_crs(EPSG4326)
+        gdf = dl.to_utm_gdf(gdf)
+    else:
+        crs = gdf.crs
+        is_utm = crs.is_projected and crs.axis_info[0].name == 'Easting' and crs.axis_info[1].name == 'Northing'
+        if not is_utm:
+            gdf = dl.to_utm_gdf(gdf)
+    
+    # gdf['lon_lat'] = [Point(p.y, p.x) for p in gdf['lat_lon']]
+    # gdf = gdf.drop('lat_lon', axis=1)
+
+    # convert time str to datetime
+    gdf['time'] = pd.to_datetime(gdf['time'])
+    
+    gdf['speed_mps'] = gdf['GPS Speed']/3.6
+    
+    return gdf, nodes_utm, edges_utm
