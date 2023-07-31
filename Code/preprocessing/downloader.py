@@ -57,11 +57,10 @@ def download_from_envirocar(id, use_cache=True, cache_dir='cache/envirocar', ext
     """
     
     def make_cache_path():
-        cache_dir = dir
         return os.path.join(cache_dir, f"envirocar-{id}.{extension}")
     
     if use_cache:
-        cache_dir = make_cache_path()
+        cache_path = make_cache_path()
         if os.path.isfile(cache_path):
             gdf = gpd.read_file(cache_path)
             if len(gdf) <= threhold:
@@ -85,7 +84,7 @@ def download_from_envirocar(id, use_cache=True, cache_dir='cache/envirocar', ext
     gdf = gdf.set_crs(EPSG4326)
     
     if use_cache:
-        cache_dir = make_cache_path()
+        cache_path = make_cache_path()
         gdf.to_file(cache_path) # Save to the file. It may be better to specify parameters when saving. The official doc is here: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html
         
     if threhold is not None and len(gdf) <= threhold:
@@ -264,9 +263,10 @@ def to_fuzzy_AHP_input(gdf):
     minx, miny, maxx, maxy = bbox
 
     # Download a map by specifying the bounding box
-    # and draw the graph
-    G = ox.graph.graph_from_bbox(maxy, miny, maxx, minx, network_type='drive') 
-
+    print("Downloading the road network graph")
+    G = ox.graph.graph_from_bbox(maxy, miny, maxx, minx, network_type='all_private', retain_all=True, truncate_by_edge=True) 
+    print("Finished downloading")
+    
     graph_proj = ox.project_graph(G)
     nodes_utm, edges_utm = ox.graph_to_gdfs(graph_proj, nodes=True, edges=True)
 

@@ -24,7 +24,7 @@ def plot_trajectory(
     # Download a map by specifying the bounding box, and draw the graph
     try:
         G = ox.graph.graph_from_bbox(
-            maxy, miny, maxx, minx, network_type="all_private"
+            maxy, miny, maxx, minx, network_type="all_private", retain_all=True, truncate_by_edge=True
         )  # The order is north, south, east, west [https://osmnx.readthedocs.io/en/stable/user-reference.html#osmnx.graph.graph_from_bbox]
     except (ValueError, nx.NetworkXPointlessConcept) as e:
         # TODO: Often a "ValueError: Found no graph nodes within the requested polygon" error or
