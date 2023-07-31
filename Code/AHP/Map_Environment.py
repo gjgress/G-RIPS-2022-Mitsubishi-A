@@ -52,7 +52,7 @@ def ME(edges_data, current_position):
     number_junctions = np.count_nonzero(temp2[1] >= 3)
 
     if len(contains) == 0:
-        return None
+        return 2
     
     total_length_intersects = 0
     for i in range(len(intersects)):
