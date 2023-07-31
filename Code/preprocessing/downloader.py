@@ -38,10 +38,7 @@ def GPX_to_GeoDataFrame(gpx):
 
 def to_utm_gdf(gdf):
     utm_crs = gdf.estimate_utm_crs()
-    # print('utm_crs: ', utm_crs)
-    # print('gdf: ', gdf)
     utm_gdf = gdf.to_crs(crs=utm_crs)
-    # print('utm_gdf: ', utm_gdf)
     utm_gdf['lon_lat']  = gdf['geometry']
     return utm_gdf
 
@@ -57,11 +54,10 @@ def download_from_envirocar(id, use_cache=True, cache_dir='cache/envirocar', ext
     """
     
     def make_cache_path():
-        cache_dir = dir
         return os.path.join(cache_dir, f"envirocar-{id}.{extension}")
     
     if use_cache:
-        cache_dir = make_cache_path()
+        cache_path = make_cache_path()
         if os.path.isfile(cache_path):
             gdf = gpd.read_file(cache_path)
             if len(gdf) <= threhold:
@@ -85,7 +81,7 @@ def download_from_envirocar(id, use_cache=True, cache_dir='cache/envirocar', ext
     gdf = gdf.set_crs(EPSG4326)
     
     if use_cache:
-        cache_dir = make_cache_path()
+        cache_path = make_cache_path()
         gdf.to_file(cache_path) # Save to the file. It may be better to specify parameters when saving. The official doc is here: https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.to_file.html
         
     if threhold is not None and len(gdf) <= threhold:
@@ -107,7 +103,6 @@ def save_trajecotory_from_envirocar_as_npz(id, dir, compressed):
     direction = []
     HDOP = []
     default_HDOP = 100 # Note: higer values have lower precision
-    print(id)
     for i in range(len(utm_gdf)):
         if 'Speed' not in utm_gdf['phenomenons'][i]:
             # print(f'Skipped: {id} (a trajectory point does not have the speed field)')
@@ -264,9 +259,8 @@ def to_fuzzy_AHP_input(gdf):
     minx, miny, maxx, maxy = bbox
 
     # Download a map by specifying the bounding box
-    # and draw the graph
-    G = ox.graph.graph_from_bbox(maxy, miny, maxx, minx, network_type='drive') 
-
+    G = ox.graph.graph_from_bbox(maxy, miny, maxx, minx, network_type='all_private', retain_all=True, truncate_by_edge=True) 
+    
     graph_proj = ox.project_graph(G)
     nodes_utm, edges_utm = ox.graph_to_gdfs(graph_proj, nodes=True, edges=True)
 
