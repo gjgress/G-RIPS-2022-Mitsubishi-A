@@ -16,14 +16,14 @@ import mm_utils
 from function_util import*
 from FIS1 import FIS1
 
-def IMP(gdf_utm, edges_utm, n, plot = False):
+def IMP(point_index, gdf_utm, edges_utm, n, plot = False):
     # n i s the number of same points detected to edges needed to stop IMP
     # function return index of location noted as starting point. 
     # initialization for IMP
     count = 0 
     same_link = 0
     stop_iter = False
-    iter = 0
+    iter = point_index
     err_size = 38
 
     # saving answer for debugging purposes 

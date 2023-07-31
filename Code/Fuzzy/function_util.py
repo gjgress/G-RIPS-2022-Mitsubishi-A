@@ -120,7 +120,6 @@ def shotest_path(target_edge, target_point, origin_edge, origin_point, G, nodes_
     # not used for now 
     # route nodes is the list of nodes travelled through the shortest path 
     
-    # get the closet nodes to the start and target point
     origin_node, origin_dist =  ox.distance.nearest_nodes(G, origin_point[0], origin_point[1], return_dist =True)
     target_node, target_dist =  ox.distance.nearest_nodes(G, target_point[0], target_point[1], return_dist = True)
 
@@ -129,88 +128,91 @@ def shotest_path(target_edge, target_point, origin_edge, origin_point, G, nodes_
     t_closest = nodes_utm.loc[target_node]
 
     #print(origin_edge['str_id'] == target_edge['str_id'])
-
-    if (o_closest.name == t_closest.name):
-        # start and end points shared same closest node
-        route_geom = gpd.GeoDataFrame([[o_closest.geometry]],geometry='geometry', crs=nodes_utm.crs,columns=['geometry'])
-        route_geom['length_m'] = 0 
-        if origin_edge['str_id'] == target_edge['str_id']:
-            # case 1 origin and target share same edge, then distance travelled is equal to difference between target and origin distance to node
-            dist_path = abs(target_dist - origin_dist)
-            #print(dist_path)
-        else:
-            # case 2 origin and target are adjacent edge, distance travelled is equal to sum of target and origin distance
-            dist_path = target_dist + origin_dist
-    else : 
-        # when start and end points doesnt share same closest node, need to find shortest path 
-        # Create a GeoDataFrame from the origin and target points
-        od_nodes = gpd.GeoDataFrame([o_closest, t_closest],geometry='geometry', crs=nodes_utm.crs,)
-
-
-        # Calculate the shortest path
-        route = nx.shortest_path(G, source=origin_node, target=target_node, weight='length')
-
-
-        # Get the nodes along the shortest path
-        route_nodes = nodes_utm.loc[route]
-        # convert route into linestring so we can calculate distance 
-        route_line = LineString(list(route_nodes.geometry.values))
-
-        # Create a GeoDataFrame
-        route_geom = gpd.GeoDataFrame([[route_line]], geometry='geometry', crs=nodes_utm.crs, columns=['geometry'])
-
-        # Calculate the route length
-        route_geom['length_m'] = route_geom.length
-        
-        dist_path = route_geom['length_m']
-        # fixing distance from origin to nearest nodes
-        if origin_edge.name[0] == route[0]:
-            if(origin_edge.name[1] == route[1]):
-                # origin edge is inside the route, start edge is equal to start of route
-                origin_start_node = origin_edge.name[0]
-                origin_end_node = origin_edge.name[1]
-                dist_path = dist_path - origin_dist
+    try :
+        if (o_closest.name == t_closest.name):
+            # start and end points shared same closest node
+            route_geom = gpd.GeoDataFrame([[o_closest.geometry]],geometry='geometry', crs=nodes_utm.crs,columns=['geometry'])
+            route_geom['length_m'] = 0 
+            if origin_edge['str_id'] == target_edge['str_id']:
+                # case 1 origin and target share same edge, then distance travelled is equal to difference between target and origin distance to node
+                dist_path = abs(target_dist - origin_dist)
+                #print(dist_path)
             else:
-                # origin edge is outside the route, end edge is equal to start of route
-                origin_end_node = origin_edge.name[0]
-                origin_start_node = origin_edge.name[1]
-                dist_path = dist_path + origin_dist
-        elif origin_edge.name[1] == route[0]:
-            if(origin_edge.name[0] == route[1]):
-                # origin edge is inside the route, start edge is equal to start of route
-                origin_start_node = origin_edge.name[1]
-                origin_end_node = origin_edge.name[0]
-                dist_path = dist_path - origin_dist
-            else:
-                # origin edge is outside the route, end edge is equal to start of route
-                origin_end_node = origin_edge.name[1]
-                origin_start_node = origin_edge.name[0]
-                dist_path = dist_path + origin_dist
+                # case 2 origin and target are adjacent edge, distance travelled is equal to sum of target and origin distance
+                dist_path = target_dist + origin_dist
+        else : 
+            # when start and end points doesnt share same closest node, need to find shortest path 
+            # Create a GeoDataFrame from the origin and target points
+            od_nodes = gpd.GeoDataFrame([o_closest, t_closest],geometry='geometry', crs=nodes_utm.crs,)
 
-        # fixing distance from targert to nearest nodes 
-        if target_edge.name[0] == route[-1]:
-            if(target_edge.name[1] == route[-2]):
-                # target edge is inside the route, end edge is equal to end of route
-                target_start_node = target_edge.name[1]
-                target_end_node = target_edge.name[0]
-                dist_path = dist_path - target_dist
-            else:
-                #target edge is outside the route, end route is start of edge
-                target_end_node = target_edge.name[1]
-                target_start_node = target_edge.name[0]
-                dist_path = dist_path + target_dist
-        elif target_edge.name[1] == route[-1]:
-            if(target_edge.name[0] == route[-2]):
-                # target edge is inside the route, end edge is equal to end of route
-                target_start_node = target_edge.name[0]
-                target_end_node = target_edge.name[1]
-                dist_path = dist_path - target_dist
-            else:
-                #target edge is outside the route, end route is start of edge
-                target_end_node = target_edge.name[0]
-                target_start_node = target_edge.name[1]
-                dist_path = dist_path + target_dist
 
+            # Calculate the shortest path
+            route = nx.shortest_path(G, source=origin_node, target=target_node, weight='length')
+
+
+            # Get the nodes along the shortest path
+            route_nodes = nodes_utm.loc[route]
+            # convert route into linestring so we can calculate distance 
+            route_line = LineString(list(route_nodes.geometry.values))
+
+            # Create a GeoDataFrame
+            route_geom = gpd.GeoDataFrame([[route_line]], geometry='geometry', crs=nodes_utm.crs, columns=['geometry'])
+
+            # Calculate the route length
+            route_geom['length_m'] = route_geom.length
+
+            dist_path = route_geom['length_m']
+            # fixing distance from origin to nearest nodes
+            if origin_edge.name[0] == route[0]:
+                if(origin_edge.name[1] == route[1]):
+                    # origin edge is inside the route, start edge is equal to start of route
+                    origin_start_node = origin_edge.name[0]
+                    origin_end_node = origin_edge.name[1]
+                    dist_path = dist_path - origin_dist
+                else:
+                    # origin edge is outside the route, end edge is equal to start of route
+                    origin_end_node = origin_edge.name[0]
+                    origin_start_node = origin_edge.name[1]
+                    dist_path = dist_path + origin_dist
+            elif origin_edge.name[1] == route[0]:
+                if(origin_edge.name[0] == route[1]):
+                    # origin edge is inside the route, start edge is equal to start of route
+                    origin_start_node = origin_edge.name[1]
+                    origin_end_node = origin_edge.name[0]
+                    dist_path = dist_path - origin_dist
+                else:
+                    # origin edge is outside the route, end edge is equal to start of route
+                    origin_end_node = origin_edge.name[1]
+                    origin_start_node = origin_edge.name[0]
+                    dist_path = dist_path + origin_dist
+
+            # fixing distance from targert to nearest nodes 
+            if target_edge.name[0] == route[-1]:
+                if(target_edge.name[1] == route[-2]):
+                    # target edge is inside the route, end edge is equal to end of route
+                    target_start_node = target_edge.name[1]
+                    target_end_node = target_edge.name[0]
+                    dist_path = dist_path - target_dist
+                else:
+                    #target edge is outside the route, end route is start of edge
+                    target_end_node = target_edge.name[1]
+                    target_start_node = target_edge.name[0]
+                    dist_path = dist_path + target_dist
+            elif target_edge.name[1] == route[-1]:
+                if(target_edge.name[0] == route[-2]):
+                    # target edge is inside the route, end edge is equal to end of route
+                    target_start_node = target_edge.name[0]
+                    target_end_node = target_edge.name[1]
+                    dist_path = dist_path - target_dist
+                else:
+                    #target edge is outside the route, end route is start of edge
+                    target_end_node = target_edge.name[0]
+                    target_start_node = target_edge.name[1]
+                    dist_path = dist_path + target_dist
+    except nx.NetworkXNoPath:
+            route_geom = gpd.GeoDataFrame([[o_closest.geometry]],geometry='geometry', crs=nodes_utm.crs,columns=['geometry'])
+            route_geom['length_m'] = 0 
+            dist_path = 1000
 
     route_geom['dist_path'] = dist_path
     # route_geom['target_start_node'] = target_start_node
@@ -219,5 +221,6 @@ def shotest_path(target_edge, target_point, origin_edge, origin_point, G, nodes_
     # route_geom['origin_end_node'] = origin_end_node
     # route_geom['route_nodes'] = [tuple(route)]
 
+    route_geom
 
     return route_geom 
