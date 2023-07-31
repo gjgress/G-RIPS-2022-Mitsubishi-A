@@ -38,9 +38,6 @@ def plot_trajectory(
     ax.set_title(title)
     
     geographic_gdf = trajectory.to_crs(EPSG4326)
-    
-    # print('trajectory[\'geometry\']\n', trajectory[trajectory['cluster'] == 1])
-    # print('geographic_gdf[\'geometry\']\n', geographic_gdf[trajectory['cluster'] == 1])
 
     if plot_trajectory_edges:
         # Plot the trajectory edges
@@ -58,8 +55,6 @@ def plot_trajectory(
             color_mapping = {
                 label: "#" + "%06x" % random.randint(0, 0xFFFFFF) for label in unique_labels
             }
-        
-        # print(color_mapping)
         
         # Color the noises by orange
         if -1 in unique_labels:

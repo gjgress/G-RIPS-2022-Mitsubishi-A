@@ -38,10 +38,7 @@ def GPX_to_GeoDataFrame(gpx):
 
 def to_utm_gdf(gdf):
     utm_crs = gdf.estimate_utm_crs()
-    # print('utm_crs: ', utm_crs)
-    # print('gdf: ', gdf)
     utm_gdf = gdf.to_crs(crs=utm_crs)
-    # print('utm_gdf: ', utm_gdf)
     utm_gdf['lon_lat']  = gdf['geometry']
     return utm_gdf
 
@@ -106,7 +103,6 @@ def save_trajecotory_from_envirocar_as_npz(id, dir, compressed):
     direction = []
     HDOP = []
     default_HDOP = 100 # Note: higer values have lower precision
-    print(id)
     for i in range(len(utm_gdf)):
         if 'Speed' not in utm_gdf['phenomenons'][i]:
             # print(f'Skipped: {id} (a trajectory point does not have the speed field)')
@@ -263,9 +259,7 @@ def to_fuzzy_AHP_input(gdf):
     minx, miny, maxx, maxy = bbox
 
     # Download a map by specifying the bounding box
-    print("Downloading the road network graph")
     G = ox.graph.graph_from_bbox(maxy, miny, maxx, minx, network_type='all_private', retain_all=True, truncate_by_edge=True) 
-    print("Finished downloading")
     
     graph_proj = ox.project_graph(G)
     nodes_utm, edges_utm = ox.graph_to_gdfs(graph_proj, nodes=True, edges=True)
