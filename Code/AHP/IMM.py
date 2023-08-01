@@ -72,22 +72,11 @@ def IMM(trajectory_data, edges_data, iter):
     # initialization for IMM
     stop_iter = False
     err_size = 38
-    
-    # saving answer for debugging purposes 
-    # edge_link saves all the candidate link name for each iteration 
-    # final answer is stored in the edge_link variable 
-    edge_link = []
-    #curr_pos
-    curr_pos_list = []
-    # save candidate link name each iteration  
-    candidate_link_res = []
-    
-    
+        
     while stop_iter == False :
         # extract current location at given iteration 
         curr_loc = trajectory_data.iloc[[iter]]
-        # save the iteration current position as a list
-        curr_pos_list.append(curr_loc)
+
     
         # if the vehicle speed is less than 3m/s we skip it because the data at the time is less reliable
         if curr_loc['speed_mps'].iloc[0] < 3:
@@ -103,9 +92,8 @@ def IMM(trajectory_data, edges_data, iter):
             
             # Check for intersection and containment using geopandas
             intersects = gpd.sjoin(err_poly, edges_data, predicate='intersects')
-            contains = gpd.sjoin(err_poly, edges_data, predicate='contains')
         
-            if (len(intersects) + len(contains)) <= 0:
+            if (len(intersects)) <= 0:
                 # print(['no edeges intersects with error bound at iteration number', iter + 1])
                 iter = iter + 1
             else:    
@@ -114,14 +102,8 @@ def IMM(trajectory_data, edges_data, iter):
                 # print(['edges found at iteration number', iter + 1])
         
                 # extract index from edges that intersect with error polygon 
-                int_index = intersects[['index_right0', 'index_right1', 'index_right2']]
-                # extract index from edges that contained in the error polygon 
-                cont_index = contains[['index_right0', 'index_right1', 'index_right2']]
+                index = intersects[['index_right0', 'index_right1', 'index_right2']]
         
-                # merge index
-                index = pd.concat([int_index, cont_index])
-                # drop duplicate
-                index = index.drop_duplicates()
         
                 # initialize candidate edges 
                 appended_edge = []
@@ -132,9 +114,6 @@ def IMM(trajectory_data, edges_data, iter):
                     appended_edge.append(edge_list)
         
                 candidate_link = edges_data.loc[appended_edge]
-        
-                #save candidate link name 
-                candidate_link_res.append(candidate_link['osmid'])
         
                 # calculate perpendicular distance 
                 # initialize list that hold perpendicular distance between points and edges
@@ -171,10 +150,6 @@ def IMM(trajectory_data, edges_data, iter):
                 
                 # find the index corresponding to the highest weight edge
                 imm_res = IMMfunction.IMMfunc(PD, HE, map_enviroment)               
-                edge_link.append(candidate_link['osmid'].iloc[imm_res])
-
-                # loc = np.where(edges_data["str_id"] == conc(edge_link[0]))
-                # a = edges_data.iloc[loc]
 
                 a = candidate_link.iloc[[imm_res]]
 

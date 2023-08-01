@@ -78,48 +78,154 @@ def check_connect(link):
         a = 0
     return a
 
+# def MMJ(trajectory_data, nodes_data, edges_data, current_position, previous_edge, iter):
+#     err_size = 38
+#     # extract node id
+#     edge_node1 = nodes_data.loc[previous_edge.index[0][0]]
+#     edge_node2 = nodes_data.loc[previous_edge.index[0][1]]
+    
+#     edge_link = []
+    
+#     # select the end node 
+#     if (current_position['GPS Bearing'].iloc[0] > 0 and current_position['GPS Bearing'].iloc[0] < 180):
+#         # if object movint to the right of map select the one with larger longitude
+#         if edge_node1.x > edge_node2.x:
+#             end_node = edge_node1
+#             start_node = edge_node2
+#         else:
+#             end_node = edge_node2
+#             start_node = edge_node1
+#     else:
+#         # if object is moving to the left select node with smaller longitude
+#         if edge_node1.x < edge_node2.x:
+#             end_node = edge_node1
+#             start_node = edge_node2
+#         else:
+#             end_node = edge_node2
+#             start_node = edge_node1
+    
+#     # get edges inside the error region 
+#     err_poly = err_polygon(current_position, err_size)
+    
+#     intersects = gpd.sjoin(err_poly, edges_data, predicate='intersects')
+#     contains = gpd.sjoin(err_poly, edges_data, predicate='contains')
+#     # print('len(intersects))
+#     if (len(intersects) + len(contains)) > 0:
+#         # extract index from edges that intersect with error polygon 
+#         int_index = intersects[['index_right0', 'index_right1', 'index_right2']]
+#         # extract index from edges that contained in the error polygon 
+#         cont_index = contains[['index_right0', 'index_right1', 'index_right2']]
+    
+#         # merge index
+#         index = pd.concat([int_index, cont_index])
+#         # drop duplicate
+#         index = index.drop_duplicates()
+    
+#         # initialize candidate edges 
+#         appended_edge = []
+    
+#         # extract candidate eges  
+#         for i in range(len(index)):
+#             edge_list = (index['index_right0'].iloc[i], index['index_right1'].iloc[i], 0 )
+#             appended_edge.append(edge_list)
+    
+#         candidate_link = edges_data.loc[appended_edge]
+#         # store previous end link info for connectivity checking 
+#         candidate_link['prev_end_node'] = np.repeat(end_node.name, len(candidate_link))
+#         # put u and v into column for connectivity checking
+#         candidate_link_uv = candidate_link.reset_index()
+        
+#         # calculate perpendicular distance 
+#         # initialize list that hold perpendicular distance between points and edges
+#         p_dist = []
+#         # initialize list that hold connectivity 
+#         conn = []
+#         # calculate perpendicular distance between current point and connectivity
+#         for i in range(len(candidate_link)):
+#             p_dist.append(candidate_link['geometry'].iloc[i].distance(current_position['geometry']).iloc[0])
+#             conn.append(check_connect(candidate_link_uv.iloc[i]))
+        
+#         # attach perpendicular distance to candidate link 
+#         candidate_link['perp_dist'] = p_dist
+        
+#         # attach connectivity 
+#         candidate_link['connectivity'] = conn
+    
+#         # print(candidate_link)
+    
+#         # calculate heading error
+#         # convert lat lon into tupple coordinate 
+#         candidate_link['lon_lat_pair'] = candidate_link.lon_lat.apply(lambda geom: list(geom.coords))
+    
+#         # calculate bearing frome start and end node for each candidate link (see notes below)
+#         bearing_raw = candidate_link['lon_lat_pair'].apply(edge_bearing)
+    
+#         # convert bearing from -pi, pi to 0, 2pi range
+#         candidate_link['edge_heading'] = bearing_raw.apply(conv_angle)
+    
+#         # heading difference = abs(gps heading - edge bearing)
+#         heading_diff = abs(candidate_link['edge_heading'] - current_position['GPS Bearing'].iloc[0])
+                
+#         # convert heading difference so that all its values lie from 0 to pi because the contribution of angle x and 2pi-x should be equal.
+#         candidate_link['heading_error'] = heading_diff.apply(adjust_angle)    
+        
+#         # initialize input for MMJ
+#         PD = candidate_link['perp_dist'].to_list()
+#         HE = candidate_link['heading_error'].to_list()
+#         TR = candidate_link['connectivity'].to_list()
+#         map_enviroment = ME(edges_data, current_position)
+        
+#         mmj_res = MMJfunction.MMJfunc(PD, HE, TR, map_enviroment)
+#         edge_link.append(candidate_link['osmid'].iloc[mmj_res])
+
+#         # loc = np.where(edges_data["str_id"] == conc(edge_link[0]))
+#         # a = edges_data.iloc[loc]
+        
+#         a = candidate_link.iloc[[mmj_res]]
+        
+#         iter = iter + 1
+
+#         return iter, a
+#     else:
+#         return (iter + 1), previous_edge
+
+
 def MMJ(trajectory_data, nodes_data, edges_data, current_position, previous_edge, iter):
     err_size = 38
-    # extract node id
-    edge_node1 = nodes_data.loc[previous_edge.index[0][0]]
-    edge_node2 = nodes_data.loc[previous_edge.index[0][1]]
+    # # extract node id
+    # edge_node1 = nodes_data.loc[previous_edge.index[0][0]]
+    # edge_node2 = nodes_data.loc[previous_edge.index[0][1]]
     
-    edge_link = []
-    
-    # select the end node 
-    if (current_position['GPS Bearing'].iloc[0] > 0 and current_position['GPS Bearing'].iloc[0] < 180):
-        # if object movint to the right of map select the one with larger longitude
-        if edge_node1.x > edge_node2.x:
-            end_node = edge_node1
-            start_node = edge_node2
-        else:
-            end_node = edge_node2
-            start_node = edge_node1
-    else:
-        # if object is moving to the left select node with smaller longitude
-        if edge_node1.x < edge_node2.x:
-            end_node = edge_node1
-            start_node = edge_node2
-        else:
-            end_node = edge_node2
-            start_node = edge_node1
+    # # select the end node 
+    # if (current_position['GPS Bearing'].iloc[0] > 0 and current_position['GPS Bearing'].iloc[0] < 180):
+    #     # if object movint to the right of map select the one with larger longitude
+    #     if edge_node1.x > edge_node2.x:
+    #         end_node = edge_node1
+    #         start_node = edge_node2
+    #     else:
+    #         end_node = edge_node2
+    #         start_node = edge_node1
+    # else:
+    #     # if object is moving to the left select node with smaller longitude
+    #     if edge_node1.x < edge_node2.x:
+    #         end_node = edge_node1
+    #         start_node = edge_node2
+    #     else:
+    #         end_node = edge_node2
+    #         start_node = edge_node1
+
+    end_node = previous_edge.iloc[0].name[1]
+    start_node = previous_edge.iloc[0].name[0]
     
     # get edges inside the error region 
     err_poly = err_polygon(current_position, err_size)
     
     intersects = gpd.sjoin(err_poly, edges_data, predicate='intersects')
-    contains = gpd.sjoin(err_poly, edges_data, predicate='contains')
-    # print('len(intersects))
-    if (len(intersects) + len(contains)) > 0:
-        # extract index from edges that intersect with error polygon 
-        int_index = intersects[['index_right0', 'index_right1', 'index_right2']]
-        # extract index from edges that contained in the error polygon 
-        cont_index = contains[['index_right0', 'index_right1', 'index_right2']]
     
-        # merge index
-        index = pd.concat([int_index, cont_index])
-        # drop duplicate
-        index = index.drop_duplicates()
+    # print('len(intersects))
+    if len(intersects) > 0:
+        # extract index from edges that intersect with error polygon 
+        index = intersects[['index_right0', 'index_right1', 'index_right2']]
     
         # initialize candidate edges 
         appended_edge = []
@@ -131,7 +237,7 @@ def MMJ(trajectory_data, nodes_data, edges_data, current_position, previous_edge
     
         candidate_link = edges_data.loc[appended_edge]
         # store previous end link info for connectivity checking 
-        candidate_link['prev_end_node'] = np.repeat(end_node.name, len(candidate_link))
+        candidate_link['prev_end_node'] = np.repeat(end_node, len(candidate_link))
         # put u and v into column for connectivity checking
         candidate_link_uv = candidate_link.reset_index()
         
@@ -176,10 +282,6 @@ def MMJ(trajectory_data, nodes_data, edges_data, current_position, previous_edge
         map_enviroment = ME(edges_data, current_position)
         
         mmj_res = MMJfunction.MMJfunc(PD, HE, TR, map_enviroment)
-        edge_link.append(candidate_link['osmid'].iloc[mmj_res])
-
-        # loc = np.where(edges_data["str_id"] == conc(edge_link[0]))
-        # a = edges_data.iloc[loc]
         
         a = candidate_link.iloc[[mmj_res]]
         
@@ -188,9 +290,6 @@ def MMJ(trajectory_data, nodes_data, edges_data, current_position, previous_edge
         return iter, a
     else:
         return (iter + 1), previous_edge
-
-
-
 
 
 
