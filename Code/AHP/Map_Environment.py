@@ -43,12 +43,33 @@ def ME(edges_data, current_position):
     inter_index = intersects[['index_right0', 'index_right1', 'index_right2']].values.tolist()
     intersects_edges = edges_data.loc[map(tuple, inter_index)]
     
-    unique_intersects = intersects_edges.loc[intersects_edges['osmid'].drop_duplicates().index]
-    temp = unique_intersects.reset_index()
-    list = pd.concat([temp['u'], temp['v']])
-    list = list.to_list()
-    temp2 = np.unique(list, return_counts=True) 
+    # unique_intersects = intersects_edges.loc[intersects_edges['osmid'].drop_duplicates().index]
+    # temp = unique_intersects.reset_index()
+    # list = pd.concat([temp['u'], temp['v']])
+    # list = list.to_list()
+    # temp2 = np.unique(list, return_counts=True) 
+
+    temp = []
+    for i in intersects_edges.index.tolist():   
+        j = list(i)
+        del j[2]
+        temp.append(set(j))
+
+    result = []
+    for item in temp:
+        if item not in result:
+            result.append(item)
     
+    ent = []
+    for i in result:
+        j = list(i)
+        if len(j) >= 2:
+            ent.append(j[0])
+            ent.append(j[1])
+        elif len(j) == 1:
+            ent.append(j[0])
+    
+    temp2 = np.unique(ent, return_counts=True)
     number_junctions = np.count_nonzero(temp2[1] >= 3)
 
     if len(contains) == 0:
