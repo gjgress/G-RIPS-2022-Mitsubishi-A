@@ -319,6 +319,11 @@ def KCMMN_input_for_fuzzy_AHP(trajectory_number, dataset_dir='../Data/map-matchi
     nodes = nodes.to_crs(projected_crs)
     edges = edges.to_crs(projected_crs)
     
+    nodes['lon'] = nodes['lon_lat'].x
+    nodes['lat'] = nodes['lon_lat'].y
+    nodes['x'] = nodes['geometry'].x
+    nodes['y'] = nodes['geometry'].y
+    
     length = []
     for u, v in zip(edges['u'], edges['v']):
         p = nodes.loc[u, 'geometry']
@@ -333,8 +338,12 @@ def KCMMN_input_for_fuzzy_AHP(trajectory_number, dataset_dir='../Data/map-matchi
         oneway.append(is_oneway[(min(uv), max(uv))])
     edges['oneway'] = oneway
     
+    edges['str_id'] = [str(uv[0]) + ',' + str(uv[1]) for uv in zip(edges['u'].values.tolist(), edges['v'].values.tolist())]
+    
     edges['key'] = 0
     edges = edges.set_index(['u', 'v', 'key'])
+    # edges['str_id'] = conc(edges.index)
+    
     
     speed_direction_approximation_path = os.path.join(speed_direction_approximation_dir, trajectory_id + '_dir.npz')
     speed_direction_approximation = np.load(speed_direction_approximation_path)
@@ -347,5 +356,6 @@ def KCMMN_input_for_fuzzy_AHP(trajectory_number, dataset_dir='../Data/map-matchi
     trajectory['time'] = time
     trajectory['speed_mps'] = velocity_magnitude # TODO: check the unit of the estimated speed!
     trajectory['GPS Bearing'] = velocity_direction
+    trajectory['GPS HDOP'] = 1
     
     return trajectory, nodes, edges
