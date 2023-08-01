@@ -16,7 +16,7 @@ import mm_utils
 from function_util import*
 from FIS1 import FIS1
 
-def IMP(point_index, gdf_utm, edges_utm, n, plot = False):
+def IMP(point_index, gdf_utm, edges_utm, n, wt_matrix = np.identity(6),plot = False):
     # n i s the number of same points detected to edges needed to stop IMP
     # function return index of location noted as starting point. 
     # initialization for IMP
@@ -88,7 +88,7 @@ def IMP(point_index, gdf_utm, edges_utm, n, plot = False):
             candidate_link = edges_utm.loc[appended_edge]
 
             #save candidate link name 
-            candidate_link_res.append(candidate_link['osmid'])
+ 
 
             # calculate perpendicular distance 
             # initialize list that hold perpendicular distance between points and edges
@@ -130,7 +130,7 @@ def IMP(point_index, gdf_utm, edges_utm, n, plot = False):
             # calculating FIS
             pred =[]
             for i in range(len(new_data)):
-                pred.append(FIS1(new_data[i,:], plot = False))
+                pred.append(FIS1(new_data[i,:], method = 1,wt_matrix = wt_matrix, plot = False))
 
             # print(pred)
             # save fis result 
@@ -138,8 +138,8 @@ def IMP(point_index, gdf_utm, edges_utm, n, plot = False):
 
             # pick candidate link based on 
             index = pred.index(max(pred))
-
-            edge_link.append(candidate_link['osmid'].iloc[index])
+            
+            edge_link.append(candidate_link.iloc[index].name)
 
             # check if the current position and previous position is in the same edge
             if count > 0:
@@ -167,14 +167,11 @@ def IMP(point_index, gdf_utm, edges_utm, n, plot = False):
         # This is how we  visualize edges and error bound 
         # find which edges is selected at time point
         # find index of the edge id
-        loc = np.where(edges_utm["str_id"] == conc(edge_link[count]))
 
         # find the last two position for IMP
-        poly_1 = err_polygon(curr_pos_list[count + iter - 2], err_size)
-        poly_2 = err_polygon(curr_pos_list[count + iter - 3], err_size)
+        poly_1 = err_polygon(curr_pos_list[iter - 2], err_size)
+        poly_2 = err_polygon(curr_pos_list[iter - 3], err_size)
 
-        #Save selected edge 
-        answer_loc = edges_utm.iloc[loc]
 
         # plotting edges and starting point together 
         f, ax = plt.subplots()
@@ -193,7 +190,7 @@ def IMP(point_index, gdf_utm, edges_utm, n, plot = False):
         edges_utm.plot(ax=ax)
 
         # this plot the selected edge at time point 
-        answer_loc.plot(ax=ax, cmap = "Reds")
+        matched_link.plot(ax=ax, color = "Red")
 
         # matched point plot
         matched_point.plot(ax = ax, color = "Green")

@@ -51,7 +51,21 @@ def init_vars():
     return df
 
 
-def FIS2(data_temp, plot):
+def FIS2(data_temp, method, plot = False):
+    # method 1 uses speed,hdop, alpha, beta, delta_d, HI, HI
+    # method 2 uses speed, alpha, beta, delta_d, HI, HI
+    
+    # check if input is passed correctly 
+    if (method ==1 and len(data_temp) != 7):
+        print('incorrect dimension of input')
+        print(['dimension of data is ', len(data_temp), ' while using method 1']) 
+        return 0
+    elif (method == 2 and len(data_temp) != 6):
+        print('incorrect dimension of input')
+        print(['dimension of data is ', len(data_temp), ' while using method 2']) 
+        return 0  
+    else:
+        print('correct dimension')
     var_bounds = init_vars()
     #print(var_bounds.iloc[0,0])
     get_mid(var_bounds,0)
@@ -100,128 +114,262 @@ def FIS2(data_temp, plot):
     m[0, 12] = get_params(var_bounds.iloc[16, 0], var_bounds.iloc[16, 1], "s")
     m[1, 12] = get_mid(var_bounds, 16)
     
-       # define range for each input 
-    x_speed = np.arange(0, 50, 0.1)
-    x_HDOP = np.arange(0, 20, 0.1)
-    x_alpha = np.arange(0, 360, 0.1)
-    x_beta = np.arange(0,360, 0.1)
-    x_delta = np.arange(-500,500, 0.1)
-    x_HI = np.arange(0, 360, 0.1)
-    x_HI180 = np.arange(0, 360, 0.1)
+    
+    if method == 1: 
+        # define range for each input 
+        x_speed = np.arange(0, 50, 0.1)
+        x_HDOP = np.arange(0, 20, 0.1)
+        x_alpha = np.arange(0, 360, 0.1)
+        x_beta = np.arange(0,360, 0.1)
+        x_delta = np.arange(-500,500, 0.1)
+        x_HI = np.arange(0, 360, 0.1)
+        x_HI180 = np.arange(0, 360, 0.1)
 
-    # Creating Membership function : 
-    #input : range, x shift, width, 
-    # note : parameter input is flipped from R function 
-    speed_high = mf.sigmf(x_speed, m[1, 0], m[0, 0])
-    speed_low = mf.sigmf(x_speed, m[1, 1], m[0, 1])
-    speed_zero = mf.sigmf(x_speed, m[1,2], m[0,2])
+        # Creating Membership function : 
+        #input : range, x shift, width, 
+        # note : parameter input is flipped from R function 
+        speed_high = mf.sigmf(x_speed, m[1, 0], m[0, 0])
+        speed_low = mf.sigmf(x_speed, m[1, 1], m[0, 1])
+        speed_zero = mf.sigmf(x_speed, m[1,2], m[0,2])
 
-    HDOP_good = mf.sigmf(x_HDOP, m[1, 3], m[0, 3])
-    HDOP_bad = mf.sigmf(x_HDOP, m[1, 4], m[0, 4])
+        HDOP_good = mf.sigmf(x_HDOP, m[1, 3], m[0, 3])
+        HDOP_bad = mf.sigmf(x_HDOP, m[1, 4], m[0, 4])
 
-    alpha_low = mf.sigmf(x_alpha, m[1,5], m[0,5])
-    alpha_high = mf.sigmf(x_alpha, m[1,6], m[0,6])
+        alpha_low = mf.sigmf(x_alpha, m[1,5], m[0,5])
+        alpha_high = mf.sigmf(x_alpha, m[1,6], m[0,6])
 
-    beta_low = mf.sigmf(x_beta, m[1, 7], m[0, 7])
-    beta_high = mf.sigmf(x_beta, m[1, 8], m[0, 8])
+        beta_low = mf.sigmf(x_beta, m[1, 7], m[0, 7])
+        beta_high = mf.sigmf(x_beta, m[1, 8], m[0, 8])
 
-    delta_d_neg = mf.sigmf(x_delta, m[1, 9], m[0,9])
-    delta_d_pos = mf.sigmf(x_delta, m[1,10], m[0,10])
+        delta_d_neg = mf.sigmf(x_delta, m[1, 9], m[0,9])
+        delta_d_pos = mf.sigmf(x_delta, m[1,10], m[0,10])
 
-    HI_small = mf.sigmf(x_HI, m[1, 11], m[0,11])
-    HI_large = mf.sigmf(x_HI, m[1, 12], m[0,12])
+        HI_small = mf.sigmf(x_HI, m[1, 11], m[0,11])
+        HI_large = mf.sigmf(x_HI, m[1, 12], m[0,12])
 
-    HI180 = mf.trapmf(x_HI180,[125, 150, 200, 225])
+        HI180 = mf.trapmf(x_HI180,[125, 150, 200, 225])
 
-    if plot == True:
-        # plot membership function 
-        fig, (ax0, ax1, ax2, ax3, ax4, ax5, ax6) = plt.subplots(nrows = 7, figsize =(10, 25))
+        if plot == True:
+            # plot membership function 
+            fig, (ax0, ax1, ax2, ax3, ax4, ax5, ax6) = plt.subplots(nrows = 7, figsize =(10, 25))
 
-        ax0.plot(x_speed, speed_high, 'r', linewidth = 2, label = 'High')
-        ax0.plot(x_speed, speed_low, 'g', linewidth = 2, label = 'Low')
-        ax0.plot(x_speed, speed_zero, 'b', linewidth = 2, label = 'Zero')
-        ax0.set_title('speed')
-        ax0.legend()
+            ax0.plot(x_speed, speed_high, 'r', linewidth = 2, label = 'High')
+            ax0.plot(x_speed, speed_low, 'g', linewidth = 2, label = 'Low')
+            ax0.plot(x_speed, speed_zero, 'b', linewidth = 2, label = 'Zero')
+            ax0.set_title('speed')
+            ax0.legend()
 
-        ax1.plot(x_HDOP, HDOP_good, 'r', linewidth = 2, label = 'Good')
-        ax1.plot(x_HDOP, HDOP_bad, 'g', linewidth = 2, label = 'Bad')
-        ax1.set_title('Horizontal Dilution of Precission')
-        ax1.legend()
+            ax1.plot(x_HDOP, HDOP_good, 'r', linewidth = 2, label = 'Good')
+            ax1.plot(x_HDOP, HDOP_bad, 'g', linewidth = 2, label = 'Bad')
+            ax1.set_title('Horizontal Dilution of Precission')
+            ax1.legend()
 
-        ax2.plot(x_alpha, alpha_low, 'r', linewidth = 2, label = 'Below 90')
-        ax2.plot(x_alpha, alpha_high, 'g', linewidth = 2, label = 'Above 90')
-        ax2.set_title('alpha')
-        ax2.legend()
+            ax2.plot(x_alpha, alpha_low, 'r', linewidth = 2, label = 'Below 90')
+            ax2.plot(x_alpha, alpha_high, 'g', linewidth = 2, label = 'Above 90')
+            ax2.set_title('alpha')
+            ax2.legend()
 
-        ax3.plot(x_beta, beta_low, 'r', linewidth = 2, label = 'Below 90')
-        ax3.plot(x_beta, beta_high, 'g', linewidth = 2, label = 'Above 90')
-        ax3.set_title('Beta')
-        ax3.legend()
+            ax3.plot(x_beta, beta_low, 'r', linewidth = 2, label = 'Below 90')
+            ax3.plot(x_beta, beta_high, 'g', linewidth = 2, label = 'Above 90')
+            ax3.set_title('Beta')
+            ax3.legend()
 
-        ax4.plot(x_delta, delta_d_neg, 'r', linewidth = 2, label = 'Negative')
-        ax4.plot(x_delta, delta_d_pos, 'g', linewidth = 2, label = 'Positive')
-        ax4.set_title('Delta d')
-        ax4.legend()
+            ax4.plot(x_delta, delta_d_neg, 'r', linewidth = 2, label = 'Negative')
+            ax4.plot(x_delta, delta_d_pos, 'g', linewidth = 2, label = 'Positive')
+            ax4.set_title('Delta d')
+            ax4.legend()
 
-        ax5.plot(x_HI, HI_small, 'r', linewidth = 2, label = 'Small')
-        ax5.plot(x_HI, HI_large, 'g', linewidth = 2, label = 'Large')
-        ax5.set_title('HI')
-        ax5.legend()
+            ax5.plot(x_HI, HI_small, 'r', linewidth = 2, label = 'Small')
+            ax5.plot(x_HI, HI_large, 'g', linewidth = 2, label = 'Large')
+            ax5.set_title('HI')
+            ax5.legend()
 
-        ax6.plot(x_HI180, HI180, 'r', linewidth = 2, label = '180')
-        ax6.set_title('HI 180')
-        ax6.legend()
+            ax6.plot(x_HI180, HI180, 'r', linewidth = 2, label = '180')
+            ax6.set_title('HI 180')
+            ax6.legend()
 
-    speed_fit_high = fuzz.interp_membership(x_speed, speed_high, data_temp[0])
-    speed_fit_low = fuzz.interp_membership(x_speed, speed_low, data_temp[0])
-    speed_fit_zero = fuzz.interp_membership(x_speed, speed_zero, data_temp[0])
+        speed_fit_high = fuzz.interp_membership(x_speed, speed_high, data_temp[0])
+        speed_fit_low = fuzz.interp_membership(x_speed, speed_low, data_temp[0])
+        speed_fit_zero = fuzz.interp_membership(x_speed, speed_zero, data_temp[0])
 
-    HDOP_fit_good = fuzz.interp_membership(x_HDOP, HDOP_good, data_temp[1])
-    HDOP_fit_bad = fuzz.interp_membership(x_HDOP, HDOP_bad, data_temp[1])
+        HDOP_fit_good = fuzz.interp_membership(x_HDOP, HDOP_good, data_temp[1])
+        HDOP_fit_bad = fuzz.interp_membership(x_HDOP, HDOP_bad, data_temp[1])
 
-    alpha_fit_low = fuzz.interp_membership(x_alpha, alpha_low, data_temp[2])
-    alpha_fit_high = fuzz.interp_membership(x_alpha, alpha_high, data_temp[2])
+        alpha_fit_low = fuzz.interp_membership(x_alpha, alpha_low, data_temp[2])
+        alpha_fit_high = fuzz.interp_membership(x_alpha, alpha_high, data_temp[2])
 
-    beta_fit_low = fuzz.interp_membership(x_beta, beta_low, data_temp[3])
-    beta_fit_high = fuzz.interp_membership(x_beta, beta_high, data_temp[3])
+        beta_fit_low = fuzz.interp_membership(x_beta, beta_low, data_temp[3])
+        beta_fit_high = fuzz.interp_membership(x_beta, beta_high, data_temp[3])
 
-    delta_fit_neg = fuzz.interp_membership(x_delta, delta_d_neg, data_temp[4])
-    delta_fit_pos = fuzz.interp_membership(x_delta, delta_d_pos, data_temp[4])
+        delta_fit_neg = fuzz.interp_membership(x_delta, delta_d_neg, data_temp[4])
+        delta_fit_pos = fuzz.interp_membership(x_delta, delta_d_pos, data_temp[4])
 
-    HI_fit_small = fuzz.interp_membership(x_HI, HI_small, data_temp[5])
-    HI_fit_large = fuzz.interp_membership(x_HI, HI_large, data_temp[5])
+        HI_fit_small = fuzz.interp_membership(x_HI, HI_small, data_temp[5])
+        HI_fit_large = fuzz.interp_membership(x_HI, HI_large, data_temp[5])
 
-    HI180_fit = fuzz.interp_membership(x_HI180, HI180, data_temp[6])
+        HI180_fit = fuzz.interp_membership(x_HI180, HI180, data_temp[6])
 
-    # weight for each rule 
-    # need to be optimize later 
-    Z = np.array([100, 10, 10, 100, 10 ,10, 10, 100, 50, 10, 50, 100])
+        # weight for each rule 
+        # need to be optimize later 
+        Z = np.array([100, 10, 10, 100, 10 ,10, 10, 100, 50, 10, 50, 100])
 
-    # initialize weight
-    weight = np.zeros((1,12))
-    # initialize output array 
-    output = np.zeros((1, 12))
+        # initialize weight
+        weight = np.zeros((1,12))
+        # initialize output array 
+        output = np.zeros((1, 12))
 
-    # Create weight rules : 
-    weight[0,0]= np.fmin(alpha_fit_low, beta_fit_low)
-    weight[0,1] = np.fmin(delta_fit_pos, alpha_fit_high)
-    weight[0,2] = np.fmin(delta_fit_pos, beta_fit_high)
-    weight[0,3] = np.fmin(HI_fit_small, np.fmin(alpha_fit_low, beta_fit_low))
-    weight[0,4] = np.fmin(HI_fit_small, np.fmin(delta_fit_pos, alpha_fit_high))
-    weight[0,5] = np.fmin(HI_fit_small, np.fmin(delta_fit_pos, beta_fit_high))
-    weight[0,6] = np.fmin(HI_fit_large, np.fmin(alpha_fit_low, beta_fit_low))
-    weight[0,7] = np.fmin(HDOP_fit_good, speed_fit_zero)
-    weight[0,8] = np.fmin(HDOP_fit_good, delta_fit_neg)
-    weight[0,9] = np.fmin(HDOP_fit_good, delta_fit_pos)
-    weight[0,10] = np.fmin(speed_fit_high, HI_fit_small)
-    weight[0,11] = np.fmin(HDOP_fit_good, np.fmin(speed_fit_high, HI180_fit))
+        # Create weight rules : 
+        weight[0,0]= np.fmin(alpha_fit_low, beta_fit_low)
+        weight[0,1] = np.fmin(delta_fit_pos, alpha_fit_high)
+        weight[0,2] = np.fmin(delta_fit_pos, beta_fit_high)
+        weight[0,3] = np.fmin(HI_fit_small, np.fmin(alpha_fit_low, beta_fit_low))
+        weight[0,4] = np.fmin(HI_fit_small, np.fmin(delta_fit_pos, alpha_fit_high))
+        weight[0,5] = np.fmin(HI_fit_small, np.fmin(delta_fit_pos, beta_fit_high))
+        weight[0,6] = np.fmin(HI_fit_large, np.fmin(alpha_fit_low, beta_fit_low))
+        weight[0,7] = np.fmin(HDOP_fit_good, speed_fit_zero)
+        weight[0,8] = np.fmin(HDOP_fit_good, delta_fit_neg)
+        weight[0,9] = np.fmin(HDOP_fit_good, delta_fit_pos)
+        weight[0,10] = np.fmin(speed_fit_high, HI_fit_small)
+        weight[0,11] = np.fmin(HDOP_fit_good, np.fmin(speed_fit_high, HI180_fit))
 
-    # standardize the weigth 
-    std_weight = weight / weight.sum()
+        # standardize the weigth 
+        std_weight = weight / weight.sum()
 
 
-    # Tsugeno-Kang method 
-    output_array = np.multiply(std_weight,Z)
+        # Tsugeno-Kang method 
+        output_array = np.multiply(std_weight,Z)
 
-    output = output_array.sum()
-    return output
+        output = output_array.sum()
+        return output
+    
+    elif method == 2:
+        # define range for each input 
+        x_speed = np.arange(0, 50, 0.1)
+        #x_HDOP = np.arange(0, 20, 0.1)
+        x_alpha = np.arange(0, 360, 0.1)
+        x_beta = np.arange(0,360, 0.1)
+        x_delta = np.arange(-500,500, 0.1)
+        x_HI = np.arange(0, 360, 0.1)
+        x_HI180 = np.arange(0, 360, 0.1)
+
+        # Creating Membership function : 
+        #input : range, x shift, width, 
+        # note : parameter input is flipped from R function 
+        speed_high = mf.sigmf(x_speed, m[1, 0], m[0, 0])
+        speed_low = mf.sigmf(x_speed, m[1, 1], m[0, 1])
+        speed_zero = mf.sigmf(x_speed, m[1,2], m[0,2])
+
+        #HDOP_good = mf.sigmf(x_HDOP, m[1, 3], m[0, 3])
+        #HDOP_bad = mf.sigmf(x_HDOP, m[1, 4], m[0, 4])
+
+        alpha_low = mf.sigmf(x_alpha, m[1,5], m[0,5])
+        alpha_high = mf.sigmf(x_alpha, m[1,6], m[0,6])
+
+        beta_low = mf.sigmf(x_beta, m[1, 7], m[0, 7])
+        beta_high = mf.sigmf(x_beta, m[1, 8], m[0, 8])
+
+        delta_d_neg = mf.sigmf(x_delta, m[1, 9], m[0,9])
+        delta_d_pos = mf.sigmf(x_delta, m[1,10], m[0,10])
+
+        HI_small = mf.sigmf(x_HI, m[1, 11], m[0,11])
+        HI_large = mf.sigmf(x_HI, m[1, 12], m[0,12])
+
+        HI180 = mf.trapmf(x_HI180,[125, 150, 200, 225])
+
+        if plot == True:
+            # plot membership function 
+            fig, (ax0, ax2, ax3, ax4, ax5, ax6) = plt.subplots(nrows = 7, figsize =(10, 25))
+
+            ax0.plot(x_speed, speed_high, 'r', linewidth = 2, label = 'High')
+            ax0.plot(x_speed, speed_low, 'g', linewidth = 2, label = 'Low')
+            ax0.plot(x_speed, speed_zero, 'b', linewidth = 2, label = 'Zero')
+            ax0.set_title('speed')
+            ax0.legend()
+
+#             ax1.plot(x_HDOP, HDOP_good, 'r', linewidth = 2, label = 'Good')
+#             ax1.plot(x_HDOP, HDOP_bad, 'g', linewidth = 2, label = 'Bad')
+#             ax1.set_title('Horizontal Dilution of Precission')
+#             ax1.legend()
+
+            ax2.plot(x_alpha, alpha_low, 'r', linewidth = 2, label = 'Below 90')
+            ax2.plot(x_alpha, alpha_high, 'g', linewidth = 2, label = 'Above 90')
+            ax2.set_title('alpha')
+            ax2.legend()
+
+            ax3.plot(x_beta, beta_low, 'r', linewidth = 2, label = 'Below 90')
+            ax3.plot(x_beta, beta_high, 'g', linewidth = 2, label = 'Above 90')
+            ax3.set_title('Beta')
+            ax3.legend()
+
+            ax4.plot(x_delta, delta_d_neg, 'r', linewidth = 2, label = 'Negative')
+            ax4.plot(x_delta, delta_d_pos, 'g', linewidth = 2, label = 'Positive')
+            ax4.set_title('Delta d')
+            ax4.legend()
+
+            ax5.plot(x_HI, HI_small, 'r', linewidth = 2, label = 'Small')
+            ax5.plot(x_HI, HI_large, 'g', linewidth = 2, label = 'Large')
+            ax5.set_title('HI')
+            ax5.legend()
+
+            ax6.plot(x_HI180, HI180, 'r', linewidth = 2, label = '180')
+            ax6.set_title('HI 180')
+            ax6.legend()
+
+        speed_fit_high = fuzz.interp_membership(x_speed, speed_high, data_temp[0])
+        speed_fit_low = fuzz.interp_membership(x_speed, speed_low, data_temp[0])
+        speed_fit_zero = fuzz.interp_membership(x_speed, speed_zero, data_temp[0])
+
+#         HDOP_fit_good = fuzz.interp_membership(x_HDOP, HDOP_good, data_temp[1])
+#         HDOP_fit_bad = fuzz.interp_membership(x_HDOP, HDOP_bad, data_temp[1])
+
+        alpha_fit_low = fuzz.interp_membership(x_alpha, alpha_low, data_temp[1])
+        alpha_fit_high = fuzz.interp_membership(x_alpha, alpha_high, data_temp[1])
+
+        beta_fit_low = fuzz.interp_membership(x_beta, beta_low, data_temp[2])
+        beta_fit_high = fuzz.interp_membership(x_beta, beta_high, data_temp[2])
+
+        delta_fit_neg = fuzz.interp_membership(x_delta, delta_d_neg, data_temp[3])
+        delta_fit_pos = fuzz.interp_membership(x_delta, delta_d_pos, data_temp[3])
+
+        HI_fit_small = fuzz.interp_membership(x_HI, HI_small, data_temp[4])
+        HI_fit_large = fuzz.interp_membership(x_HI, HI_large, data_temp[4])
+
+        HI180_fit = fuzz.interp_membership(x_HI180, HI180, data_temp[5])
+
+        # weight for each rule 
+        # need to be optimize later 
+        Z = np.array([100, 10, 10, 100, 10 ,10, 10, 100, 50, 10, 50, 100])
+
+        # initialize weight
+        weight = np.zeros((1,12))
+        # initialize output array 
+        output = np.zeros((1, 12))
+
+        # Create weight rules : 
+        weight[0,0]= np.fmin(alpha_fit_low, beta_fit_low)
+        weight[0,1] = np.fmin(delta_fit_pos, alpha_fit_high)
+        weight[0,2] = np.fmin(delta_fit_pos, beta_fit_high)
+        weight[0,3] = np.fmin(HI_fit_small, np.fmin(alpha_fit_low, beta_fit_low))
+        weight[0,4] = np.fmin(HI_fit_small, np.fmin(delta_fit_pos, alpha_fit_high))
+        weight[0,5] = np.fmin(HI_fit_small, np.fmin(delta_fit_pos, beta_fit_high))
+        weight[0,6] = np.fmin(HI_fit_large, np.fmin(alpha_fit_low, beta_fit_low))
+        weight[0,7] = speed_fit_zero
+        weight[0,8] = delta_fit_neg
+        weight[0,9] = delta_fit_pos
+        weight[0,10] = np.fmin(speed_fit_high, HI_fit_small)
+        weight[0,11] = np.fmin(speed_fit_high, HI180_fit)
+
+        # standardize the weigth 
+        std_weight = weight / weight.sum()
+
+
+        # Tsugeno-Kang method 
+        output_array = np.multiply(std_weight,Z)
+
+        output = output_array.sum()
+        return output
+    else:
+        print( 'incorrect method')
+        return None
+
+        

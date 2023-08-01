@@ -19,8 +19,10 @@ from datetime import datetime
 
 def SMP1(curr_loc, curr_edge, prev_loc, last_matched, nodes_utm, edges_utm, gdf_utm):
     
-    start_node, end_node = node_direction(curr_edge, nodes_utm, curr_loc)
-
+    start_node = nodes_utm.loc[curr_edge.index[0][0]]
+    end_node = nodes_utm.loc[curr_edge.index[0][1]]
+    #start_node, end_node = node_direction(curr_edge, nodes_utm, curr_loc)
+    
     # finding angle alpha, which is the angle between previous matched point and current postion 
     # find pos_bearing1, bearing between last matched point and current point
     # convert two points into tuple for function input purposes
@@ -69,6 +71,6 @@ def SMP1(curr_loc, curr_edge, prev_loc, last_matched, nodes_utm, edges_utm, gdf_
     # rearrange new data to the input of fis1  
     new_data = np.array([speed,hdop, alpha, beta, delta_d, HI, HI]).T
 
-    res = FIS2(new_data, plot = False)
+    res = FIS2(new_data,method = 1, plot = False)
     
     return res

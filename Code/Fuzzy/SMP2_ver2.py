@@ -13,9 +13,11 @@ from urllib.parse import urljoin
 from shapely.geometry import Point, LineString, Polygon
 import pyproj 
 import mm_utils
-from FIS3 import *
+from FIS3_ver2 import *
 from function_util import *
 from datetime import datetime
+
+# this SMP using the penalized FIS model 
 
 def SMP2(curr_loc, curr_edge, prev_loc, last_matched, err_size, nodes_utm, edges_utm, gdf_utm, wt_matrix = np.identity(10), plot = False):
     

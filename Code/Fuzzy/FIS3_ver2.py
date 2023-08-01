@@ -92,6 +92,7 @@ def build_matrix3(rule_1 = 1,
 def FIS3(data_temp, method, wt_matrix = np.identity(10),plot =False):
     # method 1 uses speed, HE, PD, hdop, conn, dist_err]
     # method 2 uses speed, HE, PD, conn, dist_err]
+    # penalized low matching
     
     # check if input is passed correctly 
     if (method ==1 and len(data_temp) != 6):
@@ -366,7 +367,7 @@ def FIS3(data_temp, method, wt_matrix = np.identity(10),plot =False):
 
         # weight for each rule 
         # need to be optimize later 
-        Z = np.array([50, 10, 50, 10, 100 ,10, 10, 100, 100, 10])
+        Z = np.array([50, -10, 50, -10, 100 ,-10, -10, 100, 100, -10])
 
         # initialize weight
         weight = np.zeros((1,10))
