@@ -2,10 +2,12 @@ import requests
 import urllib.parse
 import json
 import os
+import datetime
 
 import geopandas as gpd
 import gpxpy
 import gpxpy.gpx
+import shapely.measurement
 from shapely.geometry import Point, shape
 import numpy as np
 import osmnx as ox
@@ -297,3 +299,53 @@ def to_fuzzy_AHP_input(gdf):
     gdf['speed_mps'] = gdf['GPS Speed']/3.6
     
     return gdf, nodes_utm, edges_utm
+
+def KCMMN_input_for_fuzzy_AHP(trajectory_number, dataset_dir='../Data/map-matching-dataset/', speed_direction_approximation_dir='../kcmmn/data/kcmmn/train'):
+    trajectory_id = trajectory_number.zfill(8)
+    trajectory_path = os.path.join(dataset_dir, trajectory_id + 'track.geojson')
+    nodes_path = os.path.join(dataset_dir, trajectory_id + 'nodes.geojson')
+    edges_path = os.path.join(dataset_dir, trajectory_id + 'arcs.geojson')
+    
+    projected_crs = 'EPSG:3857' # Should this change corresponding to the GPS trajectory?
+    trajectory = gpd.read_file(trajectory_path)
+    nodes = gpd.read_file(nodes_path)
+    edges = gpd.read_file(edges_path)
+    
+    trajectory['lon_lat'] = trajectory['geometry']
+    nodes['lon_lat'] = nodes['geometry']
+    edges['lon_lat'] = edges['geometry']
+    
+    trajectory = trajectory.to_crs(projected_crs)
+    nodes = nodes.to_crs(projected_crs)
+    edges = edges.to_crs(projected_crs)
+    
+    length = []
+    for u, v in zip(edges['u'], edges['v']):
+        p = nodes.loc[u, 'geometry']
+        q = nodes.loc[v, 'geometry']
+        length.append(shapely.measurement.distance(p, q))
+    edges['length'] = length
+    
+    oneway = []
+    count_duplicates = np.unique([(min(uv), max(uv)) for uv in zip(edges['u'].values.tolist(), edges['v'].values.tolist())], axis=0, return_counts=True)
+    is_oneway = dict([((count_duplicates[0][i][0], count_duplicates[0][i][1]), count_duplicates[1][i] == 1) for i in range(len(count_duplicates[0]))])
+    for uv in zip(edges['u'], edges['v']):
+        oneway.append(is_oneway[(min(uv), max(uv))])
+    edges['oneway'] = oneway
+    
+    edges['key'] = 0
+    edges = edges.set_index(['u', 'v', 'key'])
+    
+    speed_direction_approximation_path = os.path.join(speed_direction_approximation_dir, trajectory_id + '_dir.npz')
+    speed_direction_approximation = np.load(speed_direction_approximation_path)
+    velocity_magnitude = speed_direction_approximation['vmag']
+    velocity_direction = speed_direction_approximation['vdir']
+    
+    time = []
+    for i in range(len(trajectory['timestamp'])):
+        time.append(datetime.timedelta(seconds=trajectory['timestamp'].astype('float').iloc[i]))
+    trajectory['time'] = time
+    trajectory['speed_mps'] = velocity_magnitude # TODO: check the unit of the estimated speed!
+    trajectory['GPS Bearing'] = velocity_direction
+    
+    return trajectory, nodes, edges
