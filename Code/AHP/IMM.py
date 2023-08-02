@@ -155,7 +155,7 @@ def IMM(trajectory_data, edges_data, iter):
 
                 iter = iter + 1
 
-                return (iter, a)
+                return iter, a
                 
     
         

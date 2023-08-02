@@ -192,27 +192,6 @@ def check_connect(link):
 
 def MMJ(trajectory_data, nodes_data, edges_data, current_position, previous_edge, iter):
     err_size = 38
-    # # extract node id
-    # edge_node1 = nodes_data.loc[previous_edge.index[0][0]]
-    # edge_node2 = nodes_data.loc[previous_edge.index[0][1]]
-    
-    # # select the end node 
-    # if (current_position['GPS Bearing'].iloc[0] > 0 and current_position['GPS Bearing'].iloc[0] < 180):
-    #     # if object movint to the right of map select the one with larger longitude
-    #     if edge_node1.x > edge_node2.x:
-    #         end_node = edge_node1
-    #         start_node = edge_node2
-    #     else:
-    #         end_node = edge_node2
-    #         start_node = edge_node1
-    # else:
-    #     # if object is moving to the left select node with smaller longitude
-    #     if edge_node1.x < edge_node2.x:
-    #         end_node = edge_node1
-    #         start_node = edge_node2
-    #     else:
-    #         end_node = edge_node2
-    #         start_node = edge_node1
 
     end_node = previous_edge.iloc[0].name[1]
     start_node = previous_edge.iloc[0].name[0]
