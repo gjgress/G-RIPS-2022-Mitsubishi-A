@@ -12,7 +12,7 @@ from shapely.geometry import Point, shape
 import numpy as np
 import osmnx as ox
 
-from preprocessing.constants import EPSG4326
+from preprocessing.constants import EPSG4326, EPSG3857
 
 def read_file_content(file_path):
     with open(file_path, "r") as file:
@@ -306,7 +306,7 @@ def KCMMN_input_for_fuzzy_AHP(trajectory_number, dataset_dir='../Data/map-matchi
     nodes_path = os.path.join(dataset_dir, trajectory_id + 'nodes.geojson')
     edges_path = os.path.join(dataset_dir, trajectory_id + 'arcs.geojson')
     
-    projected_crs = 'EPSG:3857' # Should this change corresponding to the GPS trajectory?
+    projected_crs = EPSG3857 # Should this change corresponding to the GPS trajectory?
     trajectory = gpd.read_file(trajectory_path)
     nodes = gpd.read_file(nodes_path)
     edges = gpd.read_file(edges_path)
@@ -359,3 +359,14 @@ def KCMMN_input_for_fuzzy_AHP(trajectory_number, dataset_dir='../Data/map-matchi
     trajectory['GPS HDOP'] = 1
     
     return trajectory, nodes, edges
+
+def load_kcmmn_ground_truth(trajectory_number, dataset_dir):
+    trajectory_id = trajectory_number.zfill(8)# trajectory_id = trajectory_number.zfill(8)
+    ground_truth_path = os.path.join(dataset_dir, trajectory_id + 'route.geojson')
+
+    # ground_truth = db.read_text(ground_truth_path).map(json.loads).map(gpd.GeoDataFrame.from_features)
+    # gt_delayed = ground_truth.to_delayed()
+    # gt = gt_delayed[0].compute()[0].set_crs(constants.EPSG4326).to_crs(EPSG3857)
+    with open(ground_truth_path) as f:
+        ground_truth = gpd.GeoDataFrame.from_features(json.load(f)).set_crs(EPSG4326).to_crs(EPSG3857)
+        return ground_truth
