@@ -22,24 +22,39 @@ def adjust_angle(angle):
         angle = 360 - angle
     return angle
 
-def JC(trajectory_data, nodes_data, edges_data, current_position, previous_edge, iter):
+def point_matching(curr_loc, curr_edge):
+    # matched position to the current edge 
+    # input need to be panda series
+    # curr loc need attribute geometry point
+    # curr_edge need attribute 'geometry' lines
+    # output a point that matched to the current edge
+    crs_utm = curr_loc.crs
+    dist = curr_edge['geometry'].project(curr_loc['geometry']).iloc[0]
+    matched_point = list(curr_edge['geometry'].interpolate(dist).coords)
+    matched_point = gpd.GeoDataFrame(geometry=gpd.points_from_xy([matched_point[0][0]], [matched_point[0][1]]), crs= crs_utm)
+    return matched_point
+
+def JC(nodes_data, edges_data, current_position, previous_position, previous_edge):
 
     end_node = nodes_data.loc[previous_edge.index[0][1]]
     # start_node = nodes_data.loc[previous_edge.index[0][0]]
     
     # angle distance between the heading of the current point and the heading of the previous point
     # it should lie between 0 to pi
-    delta_h = adjust_angle(abs(trajectory_data['GPS Bearing'].iloc[iter] - trajectory_data['GPS Bearing'].iloc[iter - 1]))
+    HI = abs(current_position['GPS Bearing'].iloc[0] - previous_position['GPS Bearing'].iloc[0])
+    delta_h = adjust_angle(HI)
     
     # distance traveled from the last position fix to the end nodes
-    d_1 = end_node['geometry'].distance(current_position['geometry']).iloc[0]
+    projected = point_matching(previous_position, previous_edge.iloc[0])
+    d_1 = end_node['geometry'].distance(projected['geometry']).iloc[0]
     
     # distance traveled since the last position fix 
-    t = trajectory_data['time'].iloc[iter] - trajectory_data['time'].iloc[iter - 1]
-    d_2 = (trajectory_data['speed_mps'].iloc[iter])* t.seconds
+    t = current_position['time'].iloc[0] - previous_position['time'].iloc[0]
+    d_2 = (current_position['speed_mps'].iloc[0] )* t.seconds
     
     delta_d = d_1 - d_2
     
     speed = current_position['speed_mps'].iloc[0]
     
     return JCfunc.MML(delta_d, delta_h, speed)
+
