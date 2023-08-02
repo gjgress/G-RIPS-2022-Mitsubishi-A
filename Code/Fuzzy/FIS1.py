@@ -17,6 +17,7 @@ import skfuzzy.membership as mf
 import mm_utils
 # for plotting 
 import matplotlib.pyplot as plt
+import warnings
 
 # function to initialize variable bounds
 def init_vars():
@@ -61,7 +62,7 @@ def FIS1(data_temp, method, wt_matrix = np.identity(6),plot = False, output_arra
     # method 1 uses PD, Speed, HE and HDOP
     # method 2 uses PD, Speed, HE
     # method 3 uses PD
-    
+
     # check if input is passed correctly 
     if (method ==1 and len(data_temp) != 4):
         print('incorrect dimension of input')
@@ -75,8 +76,6 @@ def FIS1(data_temp, method, wt_matrix = np.identity(6),plot = False, output_arra
         print('incorrect dimension of input')
         print(['dimension of data is ', len(data_temp), ' while using method 2'])
         return 0   
-    else:
-        print('correct dimension')
     
     var_bounds = init_vars()
     #print(var_bounds.iloc[0,0])

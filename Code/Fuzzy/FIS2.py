@@ -15,7 +15,7 @@ import skfuzzy.membership as mf
 import mm_utils
 # for plotting 
 import matplotlib.pyplot as plt
-
+import warnings
 def get_params(l, r, shape="s"):
     shape = shape.lower()
     if shape == "s":
@@ -54,6 +54,7 @@ def init_vars():
 def FIS2(data_temp, method, plot = False):
     # method 1 uses speed,hdop, alpha, beta, delta_d, HI, HI
     # method 2 uses speed, alpha, beta, delta_d, HI, HI
+   
     
     # check if input is passed correctly 
     if (method ==1 and len(data_temp) != 7):
@@ -64,8 +65,7 @@ def FIS2(data_temp, method, plot = False):
         print('incorrect dimension of input')
         print(['dimension of data is ', len(data_temp), ' while using method 2']) 
         return 0  
-    else:
-        print('correct dimension')
+
     var_bounds = init_vars()
     #print(var_bounds.iloc[0,0])
     get_mid(var_bounds,0)

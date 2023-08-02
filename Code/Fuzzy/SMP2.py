@@ -17,7 +17,7 @@ from FIS3 import *
 from function_util import *
 from datetime import datetime
 
-def SMP2(curr_loc, curr_edge, prev_loc, last_matched, err_size, nodes_utm, edges_utm, gdf_utm, wt_matrix = np.identity(10), plot = False):
+def SMP2(curr_loc, curr_edge, prev_loc, last_matched, err_size, nodes_utm, edges_utm, gdf_utm, wt_matrix = np.identity(10), plot = False, score = False):
     
     # get start and end node 
     start_node, end_node = node_direction(curr_edge, nodes_utm, curr_loc)
@@ -183,4 +183,7 @@ def SMP2(curr_loc, curr_edge, prev_loc, last_matched, err_size, nodes_utm, edges
             # origin_node.plot(ax = ax, color = "Black")
             # target_node.plot(ax = ax , color = "Black")
         
-        return next_edge
+        if score == True:
+            return next_edge, max(pred)
+        else:
+            return next_edge

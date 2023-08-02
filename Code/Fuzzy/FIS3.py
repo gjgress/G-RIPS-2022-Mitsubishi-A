@@ -15,6 +15,7 @@ import skfuzzy.membership as mf
 import mm_utils
 # for plotting 
 import matplotlib.pyplot as plt
+import warnings
 
 def get_params(l, r, shape="s"):
     shape = shape.lower()
@@ -102,8 +103,6 @@ def FIS3(data_temp, method, wt_matrix = np.identity(10),plot =False):
         print('incorrect dimension of input')
         print(['dimension of data is ', len(data_temp), ' while using method 2']) 
         return 0  
-    else:
-        print('correct dimension')
     
     var_bounds = init_vars()
     #print(var_bounds.iloc[0,0])

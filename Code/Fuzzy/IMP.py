@@ -150,7 +150,7 @@ def IMP(point_index, gdf_utm, edges_utm, n, wt_matrix = np.identity(6),plot = Fa
 
             # check to stop the for loop if n points belong to the same edge
             if same_link == (n - 1):
-                print(['stopping at position',iter])
+                print(['Starting SMP phase at',iter])
                 stop_iter = True
                 # find projection point 
                 matched_link = candidate_link.iloc[[index]]

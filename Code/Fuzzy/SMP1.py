@@ -57,7 +57,7 @@ def SMP1(curr_loc, curr_edge, prev_loc, last_matched, nodes_utm, edges_utm, gdf_
     HI = curr_loc['GPS Bearing'].iloc[0] - prev_loc['GPS Bearing'].iloc[0]
 
     # distance travelled from last position fix to the end nodes
-    d = end_node['geometry'].distance(curr_loc['geometry']).iloc[0]
+    d = end_node['geometry'].distance(last_matched['geometry']).iloc[0]
 
     # distance travelled since last position fix 
     t = curr_loc['time'].iloc[0] - prev_loc['time'].iloc[0]
