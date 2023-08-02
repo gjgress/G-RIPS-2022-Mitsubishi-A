@@ -248,7 +248,7 @@ def FIS3(data_temp, method, wt_matrix = np.identity(10),plot =False):
 
         # weight for each rule 
         # need to be optimize later 
-        Z = np.array([50, 10, 50, 10, 100 ,10, 10, 100, 100, 10])
+        Z = np.array([50, -10, 50, -10, 100 ,-10, -10, 100, 100, -10])
 
         # initialize weight
         weight = np.zeros((1,10))
