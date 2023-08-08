@@ -130,10 +130,11 @@ def MMJfunc(dist_data, dir_data, turnrest_data, map_environment):
 
 
     # relative importance vector
-    Z = np.array([[0.0806, 0.372, 0.3585, 0.1894],
+    Z = np.array([[0.0806, 0.3715, 0.3585, 0.1894],
                   [0.4376, 0.4642, 0.0429, 0.0553],
                   [0.5563, 0.4237, 0.01, 0.01]
                  ])
+    
 
     # total weight
     TW = weight_dist * Z[map_environment][0] + weight_dir * Z[map_environment][1] + weight_turnrest * (Z[map_environment][2] + Z[map_environment][3])

@@ -146,13 +146,12 @@ def IMM(trajectory_data, edges_data, iter):
                 # input for IMM
                 PD = candidate_link['perp_dist'].to_list()
                 HE = candidate_link['heading_error'].to_list()
+                # HE = np.zeros(len(trajectory_data))
                 map_enviroment = ME(edges_data, curr_loc)
                 
                 # find the index corresponding to the highest weight edge
                 imm_res = IMMfunction.IMMfunc(PD, HE, map_enviroment)               
-
                 a = candidate_link.iloc[[imm_res]]
-
                 iter = iter + 1
 
                 return iter, a

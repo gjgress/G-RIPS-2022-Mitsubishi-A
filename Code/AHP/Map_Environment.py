@@ -42,13 +42,8 @@ def ME(edges_data, current_position):
     
     inter_index = intersects[['index_right0', 'index_right1', 'index_right2']].values.tolist()
     intersects_edges = edges_data.loc[map(tuple, inter_index)]
-    
-    # unique_intersects = intersects_edges.loc[intersects_edges['osmid'].drop_duplicates().index]
-    # temp = unique_intersects.reset_index()
-    # list = pd.concat([temp['u'], temp['v']])
-    # list = list.to_list()
-    # temp2 = np.unique(list, return_counts=True) 
 
+    # count the number of junctions; sorry this code is very messy because we rewrote them so that we do not use "osmid".
     temp = []
     for i in intersects_edges.index.tolist():   
         j = list(i)
@@ -72,6 +67,9 @@ def ME(edges_data, current_position):
     temp2 = np.unique(ent, return_counts=True)
     number_junctions = np.count_nonzero(temp2[1] >= 3)
 
+    # calculate the total length; 
+    # but this does not calculate the exact total length of the roads within the area. 
+    # just take the average of the total length of the roads in intersections and the total length of the roads in contains.
     if len(contains) == 0:
         return 2
     
@@ -91,18 +89,10 @@ def ME(edges_data, current_position):
     
     # km to m
     total_length = (total_length_contains + total_length_intersects)/ 2000
-    # total_length = total_length_contains / 1000
     
     result = number_junctions / total_length
 
-    # print(len(contains))
-    # print(number_junctions)
-    # print('diff',total_length_intersects-total_length_contains)
-    # print('cont',total_length_contains)
-    # print('int',total_length_intersects)
-    # print('total',total_length)
-    # print(result)
-    # print('-----------------------------------------------------------------------------')
+
     if result < 2.88:
         return 2
     elif result > 6.81:
