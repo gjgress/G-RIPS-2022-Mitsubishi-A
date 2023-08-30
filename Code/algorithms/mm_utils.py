@@ -156,7 +156,6 @@ def point_to_traj(input_nodes, columns=None):
     input_nodes = input_nodes[input_nodes.geom_type == 'Point'] # Just in case you are silly and try to include non-Point geometries
     input_edges = gpd.GeoDataFrame(columns = input_nodes.columns) # Initialize
 
-    # TODO: Should be independent of the name of the geometry column of the GeoDataFrame [https://geopandas.org/en/stable/docs/reference/api/geopandas.GeoDataFrame.set_geometry.html#geopandas.GeoDataFrame.set_geometry]
     biglinestring = [xy for xy in zip(input_nodes['geometry'].x, input_nodes['geometry'].y)] # Form a single huge LineString from input_nodes
     line_segments = list(map(LineString, zip(biglinestring[:-1], biglinestring[1:]))) # Separate the line_segments into pieces
 
