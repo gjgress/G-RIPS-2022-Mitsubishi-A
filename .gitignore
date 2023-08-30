@@ -1,6 +1,5 @@
 /Code/Data/BDD100K/
 /Code/.jupyter_ystore.db
-/Code/preprocessing/__pycache__/*
 Code/cache/*
 */__pycache__/*
 *.pyc
